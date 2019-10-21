@@ -10,4 +10,12 @@ public class DareService {
         Dare dare1 = new Dare(title,dare,bet,deadline);
         dareList.add(dare1);
     }
+    public Dare getDareById(int id,List<Dare> dareList){
+        for(Dare dare : dareList){
+            if(id == dare.getId()){
+                return dare;
+            }
+        }
+        return null;
+    }
 }
