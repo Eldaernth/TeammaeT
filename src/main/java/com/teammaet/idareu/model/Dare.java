@@ -14,13 +14,12 @@ public class Dare {
     public Dare() {}
 
     public Dare(String title, String dare, String bet, Date deadline) {
-        this.id = previousid;
+        this.id = previousid++;
         this.title = title;
         this.dare = dare;
         this.bet = bet;
         this.deadline = deadline;
         this.status = false;
-        previousid++;
     }
 
     public int getId() {
