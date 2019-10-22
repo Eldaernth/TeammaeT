@@ -60,20 +60,22 @@ public class UserController {
     }
     @GetMapping("/user/{id}/dares/received")
     public List<Dare> getReceivedDares(@PathVariable("id")int id){
+        User user = null;
         try {
-            return userStorage.getReceivedDares(id);
+            user = userStorage.getUserById(id);
         } catch (Exception e) {
             e.getMessage();
         }
-        return null;
+        return user.getDareStorage().getReceivedDares();
     }
     @GetMapping("/user/{id}/dares/sent")
     public List<Dare> getSentDares(@PathVariable("id")int id){
+        User user = null;
         try {
-            return userStorage.getSentDares(id);
+            user = userStorage.getUserById(id);
         } catch (Exception e) {
             e.getMessage();
         }
-        return null;
+        return user.getDareStorage().getSentDares();
     }
 }

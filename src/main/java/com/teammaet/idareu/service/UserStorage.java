@@ -64,14 +64,5 @@ public class UserStorage {
             user.setPassword(updatedPassword);
         }
     }
-    public List<Dare> getReceivedDares(int id) throws Exception {
-        User user = getUserById(id);
-        return user.getDareStorage().getReceivedDares();
-    }
-    public List<Dare> getSentDares(int id) throws Exception {
-        User user = getUserById(id);
-        return user.getDareStorage().getSentDares();
-    }
-
 
 }
