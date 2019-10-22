@@ -1,5 +1,7 @@
 package com.teammaet.idareu.model;
 
+import com.teammaet.idareu.service.DareStorage;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,12 +14,14 @@ public class User implements Friend {
     private String email;
     private String password;
     private Set<Friend> friendList = new HashSet<>();
+    private DareStorage dareStorage;
 
     public User(String name, String email, String password) {
         this.id = previousId++;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.dareStorage = new DareStorage();
     }
 
     public int getId() {
@@ -61,12 +65,31 @@ public class User implements Friend {
         friendList.remove(friend);
     }
 
-    public void send(Dare dare, List<Friend> friends) {
+    public Set<Friend> getFriendList() {
+        return friendList;
+    }
 
+    public DareStorage getDareStorage() {
+        return dareStorage;
+    }
+
+    public void send(Dare dare, List<Friend> friends) {
+        for (Friend friend : friends) {
+            List<Dare> friendReceivedDareList = friend.getReceivedDareStorage();
+            friend.receive(friendReceivedDareList, dare);
+        }
+        List<Dare> mySentDareList = dareStorage.getSentDares();
+        dareStorage.add(mySentDareList, dare);
     }
 
     @Override
-    public void receive(Dare dare) {
+    public void receive(List<Dare> dareList, Dare dare) {
+        dareStorage.add(dareList, dare);
+    }
+
+    @Override
+    public List<Dare> getReceivedDareStorage() {
+        return dareStorage.getReceivedDares();
     }
 
 
