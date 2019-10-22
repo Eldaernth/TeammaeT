@@ -1,5 +1,6 @@
 package com.teammaet.idareu.controller;
 
+import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserCreator;
 import com.teammaet.idareu.service.UserStorage;
@@ -56,5 +57,23 @@ public class UserController {
         }
         userStorage.update(userToUpdate,user.getName(),user.getEmail(),user.getPassword());
         return userToUpdate;
+    }
+    @GetMapping("/user/{id}/dares/received")
+    public List<Dare> getReceivedDares(@PathVariable("id")int id){
+        try {
+            return userStorage.getReceivedDares(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
+    }
+    @GetMapping("/user/{id}/dares/sent")
+    public List<Dare> getSentDares(@PathVariable("id")int id){
+        try {
+            return userStorage.getSentDares(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
     }
 }
