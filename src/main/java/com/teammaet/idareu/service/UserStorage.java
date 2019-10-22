@@ -2,11 +2,19 @@ package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserStorage {
+
+    private UserCreator userCreator;
+
+    public UserStorage(UserCreator userCreator) {
+        this.userCreator = userCreator;
+    }
 
     private List<User> users = new ArrayList<>();
 
@@ -32,4 +40,11 @@ public class UserStorage {
         users.remove(user);
     }
 
+    public User getUserById(int id) throws Exception {
+        for(User user:users){
+            if(user.getId() == id)
+                return user;
+        }
+        throw new Exception("User not found");
+    }
 }
