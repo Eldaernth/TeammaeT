@@ -1,7 +1,6 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
-import com.teammaet.idareu.model.Friend;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -13,6 +12,7 @@ public class DareStorage {
 
     private List<Dare> sentDares = new ArrayList<>();
     private List<Dare> receivedDares = new ArrayList<>();
+    private List<Dare> dares = new ArrayList<>();
 
     public Dare createDare(String title, String dare, String bet, Date deadline){
         Dare dare1 = new Dare(title,dare,bet,deadline);
@@ -60,11 +60,9 @@ public class DareStorage {
         return receivedDares;
     }
 
-    public void send(Dare dare, List<Friend> friends) {
-        for (Friend friend : friends) {
-            List<Dare> friendReceivedDareList = friend.getReceivedDares();
-            friend.receive(dare, friendReceivedDareList);
-        }
-        sentDares.add(dare);
+    public List<Dare> getAllDare(){
+        dares.addAll(receivedDares);
+        dares.addAll(sentDares);
+        return dares;
     }
 }
