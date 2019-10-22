@@ -10,11 +10,12 @@ public class Dare {
     private Date deadline;
     private boolean status;
 
-    private static int previousid = 1;
+    private static int previousId = 1;
+
     public Dare() {}
 
     public Dare(String title, String dare, String bet, Date deadline) {
-        this.id = previousid++;
+        this.id = previousId++;
         this.title = title;
         this.dare = dare;
         this.bet = bet;
