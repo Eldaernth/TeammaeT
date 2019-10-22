@@ -17,6 +17,10 @@ public class UserController {
         this.userCreator = userCreator;
         this.userStorage = userStorage;
     }
+    @GetMapping("/user")
+    public List<User> getAllUser(){
+        return userStorage.getUsers();
+    }
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable("id") int id){
         try {
@@ -26,7 +30,7 @@ public class UserController {
         }
         return null;
     }
-    @PostMapping(path="/user")
+    @PostMapping("/user")
     public User register(@RequestBody User user){
         userStorage.register(user);
         return user;

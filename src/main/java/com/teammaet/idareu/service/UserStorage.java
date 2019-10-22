@@ -47,4 +47,9 @@ public class UserStorage {
         }
         throw new Exception("User not found");
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
 }
