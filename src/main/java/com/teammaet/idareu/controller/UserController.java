@@ -35,4 +35,15 @@ public class UserController {
         userStorage.register(user);
         return user;
     }
+    @DeleteMapping("user/{id}")
+    public String deleteUser(@PathVariable("id")int id){
+        User user = null;
+        try {
+            user = userStorage.getUserById(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        userStorage.deleteUser(user);
+        return "User was deleted";
+    }
 }
