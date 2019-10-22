@@ -35,7 +35,7 @@ public class UserController {
         userStorage.register(user);
         return user;
     }
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/user/{id}")
     public String deleteUser(@PathVariable("id")int id){
         User user = null;
         try {
@@ -45,5 +45,16 @@ public class UserController {
         }
         userStorage.deleteUser(user);
         return "User was deleted";
+    }
+    @PutMapping("/user/{id}")
+    public User updateUserData(@PathVariable("id")int id,@RequestBody User user){
+        User userToUpdate = null;
+        try {
+            userToUpdate = userStorage.getUserById(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        userStorage.update(userToUpdate,user.getName(),user.getEmail(),user.getPassword());
+        return userToUpdate;
     }
 }
