@@ -12,8 +12,9 @@ public class DareStorage {
     private List<Dare> sentDares = new ArrayList<>();
     private List<Dare> receivedDares = new ArrayList<>();
 
-    public void createDare(String title, String dare, String bet, Date deadline){
+    public Dare createDare(String title, String dare, String bet, Date deadline){
         Dare dare1 = new Dare(title,dare,bet,deadline);
+        return dare1;
     }
     public void add(List<Dare> dareList,Dare dare){
         dareList.add(dare);
