@@ -1,6 +1,7 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.Friend;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,5 +39,13 @@ public class DareStorage {
 
     public List<Dare> getReceivedDares() {
         return receivedDares;
+    }
+
+    public void send(Dare dare, List<Friend> friends) {
+        for (Friend friend : friends) {
+            List<Dare> friendReceivedDareList = friend.getReceivedDares();
+            friend.receive(dare, friendReceivedDareList);
+        }
+        sentDares.add(dare);
     }
 }

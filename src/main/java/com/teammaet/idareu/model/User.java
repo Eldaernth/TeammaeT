@@ -57,14 +57,6 @@ public class User implements Friend {
         this.password = password;
     }
 
-    public void addFriend(Friend friend) {
-        friendList.add(friend);
-    }
-
-    public void deleteFriend(Friend friend) {
-        friendList.remove(friend);
-    }
-
     public Set<Friend> getFriendList() {
         return friendList;
     }
@@ -73,23 +65,22 @@ public class User implements Friend {
         return dareStorage;
     }
 
-    public void send(Dare dare, List<Friend> friends) {
-        for (Friend friend : friends) {
-            List<Dare> friendReceivedDareList = friend.getReceivedDareStorage();
-            friend.receive(friendReceivedDareList, dare);
-        }
-        List<Dare> mySentDareList = dareStorage.getSentDares();
-        dareStorage.add(mySentDareList, dare);
-    }
-
     @Override
-    public void receive(List<Dare> dareList, Dare dare) {
-        dareStorage.add(dareList, dare);
-    }
-
-    @Override
-    public List<Dare> getReceivedDareStorage() {
+    public List<Dare> getReceivedDares() {
         return dareStorage.getReceivedDares();
+    }
+
+    public void addFriend(Friend friend) {
+        friendList.add(friend);
+    }
+
+    public void deleteFriend(Friend friend) {
+        friendList.remove(friend);
+    }
+
+    @Override
+    public void receive(Dare dare, List<Dare> dareList) {
+        dareStorage.add(dareList, dare);
     }
 
 
