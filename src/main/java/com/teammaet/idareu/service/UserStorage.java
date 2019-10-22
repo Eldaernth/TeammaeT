@@ -1,10 +1,12 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,5 +53,17 @@ public class UserStorage {
     public List<User> getUsers() {
         return users;
     }
+    public void update(User user,String updatedName,String updatedEmail,String updatedPassword){
+        if(updatedName != null){
+            user.setName(updatedName);
+        }
+        if(updatedEmail != null){
+            user.setEmail(updatedEmail);
+        }
+        if(updatedPassword != null){
+            user.setPassword(updatedPassword);
+        }
+    }
+
 
 }
