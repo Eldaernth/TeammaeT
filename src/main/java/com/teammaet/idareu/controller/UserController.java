@@ -78,4 +78,14 @@ public class UserController {
         }
         return user.getDareStorage().getSentDares();
     }
+    @GetMapping("/user/{id}/dares")
+    public List<Dare> getDares(@PathVariable("id")int id){
+        User user = null;
+        try {
+            user = userStorage.getUserById(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return user.getDareStorage().getAllDare();
+    }
 }
