@@ -65,11 +65,6 @@ public class User implements Friend {
         return dareStorage;
     }
 
-    @Override
-    public List<Dare> getReceivedDares() {
-        return dareStorage.getReceivedDares();
-    }
-
     public void addFriend(Friend friend) {
         friendList.add(friend);
     }
@@ -79,8 +74,8 @@ public class User implements Friend {
     }
 
     @Override
-    public void receive(Dare dare, List<Dare> dareList) {
-        dareStorage.add(dareList, dare);
+    public void receive(Dare dare) {
+        dareStorage.receive(dare);
     }
 
 

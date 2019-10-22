@@ -22,16 +22,16 @@ class DareStorageTest {
     @Test
     void add() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
-        dareStorage.add(testList,dare);
-        assert(testList.size() > 0);
+        dareStorage.receive(dare);
+        assert(!dareStorage.getReceivedDares().isEmpty());
     }
 
     @Test
     void getDareById() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
         int id = dare.getId();
-        dareStorage.add(testList,dare);
-        Dare dare1 = dareStorage.getDareById(id,testList);
+        dareStorage.receive(dare);
+        Dare dare1 = dareStorage.getDareById(id, dareStorage.getReceivedDares());
 
         assertEquals(id, dare1.getId());
     }
@@ -39,8 +39,8 @@ class DareStorageTest {
     @Test
     void delete() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
-        dareStorage.add(testList,dare);
-        dareStorage.delete(testList,dare);
+        dareStorage.receive(dare);
+        dareStorage.delete(testList, dare);
         assert(testList.isEmpty());
     }
 
@@ -50,7 +50,7 @@ class DareStorageTest {
         String title = "Jump";
         String massage = "Well";
         String bet = "Bet";
-        dareStorage.add(testList,dare);
+        dareStorage.receive(dare);
         dareStorage.update(dare,title,massage,bet,new Date());
         assertEquals(title,dare.getTitle());
         assertEquals(massage,dare.getDare());
@@ -62,7 +62,7 @@ class DareStorageTest {
         String massage = "You have to jump into the first well you find.";
         String bet = "I bet you in 10000 Ft";
         Dare dare = dareStorage.createDare(title,massage,bet,new Date());
-        dareStorage.add(testList,dare);
+        dareStorage.receive(dare);
         dareStorage.update(dare,null,null,null,new Date());
         assertEquals(title,dare.getTitle());
         assertEquals(massage,dare.getDare());

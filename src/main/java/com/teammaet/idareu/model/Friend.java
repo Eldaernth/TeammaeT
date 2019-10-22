@@ -6,7 +6,6 @@ public interface Friend {
 
     String getName();
 
-    void receive(Dare dare, List<Dare> dareList);
+    void receive(Dare dare);
 
-    List<Dare> getReceivedDares();
 }

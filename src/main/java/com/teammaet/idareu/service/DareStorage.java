@@ -19,8 +19,8 @@ public class DareStorage {
         return dare1;
     }
 
-    public void add(List<Dare> dareList, Dare dare){
-        dareList.add(dare);
+    public void receive(Dare dare){
+        receivedDares.add(dare);
     }
 
     public Dare getDareById(int id,List<Dare> dareList){
@@ -35,6 +35,7 @@ public class DareStorage {
     public void delete (List<Dare> dareList,Dare dare) {
         dareList.remove(dare);
     }
+
     public void update(Dare dare,String updatedTitle,String updatedDare,String updatedBet,Date updatedDeadline){
         if(updatedTitle != null){
             dare.setTitle(updatedTitle);
@@ -48,7 +49,6 @@ public class DareStorage {
         if(updatedDeadline != null){
             dare.setDeadline(updatedDeadline);
         }
-
 
     }
 
