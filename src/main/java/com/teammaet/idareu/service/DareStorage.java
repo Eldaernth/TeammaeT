@@ -2,6 +2,8 @@ package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +28,22 @@ public class DareStorage {
     }
     public void delete (List<Dare> dareList,Dare dare) {
         dareList.remove(dare);
+    }
+    public void update(Dare dare,String updatedTitle,String updatedDare,String updatedBet,Date updatedDeadline){
+        if(updatedTitle != null){
+            dare.setTitle(updatedTitle);
+        }
+        if(updatedDare != null){
+            dare.setDare(updatedDare);
+        }
+        if(updatedBet != null){
+            dare.setBet(updatedBet);
+        }
+        if(updatedDeadline != null){
+            dare.setDeadline(updatedDeadline);
+        }
+
+
     }
 
     public List<Dare> getSentDares() {

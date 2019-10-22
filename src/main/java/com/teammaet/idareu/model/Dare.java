@@ -1,6 +1,8 @@
 package com.teammaet.idareu.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Dare {
     private int id;
@@ -8,7 +10,7 @@ public class Dare {
     private String dare;
     private String bet;
     private Date deadline;
-    private boolean status;
+    private List<User> doneDareList = new ArrayList<>();
 
     private static int previousid = 1;
     public Dare() {}
@@ -19,7 +21,6 @@ public class Dare {
         this.dare = dare;
         this.bet = bet;
         this.deadline = deadline;
-        this.status = false;
     }
 
     public int getId() {
@@ -62,11 +63,7 @@ public class Dare {
         this.deadline = deadline;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public List<User> getDoneDareList() {
+        return doneDareList;
     }
 }
