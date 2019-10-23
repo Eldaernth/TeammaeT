@@ -3,6 +3,7 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.Friend;
+import com.teammaet.idareu.model.SentDareInformation;
 import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.DareStorage;
 import com.teammaet.idareu.service.UserStorage;
@@ -41,11 +42,11 @@ public class DareController {
 
     @PostMapping
     public Dare createDare(@PathVariable("userId") int userId,
-                           @RequestBody Dare dare,
-                           @RequestBody Set<Integer> friendIdList) {
+                           @RequestBody SentDareInformation sentDareInformation) {
 
         User user = userStorage.getUserById(userId);
-        Set<Friend> friends = userStorage.getFriends(friendIdList);
+        Set<Friend> friends = userStorage.getFriends(sentDareInformation.getFriendSet());
+        Dare dare = sentDareInformation.getDare();
         user.send(dare, friends);
         return dare;
     }

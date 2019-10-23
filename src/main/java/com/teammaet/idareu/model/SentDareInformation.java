@@ -4,12 +4,12 @@ import java.util.Set;
 
 public class SentDareInformation {
     private Dare dare;
-    private Set<Friend> friendSet;
+    private Set<Integer> friendSet;
 
     public SentDareInformation() {
     }
 
-    public SentDareInformation(Dare dare, Set<Friend> friendSet) {
+    public SentDareInformation(Dare dare, Set<Integer> friendSet) {
         this.dare = dare;
         this.friendSet = friendSet;
     }
@@ -23,7 +23,7 @@ public class SentDareInformation {
         this.dare = dare;
     }
 
-    public Set<Friend> getFriendSet() {
+    public Set<Integer> getFriendSet() {
         return friendSet;
     }
 }
