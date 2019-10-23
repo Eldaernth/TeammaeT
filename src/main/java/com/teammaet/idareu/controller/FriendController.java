@@ -18,16 +18,14 @@ public class FriendController {
     public Friend addFriend(@PathVariable("userId") int userId, @RequestBody int friendId) {
         User user = userStorage.getUserById(userId);
         Friend friend = userStorage.getUserById(friendId);
-        user.addFriend(friend);
-        return friend;
+        return user.addFriend(friend);
     }
 
     @DeleteMapping("/{id}")
-    public Friend deleteFriend(@PathVariable("userId") int userId, @PathVariable("id") int id) {
+    public String deleteFriend(@PathVariable("userId") int userId, @PathVariable("id") int id) {
         User user = userStorage.getUserById(userId);
         Friend friend = user.getById(id);
-        user.deleteFriend(friend);
-        return friend;
+        return user.deleteFriend(friend);
     }
 
 }

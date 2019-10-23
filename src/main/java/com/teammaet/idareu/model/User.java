@@ -65,12 +65,14 @@ public class User implements Friend {
         return dareStorage;
     }
 
-    public void addFriend(Friend friend) {
+    public Friend addFriend(Friend friend) {
         friendList.add(friend);
+        return friend;
     }
 
-    public void deleteFriend(Friend friend) {
+    public String deleteFriend(Friend friend) {
         friendList.remove(friend);
+        return "Friend successfully deleted!";
     }
 
     @Override
