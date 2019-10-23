@@ -23,13 +23,8 @@ public class UserController {
         return userStorage.getUsers();
     }
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable("id") int id){
-        try {
+    public User getUserById(@PathVariable("id") int id) throws Exception {
             return userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return null;
     }
     @PostMapping("/user")
     public User register(@RequestBody User user){
@@ -37,55 +32,30 @@ public class UserController {
         return user;
     }
     @DeleteMapping("/user/{id}")
-    public String deleteUser(@PathVariable("id")int id){
-        User user = null;
-        try {
-            user = userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    public String deleteUser(@PathVariable("id")int id) throws Exception {
+        User user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
         return "User was deleted";
     }
     @PutMapping("/user/{id}")
-    public User updateUserData(@PathVariable("id")int id,@RequestBody User user){
-        User userToUpdate = null;
-        try {
-            userToUpdate = userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    public User updateUserData(@PathVariable("id")int id,@RequestBody User user) throws Exception {
+        User userToUpdate = userStorage.getUserById(id);
         userStorage.update(userToUpdate,user.getName(),user.getEmail(),user.getPassword());
         return userToUpdate;
     }
     @GetMapping("/user/{id}/dares/received")
-    public List<Dare> getReceivedDares(@PathVariable("id")int id){
-        User user = null;
-        try {
-            user = userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    public List<Dare> getReceivedDares(@PathVariable("id")int id) throws Exception {
+        User user = userStorage.getUserById(id);
         return user.getDareStorage().getReceivedDares();
     }
     @GetMapping("/user/{id}/dares/sent")
-    public List<Dare> getSentDares(@PathVariable("id")int id){
-        User user = null;
-        try {
-            user = userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    public List<Dare> getSentDares(@PathVariable("id")int id) throws Exception {
+        User user = userStorage.getUserById(id);
         return user.getDareStorage().getSentDares();
     }
     @GetMapping("/user/{id}/dares")
-    public List<Dare> getDares(@PathVariable("id")int id){
-        User user = null;
-        try {
-            user = userStorage.getUserById(id);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+    public List<Dare> getDares(@PathVariable("id")int id) throws Exception {
+        User user = userStorage.getUserById(id);
         return user.getDareStorage().getAllDare();
     }
 }
