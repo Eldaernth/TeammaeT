@@ -8,11 +8,10 @@ import java.util.List;
 
 @Service
 public class UserStorage {
+    private Logger logger;
 
-    private UserCreator userCreator;
-
-    public UserStorage(UserCreator userCreator) {
-        this.userCreator = userCreator;
+    public UserStorage(Logger logger) {
+        this.logger = logger;
     }
 
     private List<User> users = new ArrayList<>();
@@ -23,11 +22,15 @@ public class UserStorage {
                 if (user.getPassword().equals(password)) {
                     return user;
                 } else {
-                    throw new Exception("Wrong password.");
+                    Exception e = new Exception("Wrong password.");
+                    logger.log(e.getMessage());
+                    throw e;
                 }
             }
         }
-        throw new Exception("Wrong username");
+        Exception e = new Exception("Wrong username.");
+        logger.log(e.getMessage());
+        throw e;
     }
 
     public void register(User user) {
@@ -37,13 +40,15 @@ public class UserStorage {
     public void deleteUser(User user) {
         users.remove(user);
     }
-
+    //TODO:best way to handle this exception
     public User getUserById(int id) throws Exception {
         for (User user : users) {
             if (user.getId() == id)
                 return user;
         }
-        throw new Exception("User not found");
+        Exception e = new Exception("User not found.");
+        logger.log(e.getMessage());
+        throw e;
     }
 
     public List<User> getUsers() {
