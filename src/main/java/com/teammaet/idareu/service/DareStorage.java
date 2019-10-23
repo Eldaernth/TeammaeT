@@ -23,6 +23,10 @@ public class DareStorage {
         receivedDares.add(dare);
     }
 
+    public void saveSentDare(Dare dare) {
+        sentDares.add(dare);
+    }
+
     public Dare getDareById(int id,List<Dare> dareList){
         for(Dare dare : dareList){
             if(id == dare.getId()){
@@ -36,7 +40,7 @@ public class DareStorage {
         dareList.remove(dare);
     }
 
-    public void update(Dare dare,String updatedTitle,String updatedDare,String updatedBet,Date updatedDeadline){
+    public void update(Dare dare, String updatedTitle, String updatedDare, String updatedBet, Date updatedDeadline) {
         if(updatedTitle != null){
             dare.setTitle(updatedTitle);
         }

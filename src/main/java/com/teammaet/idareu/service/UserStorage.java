@@ -23,10 +23,9 @@ public class UserStorage {
     public User getUser(String name, String password) throws Exception {
         for (User user : users) {
             if (user.getName().equals(name)) {
-                if (user.getPassword().equals(password)){
+                if (user.getPassword().equals(password)) {
                     return user;
-                }
-                else {
+                } else {
                     throw new Exception("Wrong password.");
                 }
             }
@@ -43,8 +42,8 @@ public class UserStorage {
     }
 
     public User getUserById(int id) throws Exception {
-        for(User user:users){
-            if(user.getId() == id)
+        for (User user : users) {
+            if (user.getId() == id)
                 return user;
         }
         throw new Exception("User not found");
@@ -53,14 +52,15 @@ public class UserStorage {
     public List<User> getUsers() {
         return users;
     }
-    public void update(User user,String updatedName,String updatedEmail,String updatedPassword){
-        if(updatedName != null){
+
+    public void update(User user, String updatedName, String updatedEmail, String updatedPassword) {
+        if (updatedName != null) {
             user.setName(updatedName);
         }
-        if(updatedEmail != null){
+        if (updatedEmail != null) {
             user.setEmail(updatedEmail);
         }
-        if(updatedPassword != null){
+        if (updatedPassword != null) {
             user.setPassword(updatedPassword);
         }
     }
