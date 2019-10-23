@@ -21,19 +21,19 @@ public class DareController {
     }
 
     @GetMapping("/received")
-    public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getReceivedDares();
     }
 
     @GetMapping("/sent")
-    public List<Dare> getSentDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getSentDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getSentDares();
     }
 
     @GetMapping("/all")
-    public List<Dare> getDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getAllDare();
     }
@@ -41,7 +41,7 @@ public class DareController {
     @PostMapping("/send")
     public Dare createDare(@PathVariable("userId") int userId,
                            @RequestBody Dare dare,
-                           @RequestBody Set<Friend> friendList)  throws Exception {
+                           @RequestBody Set<Friend> friendList)  throws NullPointerException {
         User user = userStorage.getUserById(userId);
         user.send(dare, friendList);
         return dare;

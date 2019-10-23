@@ -39,12 +39,12 @@ public class UserStorage {
         users.remove(user);
     }
     //TODO:best way to handle this exception
-    public User getUserById(int id) throws Exception {
+    public User getUserById(int id) throws NullPointerException {
         for (User user : users) {
             if (user.getId() == id)
                 return user;
         }
-        Exception e = new Exception("User not found.");
+        NullPointerException e = new NullPointerException("User not found.");
         logger.info(e.getMessage());
         throw e;
     }
