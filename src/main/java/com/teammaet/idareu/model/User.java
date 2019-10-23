@@ -3,7 +3,6 @@ package com.teammaet.idareu.model;
 import com.teammaet.idareu.service.DareStorage;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class User implements Friend {
@@ -78,5 +77,10 @@ public class User implements Friend {
         dareStorage.receive(dare);
     }
 
-
+    public void send(Dare dare, Set<Friend> friendList) {
+        for (Friend friend : friendList) {
+            friend.receive(dare);
+        }
+        dareStorage.saveSentDare(dare);
+    }
 }
