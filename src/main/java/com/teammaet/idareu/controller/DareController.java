@@ -4,6 +4,7 @@ package com.teammaet.idareu.controller;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.service.DareStorage;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,16 +54,19 @@ public class DareController {
     public Dare updateDare(@PathVariable("userId") int userId,
                            @PathVariable("id") int id) {
         User user = userStorage.getUserById(userId);
-        List<Dare> receivedDares = user.getDareStorage().getReceivedDares();
-        Dare dare = user.getDareStorage().getDareById(id, receivedDares);
-        dare.doneBy(user);
+        DareStorage dareStorage = user.getDareStorage();
+        Dare dare = dareStorage.getDareBy(id, dareStorage.getReceivedDares());
+        dareStorage.update(dare, user);
         return dare;
     }
 
-    @DeleteMapping("/user/{id}")
-    public String deleteUser(@PathVariable("id") int id) throws NullPointerException {
-        User user = userStorage.getUserById(id);
-        userStorage.deleteUser(user);
+    @DeleteMapping("/{id}")
+    public String deleteDare(@PathVariable("userId") int userId,
+                             @PathVariable("id") int id) throws NullPointerException {
+        User user = userStorage.getUserById(userId);
+        DareStorage dareStorage = user.getDareStorage();
+        Dare dare = dareStorage.getDareBy(id, dareStorage.getAllDare());
+        dareStorage.delete(dare);
         return "User was deleted";
     }
 }

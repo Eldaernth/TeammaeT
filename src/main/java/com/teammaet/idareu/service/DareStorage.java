@@ -29,7 +29,7 @@ public class DareStorage {
         sentDares.add(dare);
     }
 
-    public Dare getDareById(int id, List<Dare> dareList) throws NullPointerException{
+    public Dare getDareBy(int id, List<Dare> dareList) throws NullPointerException{
         for(Dare dare : dareList){
             if(id == dare.getId()){
                 return dare;
@@ -40,8 +40,10 @@ public class DareStorage {
         throw e;
     }
 
-    public void delete (List<Dare> dareList,Dare dare) {
-        dareList.remove(dare);
+    public void delete (Dare dare) {
+
+        receivedDares.remove(dare);
+        receivedDares.remove(dare);
     }
 
     public void update(Dare dare, Friend user) {

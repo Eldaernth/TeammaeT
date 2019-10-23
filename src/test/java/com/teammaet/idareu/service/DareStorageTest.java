@@ -31,7 +31,7 @@ class DareStorageTest {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
         int id = dare.getId();
         dareStorage.receive(dare);
-        Dare dare1 = dareStorage.getDareById(id, dareStorage.getReceivedDares());
+        Dare dare1 = dareStorage.getDareBy(id, dareStorage.getReceivedDares());
 
         assertEquals(id, dare1.getId());
     }
