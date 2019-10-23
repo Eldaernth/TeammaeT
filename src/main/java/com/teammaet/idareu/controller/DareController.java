@@ -7,7 +7,6 @@ import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,19 +21,19 @@ public class DareController {
     }
 
     @GetMapping("/received")
-    public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getReceivedDares();
     }
 
     @GetMapping("/sent")
-    public List<Dare> getSentDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getSentDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getSentDares();
     }
 
     @GetMapping("/all")
-    public List<Dare> getDares(@PathVariable("userId") int userId) throws Exception {
+    public List<Dare> getDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
         return user.getDareStorage().getAllDare();
     }
@@ -49,5 +48,4 @@ public class DareController {
         user.send(dare, friends);
         return dare;
     }
-
 }

@@ -3,13 +3,17 @@ package com.teammaet.idareu.service;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.*;
 
 @Service
 public class UserStorage {
+    Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
     private List<User> users = new ArrayList<>();
 
@@ -19,11 +23,15 @@ public class UserStorage {
                 if (user.getPassword().equals(password)) {
                     return user;
                 } else {
-                    throw new Exception("Wrong password.");
+                    Exception e = new Exception("Wrong password.");
+                    logger.info(e.getMessage());
+                    throw e;
                 }
             }
         }
-        throw new Exception("Wrong username");
+        Exception e = new Exception("Wrong username.");
+        logger.info(e.getMessage());
+        throw e;
     }
 
     public void register(User user) {
@@ -33,13 +41,15 @@ public class UserStorage {
     public void deleteUser(User user) {
         users.remove(user);
     }
-
-    public User getUserById(int id) throws Exception {
+    //TODO:best way to handle this exception
+    public User getUserById(int id) throws NullPointerException {
         for (User user : users) {
             if (user.getId() == id)
                 return user;
         }
-        throw new Exception("User not found");
+        NullPointerException e = new NullPointerException("User not found.");
+        logger.info(e.getMessage());
+        throw e;
     }
 
     public List<User> getUsers() {
