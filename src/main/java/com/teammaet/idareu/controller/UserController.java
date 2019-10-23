@@ -32,6 +32,7 @@ public class UserController {
         userStorage.register(user);
         return user;
     }
+
     //TODO:Security question about accessing the api and change data
     @DeleteMapping("/user/{id}")
     public String deleteUser(@PathVariable("id") int id) throws NullPointerException {

@@ -1,5 +1,7 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 @Service
 public class UserStorage {
@@ -65,4 +68,14 @@ public class UserStorage {
         }
     }
 
+    public Set<Friend> getFriends(Set<Integer> friendIdList) {
+        Set<Friend> friends = new HashSet<>();
+        for (Integer id : friendIdList) {
+            try {
+                friends.add(getUserById(id));
+            } catch (Exception e) {
+            }
+        }
+        return friends;
+    }
 }
