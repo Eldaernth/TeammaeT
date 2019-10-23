@@ -41,7 +41,6 @@ public class DareStorage {
     }
 
     public void delete (Dare dare) {
-
         receivedDares.remove(dare);
         receivedDares.remove(dare);
     }

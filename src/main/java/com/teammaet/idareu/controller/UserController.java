@@ -1,15 +1,13 @@
 package com.teammaet.idareu.controller;
 
-import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserStorage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private UserStorage userStorage;
 
@@ -17,31 +15,31 @@ public class UserController {
         this.userStorage = userStorage;
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public List<User> getAllUser() {
         return userStorage.getUsers();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") int id) throws NullPointerException {
         return userStorage.getUserById(id);
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public User register(@RequestBody User user) {
         userStorage.register(user);
         return user;
     }
 
     //TODO:Security question about accessing the api and change data
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) throws NullPointerException {
         User user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
         return "User was deleted";
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public User updateUserData(@PathVariable("id") int id, @RequestBody User user) throws NullPointerException {
         User userToUpdate = userStorage.getUserById(id);
         userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
