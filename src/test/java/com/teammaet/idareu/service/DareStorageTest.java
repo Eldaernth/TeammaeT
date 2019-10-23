@@ -40,7 +40,7 @@ class DareStorageTest {
     void delete() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
         dareStorage.receive(dare);
-        dareStorage.delete(testList, dare);
+        dareStorage.delete(dare);
         assert(testList.isEmpty());
     }
 
