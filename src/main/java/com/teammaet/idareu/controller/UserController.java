@@ -2,7 +2,6 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.User;
-import com.teammaet.idareu.service.UserCreator;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private UserCreator userCreator;
     private UserStorage userStorage;
 
     public UserController(UserStorage userStorage) {

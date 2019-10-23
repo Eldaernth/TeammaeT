@@ -1,6 +1,8 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,11 +10,7 @@ import java.util.List;
 
 @Service
 public class UserStorage {
-    private Logger logger;
-
-    public UserStorage(Logger logger) {
-        this.logger = logger;
-    }
+    Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
     private List<User> users = new ArrayList<>();
 
@@ -23,13 +21,13 @@ public class UserStorage {
                     return user;
                 } else {
                     Exception e = new Exception("Wrong password.");
-                    logger.log(e.getMessage());
+                    logger.info(e.getMessage());
                     throw e;
                 }
             }
         }
         Exception e = new Exception("Wrong username.");
-        logger.log(e.getMessage());
+        logger.info(e.getMessage());
         throw e;
     }
 
@@ -47,7 +45,7 @@ public class UserStorage {
                 return user;
         }
         Exception e = new Exception("User not found.");
-        logger.log(e.getMessage());
+        logger.info(e.getMessage());
         throw e;
     }
 
