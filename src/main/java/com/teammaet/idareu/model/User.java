@@ -23,6 +23,7 @@ public class User implements Friend {
         this.dareStorage = new DareStorage();
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -70,6 +71,17 @@ public class User implements Friend {
 
     public void deleteFriend(Friend friend) {
         friendList.remove(friend);
+    }
+    @Override
+    public Friend getById(int id){
+        for(Friend friend:friendList){
+            if(friend.getId() == id){
+                return friend;
+            }
+        }
+        NullPointerException e = new NullPointerException("Friend not found.");
+        e.getMessage();
+        throw e;
     }
 
     @Override
