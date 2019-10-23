@@ -50,6 +50,14 @@ public class DareController {
         return dare;
     }
 
+    @GetMapping("/{id}")
+    public Dare getDare(@PathVariable("userId") int userId,
+                        @PathVariable("id") int id) {
+        User user = userStorage.getUserById(userId);
+        DareStorage dareStorage = user.getDareStorage();
+        return dareStorage.getDareBy(id, dareStorage.getAllDare());
+    }
+
     @PutMapping("/{id}")
     public Dare updateDare(@PathVariable("userId") int userId,
                            @PathVariable("id") int id) {
