@@ -15,13 +15,15 @@ public class FriendController {
     }
 
     @PostMapping
-    public Friend addFriend(@PathVariable("userId") int userId, @RequestBody Friend friend){
+    public Friend addFriend(@PathVariable("userId") int userId, @RequestBody int friendId) {
         User user = userStorage.getUserById(userId);
+        Friend friend = userStorage.getUserById(friendId);
         user.addFriend(friend);
         return friend;
     }
+
     @DeleteMapping("/{id}")
-    public Friend addFriend(@PathVariable("userId") int userId,@PathVariable("id") int id){
+    public Friend deleteFriend(@PathVariable("userId") int userId, @PathVariable("id") int id) {
         User user = userStorage.getUserById(userId);
         Friend friend = user.getById(id);
         user.deleteFriend(friend);

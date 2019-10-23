@@ -72,10 +72,11 @@ public class User implements Friend {
     public void deleteFriend(Friend friend) {
         friendList.remove(friend);
     }
+
     @Override
-    public Friend getById(int id){
-        for(Friend friend:friendList){
-            if(friend.getId() == id){
+    public Friend getById(int id) {
+        for (Friend friend : friendList) {
+            if (friend.getId() == id) {
                 return friend;
             }
         }
