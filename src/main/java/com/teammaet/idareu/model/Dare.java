@@ -1,16 +1,17 @@
 package com.teammaet.idareu.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.*;
+
+@Component
 public class Dare {
     private int id;
     private String title;
     private String dare;
     private String bet;
     private Date deadline;
-    private List<User> doneDareList = new ArrayList<>();
+    private Set<Friend> doneFriendList = new HashSet<>();
 
     private static int previousId = 1;
 
@@ -64,7 +65,11 @@ public class Dare {
         this.deadline = deadline;
     }
 
-    public List<User> getDoneDareList() {
-        return doneDareList;
+    public Set<Friend> getDoneFriendList() {
+        return doneFriendList;
+    }
+
+    public void doneBy(Friend friend) {
+        doneFriendList.add(friend);
     }
 }

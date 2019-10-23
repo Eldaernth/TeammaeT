@@ -1,6 +1,7 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,7 @@ public class DareStorage {
         sentDares.add(dare);
     }
 
-    public Dare getDareById(int id,List<Dare> dareList) throws NullPointerException{
+    public Dare getDareById(int id, List<Dare> dareList) throws NullPointerException{
         for(Dare dare : dareList){
             if(id == dare.getId()){
                 return dare;
@@ -43,20 +44,8 @@ public class DareStorage {
         dareList.remove(dare);
     }
 
-    public void update(Dare dare, String updatedTitle, String updatedDare, String updatedBet, Date updatedDeadline) {
-        if(updatedTitle != null){
-            dare.setTitle(updatedTitle);
-        }
-        if(updatedDare != null){
-            dare.setDare(updatedDare);
-        }
-        if(updatedBet != null){
-            dare.setBet(updatedBet);
-        }
-        if(updatedDeadline != null){
-            dare.setDeadline(updatedDeadline);
-        }
-
+    public void update(Dare dare, Friend user) {
+        dare.doneBy(user);
     }
 
     public List<Dare> getSentDares() {
