@@ -1,22 +1,15 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserStorage {
-
-    private UserCreator userCreator;
-
-    public UserStorage(UserCreator userCreator) {
-        this.userCreator = userCreator;
-    }
 
     private List<User> users = new ArrayList<>();
 
@@ -65,4 +58,14 @@ public class UserStorage {
         }
     }
 
+    public Set<Friend> getFriends(Set<Integer> friendIdList) {
+        Set<Friend> friends = new HashSet<>();
+        for (Integer id : friendIdList) {
+            try {
+                friends.add(getUserById(id));
+            } catch (Exception e) {
+            }
+        }
+        return friends;
+    }
 }

@@ -7,6 +7,7 @@ import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,9 +42,12 @@ public class DareController {
     @PostMapping("/send")
     public Dare createDare(@PathVariable("userId") int userId,
                            @RequestBody Dare dare,
-                           @RequestBody Set<Friend> friendList)  throws Exception {
+                           @RequestBody Set<Integer> friendIdList)  throws Exception {
+
         User user = userStorage.getUserById(userId);
-        user.send(dare, friendList);
+        Set<Friend> friends = userStorage.getFriends(friendIdList);
+        user.send(dare, friends);
         return dare;
     }
+
 }
