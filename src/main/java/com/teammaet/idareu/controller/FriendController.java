@@ -14,8 +14,8 @@ public class FriendController {
         this.userStorage = userStorage;
     }
 
-    @PostMapping
-    public Friend addFriend(@PathVariable("userId") int userId, @RequestBody int friendId) {
+    @PostMapping("/{id}")
+    public Friend addFriend(@PathVariable("userId") int userId, @PathVariable("id") int friendId) {
         User user = userStorage.getUserById(userId);
         Friend friend = userStorage.getUserById(friendId);
         return user.addFriend(friend);
