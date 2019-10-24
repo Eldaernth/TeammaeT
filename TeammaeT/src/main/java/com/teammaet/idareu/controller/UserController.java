@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
     private UserStorage userStorage;
 

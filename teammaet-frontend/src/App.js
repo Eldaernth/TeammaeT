@@ -1,11 +1,11 @@
 import React from 'react';
-import Friends from './Friends';
+import FriendList from './FriendList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
-      <Friends/>
+      <FriendList userId="0"/>
     </div>
   );
 }

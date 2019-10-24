@@ -5,6 +5,9 @@ import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/user/{userId}/friend")
 public class FriendController {
@@ -12,6 +15,12 @@ public class FriendController {
 
     public FriendController(UserStorage userStorage) {
         this.userStorage = userStorage;
+    }
+
+    @GetMapping
+    public Set<Friend> getFriendList(@PathVariable("userId") int userId) {
+        User user = userStorage.getUserById(userId);
+        return user.getFriendList();
     }
 
     @PostMapping("/{id}")
@@ -29,3 +38,5 @@ public class FriendController {
     }
 
 }
+
+
