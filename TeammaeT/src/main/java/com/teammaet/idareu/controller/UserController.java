@@ -2,12 +2,15 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.service.UserStorage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
     private UserStorage userStorage;
 
@@ -33,10 +36,10 @@ public class UserController {
 
     //TODO:Security question about accessing the api and change data
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") int id) throws NullPointerException {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) throws NullPointerException {
         User user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
-        return "User was deleted";
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")

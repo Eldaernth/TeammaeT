@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Component
 public class Dare {
+
     private int id;
     private String title;
     private String dare;

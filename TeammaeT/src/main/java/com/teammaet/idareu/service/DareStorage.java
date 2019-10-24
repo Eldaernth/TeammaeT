@@ -10,15 +10,14 @@ import java.util.Date;
 import java.util.List;
 
 public class DareStorage {
+
     Logger logger = LoggerFactory.getLogger(DareStorage.class);
 
     private List<Dare> sentDares = new ArrayList<>();
     private List<Dare> receivedDares = new ArrayList<>();
-    private List<Dare> dares = new ArrayList<>();
 
     public Dare createDare(String title, String dare, String bet, Date deadline){
-        Dare dare1 = new Dare(title,dare,bet,deadline);
-        return dare1;
+        return new Dare(title,dare,bet,deadline);
     }
 
     public void receive(Dare dare){
@@ -42,7 +41,7 @@ public class DareStorage {
 
     public void delete (Dare dare) {
         receivedDares.remove(dare);
-        receivedDares.remove(dare);
+        sentDares.remove(dare);
     }
 
     public void update(Dare dare, Friend user) {
@@ -58,6 +57,7 @@ public class DareStorage {
     }
 
     public List<Dare> getAllDare(){
+        List<Dare> dares = new ArrayList<>();
         dares.addAll(receivedDares);
         dares.addAll(sentDares);
         return dares;
