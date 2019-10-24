@@ -1,12 +1,17 @@
 import React from 'react';
-import Friends from './Friends';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import UsersPage from "./UsersPage"
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Friends/>
+        <Switch>
+            <Route path={"/users"} component={UsersPage}/>)}/>
+        </Switch>
     </div>
+  </Router>
   );
 }
 
