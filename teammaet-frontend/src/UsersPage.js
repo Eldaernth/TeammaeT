@@ -1,16 +1,17 @@
 import React,{useState} from 'react';
-import axios from "axios";
+import Axios from "axios";
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 function UsersPage() {
-    const [users,setUsers] = useState([{
-        id:1,
-        name:"NNNN",
-        email:"asd",
-        password:"dawf"
-    }]
-    )
+
+    const [users,setUsers] = useState([])
+
+    Axios.get('http://localhost:8080/user')
+    .then((ret) => {
+        setUsers(ret.data);
+    })
+
     return (
         <div>
             {users.map((row)=>
