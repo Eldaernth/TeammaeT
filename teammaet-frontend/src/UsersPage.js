@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import axios from "axios";
-import Card from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 function UsersPage() {
     const [users,setUsers] = useState([{
@@ -12,11 +13,13 @@ function UsersPage() {
     )
     return (
         <div>
-            {users.map((row)=>{
-                <Card>
-                <Card.Body>{row.name}</Card.Body>
-                </Card>
-            })}
+            {users.map((row)=>
+            <Link to={`user/${row.id}`} params={row}>
+            <Card key={row.id}>
+            <Card.Body>{row.name}</Card.Body>
+            </Card>
+            </Link>)}
+            
         </div>
     )
 }
