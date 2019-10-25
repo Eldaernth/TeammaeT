@@ -5,10 +5,15 @@ import {Button} from 'react-bootstrap';
 export default function FriendList(props) {
 
 
-    const [friends, setFriends] = useState([]);
+    const [friends, setFriends] = useState([
+        {
+        id:1,
+        name:"nama2",
+        email:"dsadas",
+        password:"asdfasf"
+        }
+    ]);
     const id = props.match.params.userId;
-    console.log(id)
-    console.log("ok")
     Axios.get(`http://localhost:8080/user/${id}/friend`)
         .then((ret) => {
             setFriends(ret.data);
