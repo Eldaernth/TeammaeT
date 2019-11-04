@@ -13,7 +13,7 @@ function App() {
     <Router>
     <div className="App">
         <Switch>
-          <Container>
+          <Container className="container">
             <Route path="/users" exact component={UsersPage}/>
             <Route path="/user/:id" exact component={UserPage}/>
             <Route path="/user/:userId/friend" exact component={FriendList}/>
