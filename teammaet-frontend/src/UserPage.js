@@ -1,10 +1,13 @@
 import React,{useState} from 'react'
 import Axios from "axios";
-import {Row,Col, ListGroup} from 'react-bootstrap'
+import {Row,Col} from 'react-bootstrap'
 import { Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import './style.css';
 import Popup from 'reactjs-popup';
+import FriendList from './FriendList'
+import Recived from './ReceivedList'
+import Sent from './SentDares'
+import CreateDare from './CreateDare'
 
 export default function Userpage(props) {
 
@@ -33,15 +36,20 @@ export default function Userpage(props) {
                 <Row className="user-buttons">
                     <div className="user-buttons">
                         <Popup modal trigger={<Button variant="secondary" block>FriendList</Button>}>
+                            <FriendList id={user.id}/>
                         </Popup>
-                         <Link to={`${id}/dares/received`}>
-                        <Button variant="secondary" block>Recived List</Button>
-                        </Link>
-                        <Link to={`${id}/dares/sent`}>
-                        <Button variant="secondary" block>Sent List</Button>
-                        </Link>
-                        
-                        <Button variant="secondary" block >Create Dare</Button>
+                        <Popup modal trigger={
+                        <Button variant="secondary" block>Recived List</Button>}>
+                            <Recived id={user.id}/>
+                        </Popup>
+                        <Popup modal trigger={
+                        <Button variant="secondary" block>Sent List</Button>}>
+                            <Sent id={user.id}/>
+                        </Popup>
+                        <Popup modal trigger={
+                        <Button variant="secondary" block >Create Dare</Button>}>
+                            <CreateDare/>>
+                        </Popup>
                     </div>
                 </Row>
             </Col>
