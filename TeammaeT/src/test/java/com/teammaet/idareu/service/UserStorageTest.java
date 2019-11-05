@@ -1,13 +1,5 @@
 package com.teammaet.idareu.service;
 
-import com.teammaet.idareu.model.User;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserStorageTest {
 //    UserStorage userStorage=new UserStorage();
 //

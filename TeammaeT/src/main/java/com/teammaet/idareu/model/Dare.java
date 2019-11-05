@@ -27,7 +27,7 @@ public class Dare {
     private boolean progress;
 
     @ManyToOne
-    private User userId;
+    private AppUser userId;
 
     @Enumerated(EnumType.STRING)
     private DareType dareType;

@@ -1,6 +1,6 @@
 package com.teammaet.idareu.controller;
 
-import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +18,17 @@ public class FriendController {
     }
 
     @GetMapping
-    public Set<User> getFriendList(@PathVariable("userId") Long userId){
+    public Set<AppUser> getFriendList(@PathVariable("userId") Long userId){
         return userStorage.getFriends(userId);
     }
 
     @PostMapping("/{id}")
-    public User addFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) {
+    public AppUser addFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) {
         return userStorage.addFriend(userId, friendId);
     }
 
     @DeleteMapping("/{id}")
-    public User deleteFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) {
+    public AppUser deleteFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) {
         return userStorage.deleteFriend(userId, friendId);
     }
 

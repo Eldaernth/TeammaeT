@@ -1,6 +1,6 @@
 package com.teammaet.idareu.service;
 
-import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +20,16 @@ public class UserStorage {
     Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
 
-    public void register(User user) {
+    public void register(AppUser user) {
         userRepository.save(user);
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(AppUser user) {
         userRepository.delete(user);
     }
 
     //TODO:best way to handle this exception
-    public User getUserById(Long id) {
+    public AppUser getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> {
             NullPointerException e = new NullPointerException("User not found.");
             logger.info(e.getMessage());
@@ -37,7 +37,7 @@ public class UserStorage {
         });
     }
 
-    public List<User> getUsers() {
+    public List<AppUser> getUsers() {
         return userRepository.findAll();
     }
 
@@ -53,27 +53,27 @@ public class UserStorage {
 //        }
 //    }
 
-    public User deleteFriend(Long userId, Long friendId) {
-        User user = getUserById(userId);
+    public AppUser deleteFriend(Long userId, Long friendId) {
+        AppUser user = getUserById(userId);
         Set<Long> friendIdList = user.getFriendList();
-        User friend = getUserById(friendId);
+        AppUser friend = getUserById(friendId);
         friendIdList.remove(friendId);
         user.setFriendList(friendIdList);
         return friend;
     }
 
-    public User addFriend(Long userId, Long friendId) {
-        User user = getUserById(userId);
+    public AppUser addFriend(Long userId, Long friendId) {
+        AppUser user = getUserById(userId);
         Set<Long> friendIdList = user.getFriendList();
-        User friend = getUserById(friendId);
+        AppUser friend = getUserById(friendId);
         friendIdList.add(friendId);
         user.setFriendList(friendIdList);
         return friend;
     }
 
-    public Set<User> getFriends(Long userId) {
-        Set<User> friends = new HashSet<>();
-        User user = getUserById(userId);
+    public Set<AppUser> getFriends(Long userId) {
+        Set<AppUser> friends = new HashSet<>();
+        AppUser user = getUserById(userId);
         Set<Long> friendIdList = user.getFriendList();
         for (Long id : friendIdList) {
             userRepository.findById(id);
