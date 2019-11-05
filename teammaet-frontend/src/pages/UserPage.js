@@ -2,9 +2,9 @@ import React,{useState} from 'react'
 import Axios from "axios";
 import {Row,Col} from 'react-bootstrap'
 import { Button } from 'react-bootstrap';
-import './style.css';
+import '../style.css';
 import Popup from 'reactjs-popup';
-import FriendList from '../component/FriendList'
+import FriendList from '../component/friendlist/FriendList'
 import Recived from '../component/ReceivedList'
 import Sent from '../component/SentDares'
 import CreateDare from '../component/CreateDare'
