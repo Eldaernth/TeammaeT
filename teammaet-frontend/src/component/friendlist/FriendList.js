@@ -28,7 +28,7 @@ export default function FriendList(props) {
                     {friends.map((row) =>
                     <tr>
                         <td>
-                        <Link to={`user/${row.id}`}>
+                        <Link to={`${row.id}`}>
                         {row.name}
                         </Link></td>
                         <td>{row.email}</td>
