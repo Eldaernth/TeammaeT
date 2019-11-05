@@ -1,11 +1,9 @@
 package com.teammaet.idareu.model;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -29,8 +27,10 @@ public class Dare {
     private boolean progress;
 
     @ManyToOne
-    private User user;
+    private User userId;
 
     @Enumerated(EnumType.STRING)
     private DareType dareType;
+    
+    
 }

@@ -1,10 +1,6 @@
 package com.teammaet.idareu.model;
 
-import com.teammaet.idareu.repository.DareRepository;
-import com.teammaet.idareu.service.DareStorage;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,7 +28,7 @@ public class User {
     @ElementCollection
     private Set<Long> friendList = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "userId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Dare> dares;
-
+    
 }

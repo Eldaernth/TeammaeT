@@ -1,7 +1,5 @@
 package com.teammaet.idareu.service;
 
-import com.teammaet.idareu.model.Dare;
-import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.model.User;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
@@ -9,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.*;
+import java.util.Set;
 
 @Service
 public class UserStorage {
@@ -31,7 +29,7 @@ public class UserStorage {
     }
 
     //TODO:best way to handle this exception
-    public User getUserById(Long id) throws NullPointerException {
+    public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> {
             NullPointerException e = new NullPointerException("User not found.");
             logger.info(e.getMessage());
@@ -55,10 +53,30 @@ public class UserStorage {
 //        }
 //    }
 
-    public Set<User> getFriends(Set<Long> friendIdList) {
+    public User deleteFriend(Long userId, Long friendId) {
+        User user = getUserById(userId);
+        Set<Long> friendIdList = user.getFriendList();
+        User friend = getUserById(friendId);
+        friendIdList.remove(friendId);
+        user.setFriendList(friendIdList);
+        return friend;
+    }
+
+    public User addFriend(Long userId, Long friendId) {
+        User user = getUserById(userId);
+        Set<Long> friendIdList = user.getFriendList();
+        User friend = getUserById(friendId);
+        friendIdList.add(friendId);
+        user.setFriendList(friendIdList);
+        return friend;
+    }
+
+    public Set<User> getFriends(Long userId) {
         Set<User> friends = new HashSet<>();
+        User user = getUserById(userId);
+        Set<Long> friendIdList = user.getFriendList();
         for (Long id : friendIdList) {
-            userRepository.findById()
+            userRepository.findById(id);
         }
         return friends;
     }

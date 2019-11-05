@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") int id) throws NullPointerException {
+    public User getUserById(@PathVariable("id") Long id) throws NullPointerException {
         return userStorage.getUserById(id);
     }
 
@@ -36,16 +36,16 @@ public class UserController {
 
     //TODO:Security question about accessing the api and change data
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) throws NullPointerException {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) throws NullPointerException {
         User user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")
-    public User updateUserData(@PathVariable("id") int id, @RequestBody User user) throws NullPointerException {
+    public User updateUserData(@PathVariable("id") Long id, @RequestBody User user) throws NullPointerException {
         User userToUpdate = userStorage.getUserById(id);
-        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
+//        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
         return userToUpdate;
     }
 

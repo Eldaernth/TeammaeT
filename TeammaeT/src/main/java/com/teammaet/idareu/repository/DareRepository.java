@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface DareRepository extends JpaRepository<Dare, Long> {
 
-    List<Dare> findAllById(Long id);
+    List<Dare> findAllByUserId(Long id);
 
-    List<Dare> findAllByIdAndAndDareType(Long id, DareType dareType);
+    List<Dare> findAllByUserIdAndDareType(Long id, DareType dareType);
 
 }

@@ -2,16 +2,15 @@ package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareType;
-import com.teammaet.idareu.model.Friend;
 import com.teammaet.idareu.repository.DareRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Service
 public class DareStorage {
 
     @Autowired
@@ -19,10 +18,11 @@ public class DareStorage {
 
     private Logger logger = LoggerFactory.getLogger(DareStorage.class);
 
-    public void save(Dare dare) {
-        dareRepository.save(dare);
+    public void save(List<Dare> dares) {
+        for (Dare dare : dares) {
+            dareRepository.save(dare);
+        }
     }
-
 
     public Dare getDareBy(Long id) throws NullPointerException {
         return dareRepository.findById(id).orElseThrow(() -> {
@@ -32,20 +32,15 @@ public class DareStorage {
         });
     }
 
-    public void delete(Dare dare) {
-        dareRepository.delete(dare);
+    public void delete(Long dareId) {
+        dareRepository.delete(getDareBy(dareId));
     }
 
-//    public void update(Dare dare, Friend user) {
-//        dare.doneBy(user);
-//    }
-
-    public List<Dare> getDares(Long id, DareType dareType) {
-        return dareRepository.findAllByIdAndAndDareType(id,dareType);
+    public List<Dare> getDares(Long userId, DareType dareType) {
+        return dareRepository.findAllByUserIdAndDareType(userId, dareType);
     }
 
-
-    public List<Dare> getAllDare(Long id) {
-        return dareRepository.findAllById(id);
+    public List<Dare> getAllDare(Long userId) {
+        return dareRepository.findAllByUserId(userId);
     }
 }
