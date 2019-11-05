@@ -18,7 +18,7 @@ public class FriendController {
     }
 
     @GetMapping
-    public Set<Friend> getFriendList(@PathVariable("userId") int userId) {
+    public Set<Friend> getFriendList(@PathVariable("userId") int userId){
         User user = userStorage.getUserById(userId);
         return user.getFriendList();
     }
@@ -38,5 +38,3 @@ public class FriendController {
     }
 
 }
-
-

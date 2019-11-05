@@ -1,16 +1,18 @@
 import React from 'react';
-import FriendList from './FriendList';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import UsersPage from "./UsersPage"
 
 function App() {
-    return (
-        <Router>
-            <div className="App">
-                <Route path="/users/:id/friend" render={(props) => <FriendList {...props} />}/> 
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+    <div className="App">
+        <Switch>
+            <Route path={"/users"} component={UsersPage}/>)}/>
+        </Switch>
+    </div>
+  </Router>
+  );
 }
 
 export default App;
