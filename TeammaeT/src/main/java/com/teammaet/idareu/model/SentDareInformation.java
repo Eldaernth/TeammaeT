@@ -1,29 +1,16 @@
 package com.teammaet.idareu.model;
 
+import lombok.*;
+
 import java.util.Set;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SentDareInformation {
     private Dare dare;
+
+    @Singular("friendSet")
     private Set<Integer> friendSet;
-
-    public SentDareInformation() {
-    }
-
-    public SentDareInformation(Dare dare, Set<Integer> friendSet) {
-        this.dare = dare;
-        this.friendSet = friendSet;
-    }
-
-    public Dare getDare() {
-        return dare;
-    }
-
-
-    public void setDare(Dare dare) {
-        this.dare = dare;
-    }
-
-    public Set<Integer> getFriendSet() {
-        return friendSet;
-    }
 }

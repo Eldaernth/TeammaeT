@@ -22,16 +22,16 @@ class DareStorageTest {
     @Test
     void add() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
-        dareStorage.receive(dare);
-        assert(!dareStorage.getReceivedDares().isEmpty());
+        dareStorage.save(dare);
+        assert(!dareStorage.getDares().isEmpty());
     }
 
     @Test
     void getDareById() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
         int id = dare.getId();
-        dareStorage.receive(dare);
-        Dare dare1 = dareStorage.getDareBy(id, dareStorage.getReceivedDares());
+        dareStorage.save(dare);
+        Dare dare1 = dareStorage.getDareBy(id, dareStorage.getDares());
 
         assertEquals(id, dare1.getId());
     }
@@ -39,7 +39,7 @@ class DareStorageTest {
     @Test
     void delete() {
         Dare dare = dareStorage.createDare("Jump on the well","You have to jump into the first well you find.","I bet you in 10000 Ft",new Date());
-        dareStorage.receive(dare);
+        dareStorage.save(dare);
         dareStorage.delete(dare);
         assert(testList.isEmpty());
     }

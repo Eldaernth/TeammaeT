@@ -1,101 +1,38 @@
 package com.teammaet.idareu.model;
 
+import com.teammaet.idareu.repository.DareRepository;
 import com.teammaet.idareu.service.DareStorage;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class User implements Friend {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class User {
 
-    private static int previousId = 0;
-    private int id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String name;
+
     private String email;
+
     private String password;
-    private Set<Friend> friendList = new HashSet<>();
-    private DareStorage dareStorage;
 
-    public User(String name, String email, String password) {
-        this.id = previousId++;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.dareStorage = new DareStorage();
-    }
+    @Singular("friendList")
+    @ElementCollection
+    private Set<Long> friendList = new HashSet<>();
 
-    @Override
-    public int getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Dare> dares;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Friend> getFriendList() {
-        return friendList;
-    }
-
-    public DareStorage getDareStorage() {
-        return dareStorage;
-    }
-
-    public Friend addFriend(Friend friend) {
-        friendList.add(friend);
-        return friend;
-    }
-
-    public String deleteFriend(Friend friend) {
-        friendList.remove(friend);
-        return "Friend successfully deleted!";
-    }
-
-    @Override
-    public Friend getById(int id) {
-        for (Friend friend : friendList) {
-            if (friend.getId() == id) {
-                return friend;
-            }
-        }
-        NullPointerException e = new NullPointerException("Friend not found.");
-        e.getMessage();
-        throw e;
-    }
-
-    @Override
-    public void receive(Dare dare) {
-        dareStorage.receive(dare);
-    }
-
-    public void send(Dare dare, Set<Friend> friendList) {
-        for (Friend friend : friendList) {
-            friend.receive(dare);
-        }
-        dareStorage.saveSentDare(dare);
-    }
 }

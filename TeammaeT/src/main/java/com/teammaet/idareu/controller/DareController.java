@@ -26,13 +26,13 @@ public class DareController {
     @GetMapping("/received")
     public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
-        return user.getDareStorage().getReceivedDares();
+        return user.getDareStorage().getDares();
     }
 
     @GetMapping("/sent")
     public List<Dare> getSentDares(@PathVariable("userId") int userId) throws NullPointerException {
         User user = userStorage.getUserById(userId);
-        return user.getDareStorage().getSentDares();
+        return user.getDareStorage().getDares();
     }
 
     @GetMapping
@@ -65,7 +65,7 @@ public class DareController {
                            @PathVariable("id") int id) {
         User user = userStorage.getUserById(userId);
         DareStorage dareStorage = user.getDareStorage();
-        Dare dare = dareStorage.getDareBy(id, dareStorage.getReceivedDares());
+        Dare dare = dareStorage.getDareBy(id, dareStorage.getDares());
         dareStorage.update(dare, user);
         return dare;
     }

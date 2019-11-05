@@ -1,9 +1,12 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.model.Friend;
+import com.teammaet.idareu.repository.DareRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,55 +14,38 @@ import java.util.List;
 
 public class DareStorage {
 
-    Logger logger = LoggerFactory.getLogger(DareStorage.class);
+    @Autowired
+    private DareRepository dareRepository;
 
-    private List<Dare> sentDares = new ArrayList<>();
-    private List<Dare> receivedDares = new ArrayList<>();
+    private Logger logger = LoggerFactory.getLogger(DareStorage.class);
 
-    public Dare createDare(String title, String dare, String bet, Date deadline){
-        return new Dare(title,dare,bet,deadline);
+    public void save(Dare dare) {
+        dareRepository.save(dare);
     }
 
-    public void receive(Dare dare){
-        receivedDares.add(dare);
+
+    public Dare getDareBy(Long id) throws NullPointerException {
+        return dareRepository.findById(id).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+        });
     }
 
-    public void saveSentDare(Dare dare) {
-        sentDares.add(dare);
+    public void delete(Dare dare) {
+        dareRepository.delete(dare);
     }
 
-    public Dare getDareBy(int id, List<Dare> dareList) throws NullPointerException{
-        for(Dare dare : dareList){
-            if(id == dare.getId()){
-                return dare;
-            }
-        }
-        NullPointerException e = new NullPointerException("User not found.");
-        logger.info(e.getMessage());
-        throw e;
+//    public void update(Dare dare, Friend user) {
+//        dare.doneBy(user);
+//    }
+
+    public List<Dare> getDares(Long id, DareType dareType) {
+        return dareRepository.findAllByIdAndAndDareType(id,dareType);
     }
 
-    public void delete (Dare dare) {
-        receivedDares.remove(dare);
-        sentDares.remove(dare);
-    }
 
-    public void update(Dare dare, Friend user) {
-        dare.doneBy(user);
-    }
-
-    public List<Dare> getSentDares() {
-        return sentDares;
-    }
-
-    public List<Dare> getReceivedDares() {
-        return receivedDares;
-    }
-
-    public List<Dare> getAllDare(){
-        List<Dare> dares = new ArrayList<>();
-        dares.addAll(receivedDares);
-        dares.addAll(sentDares);
-        return dares;
+    public List<Dare> getAllDare(Long id) {
+        return dareRepository.findAllById(id);
     }
 }
