@@ -4,10 +4,10 @@ import {Row,Col} from 'react-bootstrap'
 import { Button } from 'react-bootstrap';
 import './style.css';
 import Popup from 'reactjs-popup';
-import FriendList from './FriendList'
-import Recived from './ReceivedList'
-import Sent from './SentDares'
-import CreateDare from './CreateDare'
+import FriendList from '../component/FriendList'
+import Recived from '../component/ReceivedList'
+import Sent from '../component/SentDares'
+import CreateDare from '../component/CreateDare'
 
 export default function Userpage(props) {
 

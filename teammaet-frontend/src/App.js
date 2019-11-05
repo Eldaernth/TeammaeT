@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container} from 'react-bootstrap';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
-import UsersPage from "./UsersPage";
-import UserPage from "./UserPage";
+import UsersPage from "./pages/UsersPage";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
