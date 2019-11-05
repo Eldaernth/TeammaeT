@@ -5,20 +5,7 @@ import { Link } from 'react-router-dom';
 
 function UsersPage() {
 
-    const [users, setUsers] = useState([
-        {
-            id: 0,
-            name: "nama1",
-            email: "dsadas",
-            password: "asdfasf"
-        },
-        {
-            id: 1,
-            name: "nama2",
-            email: "dsadas",
-            password: "asdfasf"
-        }
-    ])
+    const [users, setUsers] = useState([])
 
     Axios.get('http://localhost:8080/user')
         .then((ret) => {
