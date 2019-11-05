@@ -1,0 +1,31 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f2f2f2;
+}
+
+h3{
+    text-align: center;
+}
+.user-page{
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.user-info{
+    min-height: 25vmin;
+
+}
+.user-buttons{
+    min-height: 25vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:10px;
+}

@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import Axios from "axios";
-import Table from 'react-bootstrap/Table'
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react'
+import Axios from 'axios';
+import {Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 
-function UsersPage() {
+export default function FriendList(props) {
 
-    const [users, setUsers] = useState([])
 
-    Axios.get('http://localhost:8080/user')
+    const [friends, setFriends] = useState([]);
+    Axios.get(`http://localhost:8080/user/${props.id}/friend`)
         .then((ret) => {
-            setUsers(ret.data);
+            setFriends(ret.data);
         })
 
+        console.log(friends);
     return (
         <div>
-            <h1>Users</h1>
+            <h1>FriendList</h1>
 
             <Table>
                 <thead>
@@ -24,7 +25,7 @@ function UsersPage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((row) =>
+                    {friends.map((row) =>
                     <tr>
                         <td>
                         <Link to={`user/${row.id}`}>
@@ -38,5 +39,3 @@ function UsersPage() {
         </div>
     )
 }
-
-export default UsersPage
