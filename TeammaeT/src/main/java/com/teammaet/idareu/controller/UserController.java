@@ -20,7 +20,6 @@ public class UserController {
 
     @GetMapping
     public List<AppUser> getAllUser() throws NullPointerException {
-        System.out.println(userStorage.getUsers());
         return userStorage.getUsers();
     }
 
@@ -30,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    public AppUser register(@RequestBody AppUser user) {
+    public AppUser register(@RequestBody AppUser user) throws NullPointerException{
         userStorage.register(user);
         return user;
     }

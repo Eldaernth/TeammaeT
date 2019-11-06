@@ -34,13 +34,13 @@ public class DareController {
     }
 
     @PostMapping
-    public List<Dare> createAndSendDare(@RequestBody List<Dare> dares) {
+    public List<Dare> createAndSendDare(@RequestBody List<Dare> dares) throws NullPointerException{
         dareStorage.save(dares);
         return dares;
     }
 
     @GetMapping("/{id}")
-    public Dare getDare(@PathVariable("id") Long dareId) {
+    public Dare getDare(@PathVariable("id") Long dareId) throws NullPointerException {
         return dareStorage.getDareBy(dareId);
     }
 
