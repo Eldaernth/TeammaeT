@@ -28,6 +28,7 @@ public class AppUser {
     @ElementCollection
     private Set<Long> friendList = new HashSet<>();
 
+    @Singular("dares")
     @OneToMany(mappedBy = "userId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Dare> dares;
     

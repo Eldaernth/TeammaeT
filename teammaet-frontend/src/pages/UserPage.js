@@ -5,24 +5,19 @@ import { Button } from 'react-bootstrap';
 import '../style.css';
 import Popup from 'reactjs-popup';
 import FriendList from '../component/friendlist/FriendList'
-import Recived from '../component/ReceivedList'
-import Sent from '../component/SentDares'
-import CreateDare from '../component/CreateDare'
+import Recived from '../component/dare/ReceivedList'
+import Sent from '../component/dare/SentDares'
+import CreateDare from '../component/dare/CreateDare'
 
 export default function Userpage(props) {
 
-    const [user, setUser] = useState({
-        id:0,
-        name:"nama1",
-        email:"dsadas",
-        password:"asdfasf"
-    })
-    const id = props.match.params.id
+    const [user, setUser] = useState("");
+    const id = props.match.params.id;
 
     Axios.get(`http://localhost:8080/user/${id}`)
     .then((ret) => {
         setUser(ret.data);
-    })
+    });
 
     //TODO change <a href={`http://localhost:3000/user/${id}/friend`}>
     return (

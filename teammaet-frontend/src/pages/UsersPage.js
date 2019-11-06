@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 function UsersPage() {
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
 
     Axios.get('http://localhost:8080/user')
         .then((ret) => {
             setUsers(ret.data);
-        })
+        });
 
     return (
         <div>

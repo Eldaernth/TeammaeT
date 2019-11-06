@@ -19,7 +19,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<AppUser> getAllUser() {
+    public List<AppUser> getAllUser() throws NullPointerException {
+        System.out.println(userStorage.getUsers());
         return userStorage.getUsers();
     }
 
