@@ -28,6 +28,7 @@ public class Dare {
     private boolean progress;
 
     @ManyToOne
+    @ToString.Exclude
     private AppUser user;
 
     @Enumerated(EnumType.STRING)
