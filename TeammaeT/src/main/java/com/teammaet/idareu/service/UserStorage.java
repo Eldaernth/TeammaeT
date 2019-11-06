@@ -17,7 +17,7 @@ public class UserStorage {
     @Autowired
     private UserRepository userRepository;
 
-    Logger logger = LoggerFactory.getLogger(UserStorage.class);
+    private Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
 
     public void register(AppUser user) {
