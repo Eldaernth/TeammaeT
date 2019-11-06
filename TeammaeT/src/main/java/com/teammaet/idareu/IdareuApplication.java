@@ -4,7 +4,6 @@ import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.repository.UserRepository;
-import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +14,7 @@ import java.time.LocalDate;
 
 @SpringBootApplication
 public class IdareuApplication {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -30,18 +30,19 @@ public class IdareuApplication {
                     .dare("Jump into a well")
                     .bet("100ft")
                     .deadline(LocalDate.of(2019, 2, 12))
-                    .dareType(DareType.SENT)
+                    .dareType(DareType.sent)
                     .build();
+
             Dare dare1 = Dare.builder()
                     .title("Jump")
                     .dare("Jump into a well")
                     .bet("100ft")
                     .deadline(LocalDate.of(2019, 2, 12))
-                    .dareType(DareType.RECEIVED)
+                    .dareType(DareType.received)
                     .build();
 
             AppUser user = AppUser.builder()
-                    .name("Tom")
+                    .name("rec")
                     .email("tom@gmail.com")
                     .password("everyoneKnows")
                     .dares(dare1)
@@ -55,8 +56,8 @@ public class IdareuApplication {
                 .dares(dare)
                 .build();
 
-        dare.setUserId(user1);
-        dare.setUserId(user);
+        dare.setUser(user1);
+        dare1.setUser(user);
 
         userRepository.save(user);
         userRepository.save(user1);

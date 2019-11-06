@@ -30,7 +30,7 @@ public class AppUser {
     private Set<Long> friendList = new HashSet<>();
 
     @Singular("dares")
-    @OneToMany(mappedBy = "userId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JsonIgnore
     private List<Dare> dares;
     

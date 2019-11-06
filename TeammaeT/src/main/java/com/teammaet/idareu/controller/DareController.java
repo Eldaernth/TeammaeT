@@ -22,10 +22,11 @@ public class DareController {
     @Autowired
     private UserStorage userStorage;
 
-    @GetMapping("/{dareType}") //TODO ? UPPERCASE
+    @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
     public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
-                                       @PathVariable("dareType")DareType dareType) throws NullPointerException {
-        return dareStorage.getDares(userId, dareType);
+                                       @PathVariable("dareType") String dareType) throws NullPointerException {
+        System.out.println(dareStorage.getDares(userId, DareType.valueOf(dareType)));
+        return dareStorage.getDares(userId, DareType.valueOf(dareType));
     }
 
     @GetMapping

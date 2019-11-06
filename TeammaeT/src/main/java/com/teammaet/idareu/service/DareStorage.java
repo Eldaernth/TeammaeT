@@ -1,5 +1,6 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.repository.DareRepository;

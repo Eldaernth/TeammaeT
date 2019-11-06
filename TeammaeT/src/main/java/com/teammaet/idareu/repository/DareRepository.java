@@ -1,5 +1,6 @@
 package com.teammaet.idareu.repository;
 
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,7 @@ public interface DareRepository extends JpaRepository<Dare, Long> {
 
     List<Dare> findAllByUserId(Long id);
 
-    List<Dare> findAllByUserIdAndDareType(Long id, DareType dareType);
+    List<Dare> findAllByUserIdAndDareType(Long userId, DareType dareType);
+
 
 }
