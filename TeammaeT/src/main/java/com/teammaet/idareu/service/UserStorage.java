@@ -72,12 +72,7 @@ public class UserStorage {
     }
 
     public Set<AppUser> getFriends(Long userId) {
-        Set<AppUser> friends = new HashSet<>();
-        AppUser user = getUserById(userId);
-        Set<Long> friendIdList = user.getFriendList();
-        for (Long id : friendIdList) {
-            userRepository.findById(id);
-        }
-        return friends;
+        return userRepository.findAllById(userId);
     }
+
 }
