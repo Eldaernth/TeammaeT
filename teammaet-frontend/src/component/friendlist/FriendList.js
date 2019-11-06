@@ -10,7 +10,7 @@ export default function FriendList(props) {
     Axios.get(`http://localhost:8080/user/${props.id}/friend`)
         .then((ret) => {
             setFriends(ret.data);
-        })
+        });
 
         console.log(friends);
     return (

@@ -25,7 +25,6 @@ public class DareController {
     @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
     public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
                                        @PathVariable("dareType") String dareType) throws NullPointerException {
-        System.out.println(dareStorage.getDares(userId, DareType.valueOf(dareType)));
         return dareStorage.getDares(userId, DareType.valueOf(dareType));
     }
 
