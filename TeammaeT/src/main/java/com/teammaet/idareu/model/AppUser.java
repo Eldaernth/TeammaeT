@@ -1,5 +1,6 @@
 package com.teammaet.idareu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class AppUser {
 
     @Singular("dares")
     @OneToMany(mappedBy = "userId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
     private List<Dare> dares;
     
 }
