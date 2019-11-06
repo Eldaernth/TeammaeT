@@ -5,9 +5,9 @@ import { Button } from 'react-bootstrap';
 import '../style.css';
 import Popup from 'reactjs-popup';
 import FriendList from '../component/friendlist/FriendList'
-import Recived from '../component/dare/ReceivedList'
 import Sent from '../component/dare/SentDares'
 import CreateDare from '../component/dare/CreateDare'
+import ReceivedList from "../component/dare/ReceivedList";
 
 export default function Userpage(props) {
 
@@ -34,8 +34,8 @@ export default function Userpage(props) {
                             <FriendList id={user.id}/>
                         </Popup>
                         <Popup modal trigger={
-                        <Button variant="secondary" block>Recived List</Button>}>
-                            <Recived id={user.id}/>
+                        <Button variant="secondary" block>Received List</Button>}>
+                            <ReceivedList id={user.id}/>
                         </Popup>
                         <Popup modal trigger={
                         <Button variant="secondary" block>Sent List</Button>}>

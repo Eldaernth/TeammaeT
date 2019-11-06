@@ -4,10 +4,10 @@ import Axios from 'axios';
 function SentDares(props) {
     const[dares,setDares] = useState([]);
     
-    Axios.get(`http://localhost:8080/user/${props.id}/dare/sent`)
+    Axios.get(`http://localhost:8080/user/${props.id}/dare/type/sent`)
         .then((ret) => {
             setDares(ret.data);
-        })
+        });
     return (
         <div>
             {dares.map((row) => 

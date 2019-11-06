@@ -2,12 +2,12 @@ import React,{useState} from 'react';
 import Axios from 'axios';
 
 
-function RecievedList(props) {
+function ReceivedList(props) {
     const[dares,setDares] = useState([]);
-    Axios.get(`http://localhost:8080/user/${props.id}/dare/recieved`)
+    Axios.get(`http://localhost:8080/user/${props.id}/dare/type/received`)
         .then((ret) => {
             setDares(ret.data);
-        })
+        });
     
     return (
         <div>
@@ -18,4 +18,4 @@ function RecievedList(props) {
     )
 }
 
-export default RecievedList
+export default ReceivedList
