@@ -45,6 +45,7 @@ public class IdareuApplication {
                     .name("rec")
                     .email("tom@gmail.com")
                     .password("everyoneKnows")
+                    .friendList(3L)
                     .dares(dare1)
                     .build();
 

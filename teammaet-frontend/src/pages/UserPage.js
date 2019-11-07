@@ -43,7 +43,7 @@ export default function Userpage(props) {
                         </Popup>
                         <Popup modal trigger={
                         <Button variant="secondary" block >Create Dare</Button>}>
-                            <CreateDare/>>
+                            <CreateDare id={user.id}/>
                         </Popup>
                     </div>
                 </Row>
