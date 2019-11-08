@@ -14,8 +14,4 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
     Optional<AppUser> findAppUserByName(String name);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE AppUser A SET A.friendList = :friendList where A.id = :userId")
-    void addFriend(@Param("userId") Long userId, @Param("friendList") Set<Long> friendList);
 }

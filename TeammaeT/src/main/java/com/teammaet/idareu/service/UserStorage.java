@@ -54,37 +54,18 @@ public class UserStorage {
         return userRepository.findAll();
     }
 
-//    public void update(User user, String updatedName, String updatedEmail, String updatedPassword) {
-//        if (updatedName != null) {
-//            user.setName(updatedName);
-//        }
-//        if (updatedEmail != null) {
-//            user.setEmail(updatedEmail);
-//        }
-//        if (updatedPassword != null) {
-//            user.setPassword(updatedPassword);
-//        }
-//    }
-
+    @Transactional
     public AppUser deleteFriend(Long userId, Long friendId) {
-        AppUser user = getUserById(userId);
-        Set<Long> friendIdList = user.getFriendList();
-        AppUser friend = getUserById(friendId);
-        friendIdList.remove(friendId);
-        user.setFriendList(friendIdList);
-        return friend;
+        AppUser user = em.find(AppUser.class, userId);
+        user.getFriendList().remove(friendId);
+        return getUserById(friendId);
     }
 
     @Transactional
     public AppUser addFriend(Long userId, Long friendId) {
-//        AppUser user = getUserById(userId);
         AppUser user = em.find(AppUser.class, userId);
-        Set<Long> friendIdList = user.getFriendList();
-        AppUser friend = getUserById(friendId);
-        friendIdList.add(friendId);
-        user.setFriendList(friendIdList);
-//        userRepository.addFriend(userId, friendIdList);
-        return friend;
+        user.getFriendList().add(friendId);
+        return getUserById(friendId);
     }
 
     public Set<AppUser> getFriends(Long userId) {
