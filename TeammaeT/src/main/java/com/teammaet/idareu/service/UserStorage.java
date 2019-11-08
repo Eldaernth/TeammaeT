@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,9 @@ public class UserStorage {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EntityManager em;
 
     private Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
@@ -35,6 +39,14 @@ public class UserStorage {
             logger.info(e.getMessage());
             throw e;
         });
+    }
+
+    public AppUser getAppUserByName(String name) {
+        return userRepository.findAppUserByName(name).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+            });
     }
 
     public List<AppUser> getUsers() {
@@ -67,7 +79,7 @@ public class UserStorage {
         Set<Long> friendIdList = user.getFriendList();
         AppUser friend = getUserById(friendId);
         friendIdList.add(friendId);
-        user.setFriendList(friendIdList);
+        userRepository.addFriend(userId, friendIdList);
         return friend;
     }
 

@@ -22,13 +22,18 @@ public class FriendController {
         return userStorage.getFriends(userId);
     }
 
-    @PostMapping("/{id}")
-    public AppUser addFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) throws NullPointerException{
+    @PostMapping("/{name}")
+    public AppUser addFriend(@PathVariable("userId") Long userId, @PathVariable("name") String name) throws NullPointerException{
+        Long friendId = userStorage.getAppUserByName(name).getId();
+        System.out.println(userId + "   " + name + friendId);
+        userStorage.addFriend(friendId, userId);
         return userStorage.addFriend(userId, friendId);
     }
 
-    @DeleteMapping("/{id}")
-    public AppUser deleteFriend(@PathVariable("userId") Long userId, @PathVariable("id") Long friendId) throws NullPointerException{
+    @DeleteMapping("/{name}")
+    public AppUser deleteFriend(@PathVariable("userId") Long userId, @PathVariable("name") String name) throws NullPointerException{
+        Long friendId = userStorage.getAppUserByName(name).getId();
+        userStorage.deleteFriend(friendId, userId);
         return userStorage.deleteFriend(userId, friendId);
     }
 
