@@ -29,7 +29,7 @@ public class DareController {
     }
 
     @PostMapping
-    public List<Dare> createAndSendDare(@RequestBody List<Dare> dares) throws NullPointerException{
+    public Dare createAndSendDare(@RequestBody Dare dares) throws NullPointerException{
         dareStorage.save(dares);
         return dares;
     }

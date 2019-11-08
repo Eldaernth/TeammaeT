@@ -31,7 +31,7 @@ export default function Userpage(props) {
                 <Row className="user-buttons">
                     <div className="user-buttons">
                         <Popup modal trigger={<Button variant="secondary" block>FriendList</Button>}>
-                            <FriendList id={user.id}/>
+                            <FriendList id={user.id} isDare={false}/>
                         </Popup>
                         <Popup modal trigger={
                         <Button variant="secondary" block>Received List</Button>}>

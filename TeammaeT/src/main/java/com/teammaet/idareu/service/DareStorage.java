@@ -18,10 +18,8 @@ public class DareStorage {
 
     private Logger logger = LoggerFactory.getLogger(DareStorage.class);
 
-    public void save(List<Dare> dares) {
-        for (Dare dare : dares) {
+    public void save(Dare dare) {
             dareRepository.save(dare);
-        }
     }
 
     public Dare getDareBy(Long id) throws NullPointerException {

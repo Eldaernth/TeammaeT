@@ -1,18 +1,21 @@
 import React, {useState} from 'react'
 import Axios from 'axios';
-import {Table} from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Button, Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {Form} from "react-bootstrap";
 
 export default function FriendList(props) {
-
-
+    const [friendId,setFriendId] = useState([]);
     const [friends, setFriends] = useState([]);
+
+    function handleFriendIdClick(event) {
+        props.friendList(friendId);
+    }
+
     Axios.get(`http://localhost:8080/user/${props.id}/friend`)
         .then((ret) => {
             setFriends(ret.data);
         });
-
-        console.log(friends);
     return (
         <div>
             <h1>FriendList</h1>
@@ -32,10 +35,24 @@ export default function FriendList(props) {
                         {row.name}
                         </Link></td>
                         <td>{row.email}</td>
+                        {props.isDare ?(
+                                <td>
+                                    <Form.Check aria-label="option 1" onChange={()=>{friendId.push(row.id)}}/>
+                                </td>
+                            ):
+                            (
+                                ""
+                            )
+                        }
                     </tr>)
                     }
                 </tbody>
             </Table>
+            {props.isDare ?(
+                <Button onClick={handleFriendIdClick}>Submit</Button>
+            ):(
+                ""
+            )}
         </div>
     )
 }
