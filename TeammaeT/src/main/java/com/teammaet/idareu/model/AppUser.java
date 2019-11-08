@@ -27,6 +27,8 @@ public class AppUser {
 
     @Singular("friendList")
     @ElementCollection
+    @CollectionTable(name = "app_user_friend_list", joinColumns = @JoinColumn(name = "app_user_id"))
+    @OrderColumn
     private Set<Long> friendList = new HashSet<>();
 
     @Singular("dares")

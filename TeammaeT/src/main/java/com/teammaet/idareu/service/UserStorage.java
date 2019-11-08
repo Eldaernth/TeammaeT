@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.HashSet;
@@ -74,12 +75,15 @@ public class UserStorage {
         return friend;
     }
 
+    @Transactional
     public AppUser addFriend(Long userId, Long friendId) {
-        AppUser user = getUserById(userId);
+//        AppUser user = getUserById(userId);
+        AppUser user = em.find(AppUser.class, userId);
         Set<Long> friendIdList = user.getFriendList();
         AppUser friend = getUserById(friendId);
         friendIdList.add(friendId);
-        userRepository.addFriend(userId, friendIdList);
+        user.setFriendList(friendIdList);
+//        userRepository.addFriend(userId, friendIdList);
         return friend;
     }
 
