@@ -5,19 +5,28 @@ import Axios from "axios";
 import {Button} from "react-bootstrap";
 
 export default function CreateDare(props) {
-    const [dare,setDare] = useState([]);
+    const [dare,setDare] = useState({
+        Dare:{
+            title: "",
+            dare:"",
+            bet:"",
+            deadline: ""
+        }
+    });
     const [isShown,setIsShown] = useState(false);
-    let template = {};
     function handleDareClick(shown) {
         setIsShown(shown.Shown);
-        template= {
-                    title:shown.title,
-                    dare:shown.dare,
-                    bet:shown.bet,
-                    deadline:shown.deadline
-        };
-
-        setDare(template);
+        console.log(shown.title);
+        setDare(prevState => ({
+            Dare:{
+                ...prevState.Dare,
+                title:shown.title,
+                dare:shown.dare,
+                bet:shown.bet,
+                deadline:shown.deadline
+            }
+            }));
+        console.log(dare);
     }
     function handleFriendClick(friendId){
         Axios.post(`http://localhost:8080/user/${props.id}/dare`,{
