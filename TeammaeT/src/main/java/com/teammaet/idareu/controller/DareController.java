@@ -2,6 +2,7 @@ package com.teammaet.idareu.controller;
 
 
 import com.teammaet.idareu.model.Dare;
+import com.teammaet.idareu.model.DareInformation;
 import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.service.DareStorage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class DareController {
     }
 
     @PostMapping
-    public Dare createAndSendDare(@RequestBody Dare dares) throws NullPointerException{
-        dareStorage.save(dares);
-        return dares;
+    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation) throws NullPointerException{
+        dareStorage.save(dareInformation);
+        return dareInformation;
     }
 
     @GetMapping("/{id}")
