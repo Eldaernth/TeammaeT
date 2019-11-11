@@ -10,6 +10,14 @@ function ReceivedList(props) {
             setDares(ret.data);
         });
 
+    const deleteDare = (evt) => {
+        evt.preventDefault();
+        Axios.delete(`http://localhost:8080/user/${props.id}/dare/${evt.target.value}`)
+            .then((ret) => {
+                console.log(ret.data)
+            });
+    };
+
 
     return (
         <div>
@@ -25,7 +33,7 @@ function ReceivedList(props) {
                     <tr>
                         <td > {row.title}</td>
                         <td> {row.dare}</td>
-                        <td><Button>Delete</Button></td>
+                        <td><Button value={row.id} variant="outline-danger" onClick={deleteDare}>X</Button></td>
                     </tr>
                 )}
                 </tbody>
