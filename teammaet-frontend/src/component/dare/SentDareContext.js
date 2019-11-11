@@ -1,14 +1,14 @@
 import React, {createContext, useEffect, useState} from "react";
 import Axios from "axios";
 
-export const ReceivedDareContext = createContext();
+export const SentDareContext = createContext();
 
-export function ReceivedDareProvider(props) {
-    const [receivedDares,setReceivedDares] = useState([]);
+export function SentDareProvider(props) {
+    const [sentDares,setSentDares] = useState([]);
     const methods = {
         getReceivedDares:() => {Axios.get(`http://localhost:8080/user/${props.id}/dare/type/received`)
             .then((ret) => {
-                setReceivedDares(ret.data);
+                setSentDares(ret.data);
             })
         },
         deleteDare:(evt) => {
@@ -24,8 +24,8 @@ export function ReceivedDareProvider(props) {
 
 
     return(
-        <ReceivedDareContext.Provider value={[receivedDares,setReceivedDares,methods]}>
+        <SentDareContext.Provider value={[sentDares,setSentDares,methods]}>
             {props.children}
-        </ReceivedDareContext.Provider>
+        </SentDareContext.Provider>
     );
 }
