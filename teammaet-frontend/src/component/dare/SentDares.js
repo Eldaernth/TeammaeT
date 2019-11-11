@@ -5,7 +5,7 @@ function SentDares(props) {
     const[dares,setDares] = useState([]);
     Axios.get(`http://localhost:8080/user/${props.id}/dare/type/sent`)
         .then((ret) => {
-            setSentDares(ret.data);
+            setDares(ret.data);
         });
     return (
         <div>
