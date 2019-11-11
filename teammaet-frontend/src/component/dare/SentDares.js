@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Axios from 'axios';
 import {Button, Table} from "react-bootstrap";
+import {SentDareContext} from "./SentDareContext";
 
 function SentDares(props) {
-    const[dares,setDares] = useState([]);
-    Axios.get(`http://localhost:8080/user/${props.id}/dare/type/sent`)
-        .then((ret) => {
-            setDares(ret.data);
-        });
+    const[dares,setDares,methods] = useContext(SentDareContext);
+
+    useEffect(()=>methods.getSentDares(),[methods]);
+
     return (
         <div>
             <Table>

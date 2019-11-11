@@ -43,7 +43,7 @@ export default function Userpage(props) {
                             <ReceivedList/>
                         </Popup>
                         </ReceivedDareProvider>
-                        <SentDareProvider>
+                        <SentDareProvider id={user.id}>
                         <Popup modal trigger={
                         <Button variant="secondary" block>Sent List</Button>}>
                             <Sent/>

@@ -6,7 +6,7 @@ export const SentDareContext = createContext();
 export function SentDareProvider(props) {
     const [sentDares,setSentDares] = useState([]);
     const methods = {
-        getReceivedDares:() => {Axios.get(`http://localhost:8080/user/${props.id}/dare/type/received`)
+        getSentDares:() => {Axios.get(`http://localhost:8080/user/${props.id}/dare/type/sent`)
             .then((ret) => {
                 setSentDares(ret.data);
             })
