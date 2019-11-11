@@ -2,8 +2,8 @@ import React, {useContext, useState} from 'react';
 import FriendList from "../friendlist/FriendList";
 import DareForm from "./form";
 import Axios from "axios";
-import {UserContext} from "../context/UserContext";
-import {DareContext} from "../context/DareContext";
+import {UserContext} from "../../context/UserContext";
+import {DareContext} from "../../context/DareContext";
 
 
 export default function CreateDare(props) {

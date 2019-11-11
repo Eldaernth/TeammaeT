@@ -7,9 +7,9 @@ import FriendList from '../component/friendlist/FriendList'
 import Sent from '../component/dare/SentDares'
 import CreateDare from '../component/dare/CreateDare'
 import ReceivedList from "../component/dare/ReceivedList";
-import {DareProvider} from "../component/context/DareContext";
-import {FriendsProvider} from "../component/context/FriendsContext";
-import {UserContext} from "../component/context/UserContext";
+import {DareProvider} from "../context/DareContext";
+import {FriendsProvider} from "../context/FriendsContext";
+import {UserContext} from "../context/UserContext";
 
 export default function Userpage(props) {
 

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import Table from 'react-bootstrap/Table'
 import {Link} from 'react-router-dom';
-import {UserContext} from "../component/context/UserContext";
+import {UserContext} from "../context/UserContext";
 
 function UsersPage() {
 

@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {Button, Col, Form, Row, Table, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import {FriendsContext} from "../context/FriendsContext";
-import {UserContext} from "../context/UserContext";
+import {FriendsContext} from "../../context/FriendsContext";
+import {UserContext} from "../../context/UserContext";
 
 export default function FriendList(props) {
     const [users,user,userMethods] = useContext(UserContext);
@@ -61,7 +61,7 @@ export default function FriendList(props) {
                             (
                                 <td align={"right"}>
                                     <Button value={row.id} variant={"outline-danger"}
-                                            onClick={()=>methods.deleteFriend(user.id)}>X</Button>
+                                            onClick={(e)=>methods.deleteFriend(e,user.id)}>X</Button>
                                 </td>
                             )
                         }

@@ -4,7 +4,7 @@ import {Container} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import UsersPage from "./pages/UsersPage";
 import UserPage from "./pages/UserPage";
-import {UserProvider} from "./component/context/UserContext";
+import {UserProvider} from "./context/UserContext";
 
 function App() {
     return (

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Table} from "react-bootstrap";
-import {DareContext} from "../context/DareContext";
-import {UserContext} from "../context/UserContext";
+import {DareContext} from "../../context/DareContext";
+import {UserContext} from "../../context/UserContext";
 
 function SentDares(props) {
     const [received, sent, methods] = useContext(DareContext);
@@ -23,7 +23,7 @@ function SentDares(props) {
                     <tr>
                         <td> {row.title}</td>
                         <td> {row.dare}</td>
-                        <td><Button value={row.id} variant="outline-danger" onClick={()=>methods.deleteDare(user.id)}>X</Button></td>
+                        <td><Button value={row.id} variant="outline-danger" onClick={(e)=>methods.deleteDare(e,user.id)}>X</Button></td>
                     </tr>
                 )}
                 </tbody>
