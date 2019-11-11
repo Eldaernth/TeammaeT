@@ -4,9 +4,9 @@ import {Button} from 'react-bootstrap';
 import '../style.css';
 import Popup from 'reactjs-popup';
 import FriendList from '../component/friendlist/FriendList'
-import Sent from '../component/dare/SentDares'
+import Sent from '../component/dare/DareList'
 import CreateDare from '../component/dare/CreateDare'
-import ReceivedList from "../component/dare/ReceivedList";
+import DareList from "../component/dare/DareList";
 import {DareProvider} from "../context/DareContext";
 import {FriendsProvider} from "../context/FriendsContext";
 import {UserContext} from "../context/UserContext";
@@ -39,11 +39,11 @@ export default function Userpage(props) {
                         <DareProvider>
                             <Popup modal trigger={
                                 <Button variant="secondary" block>Received List</Button>}>
-                                <ReceivedList/>
+                                <DareList isReceived={true}/>
                             </Popup>
                             <Popup modal trigger={
                                 <Button variant="secondary" block>Sent List</Button>}>
-                                <Sent/>
+                                <DareList isReceived={false}/>
                             </Popup>
                         <Popup modal trigger={
                             <Button variant="secondary" block>Create Dare</Button>}>

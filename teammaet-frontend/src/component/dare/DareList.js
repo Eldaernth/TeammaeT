@@ -3,12 +3,12 @@ import {Button, Table} from "react-bootstrap";
 import {DareContext} from "../../context/DareContext";
 import {UserContext} from "../../context/UserContext";
 
-function SentDares(props) {
+function DareList(props) {
     const [received, sent, methods] = useContext(DareContext);
     const [users,user,userMethods] = useContext(UserContext);
 
 
-    useEffect(() => methods.getSentDares(user.id), [methods]);
+    useEffect(() => props.isReceived ? methods.getReceivedDares(user.id) : methods.getSentDares(user.id), [methods]);
     return (
         <div>
             <Table>
@@ -19,17 +19,25 @@ function SentDares(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {sent.map((row) =>
+                {props.isReceived ?
+                    received.map((row) =>
                     <tr>
                         <td> {row.title}</td>
                         <td> {row.dare}</td>
                         <td><Button value={row.id} variant="outline-danger" onClick={(e)=>methods.deleteDare(e,user.id)}>X</Button></td>
                     </tr>
-                )}
+                ):
+                    sent.map((row) =>
+                        <tr>
+                            <td> {row.title}</td>
+                            <td> {row.dare}</td>
+                            <td><Button value={row.id} variant="outline-danger" onClick={(e)=>methods.deleteDare(e,user.id)}>X</Button></td>
+                        </tr>
+                    )}
                 </tbody>
             </Table>
         </div>
     )
 }
 
-export default SentDares
+export default DareList
