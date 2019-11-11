@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import Axios from "axios";
 import {Row,Col} from 'react-bootstrap'
 import { Button } from 'react-bootstrap';
@@ -14,10 +14,12 @@ export default function Userpage(props) {
     const [user, setUser] = useState("");
     const id = props.match.params.id;
 
-    Axios.get(`http://localhost:8080/user/${id}`)
-    .then((ret) => {
-        setUser(ret.data);
-    });
+    useEffect (() => {
+        Axios.get(`http://localhost:8080/user/${id}`)
+            .then((ret) => {
+                setUser(ret.data);
+            });
+    }, [id]);
 
     //TODO change <a href={`http://localhost:3000/user/${id}/friend`}>
     return (

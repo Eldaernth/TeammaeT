@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +18,9 @@ public class UserStorage {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EntityManager em;
 
     private Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
@@ -37,38 +42,30 @@ public class UserStorage {
         });
     }
 
+    public AppUser getAppUserByName(String name) {
+        return userRepository.findAppUserByName(name).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+            });
+    }
+
     public List<AppUser> getUsers() {
         return userRepository.findAll();
     }
 
-//    public void update(User user, String updatedName, String updatedEmail, String updatedPassword) {
-//        if (updatedName != null) {
-//            user.setName(updatedName);
-//        }
-//        if (updatedEmail != null) {
-//            user.setEmail(updatedEmail);
-//        }
-//        if (updatedPassword != null) {
-//            user.setPassword(updatedPassword);
-//        }
-//    }
-
+    @Transactional
     public AppUser deleteFriend(Long userId, Long friendId) {
-        AppUser user = getUserById(userId);
-        Set<Long> friendIdList = user.getFriendList();
-        AppUser friend = getUserById(friendId);
-        friendIdList.remove(friendId);
-        user.setFriendList(friendIdList);
-        return friend;
+        AppUser user = em.find(AppUser.class, userId);
+        user.getFriendList().remove(friendId);
+        return getUserById(friendId);
     }
 
+    @Transactional
     public AppUser addFriend(Long userId, Long friendId) {
-        AppUser user = getUserById(userId);
-        Set<Long> friendIdList = user.getFriendList();
-        AppUser friend = getUserById(friendId);
-        friendIdList.add(friendId);
-        user.setFriendList(friendIdList);
-        return friend;
+        AppUser user = em.find(AppUser.class, userId);
+        user.getFriendList().add(friendId);
+        return getUserById(friendId);
     }
 
     public Set<AppUser> getFriends(Long userId) {

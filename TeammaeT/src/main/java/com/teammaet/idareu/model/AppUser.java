@@ -2,6 +2,7 @@ package com.teammaet.idareu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,6 +28,8 @@ public class AppUser {
 
     @Singular("friendList")
     @ElementCollection
+    @CollectionTable(name = "app_user_friend_list", joinColumns = @JoinColumn(name = "app_user_id"))
+    @OrderColumn
     private Set<Long> friendList = new HashSet<>();
 
     @Singular("dares")
