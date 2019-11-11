@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import FriendList from "../friendlist/FriendList";
 import DareForm from "./form";
 import Axios from "axios";
-import {Button} from "react-bootstrap";
 
 export default function CreateDare(props) {
     const [dare, setDare] = useState({
