@@ -1,48 +1,26 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Axios from 'axios';
 import {Button, Col, Form, Row, Table, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import {FriendsContext} from "./FriendsContext";
 
 export default function FriendList(props) {
-
-    const [friendsId,setFriendsId] = useState([]);
-    const [friends, setFriends] = useState([]);
+    const [friends, methods] = useContext(FriendsContext);
+    const [friendsId, setFriendsId] = useState([]);
     const [name, setName] = useState("");
-    const [friendId, setFriendId] = useState("");
 
     function handleFriendIdClick(event) {
         props.friendList(friendsId);
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:8080/user/${props.id}/friend`)
-            .then((ret) => {
-                setFriends(ret.data);
-            });
-    }, [props, friendId]);
-
-
-    const addFriend = (evt) => {
-        evt.preventDefault();
-        Axios.post(`http://localhost:8080/user/${props.id}/friend/add/${name}`)
-            .then((ret) => {
-                console.log(ret.data)
-            });
-    };
-
-    const deleteFriend = (evt) => {
-        evt.preventDefault();
-        setFriendId(evt.target.value);
-        Axios.delete(`http://localhost:8080/user/${props.id}/friend/del/${evt.target.value}`)
-            .then((ret) => {
-                console.log(ret.data)
-            });
-    };
+        methods.getFriends()
+    }, [methods, props]);
 
 
     return (
         <div>
-            <Form onSubmit={addFriend}>
+            <Form onSubmit={(e) => methods.addFriend(e, name)}>
                 <Container style={{
                     flexDirection: 'col',
                     alignItems: 'center',
@@ -73,14 +51,17 @@ export default function FriendList(props) {
                                 {row.name}
                             </Link></td>
                         <td>{row.email}</td>
-                        {props.isDare ?(
+                        {props.isDare ? (
                                 <td>
-                                    <Form.Check aria-label="option 1" onChange={()=>{friendsId.push(row.id)}}/>
+                                    <Form.Check aria-label="option 1" onChange={() => {
+                                        friendsId.push(row.id)
+                                    }}/>
                                 </td>
-                            ):
+                            ) :
                             (
                                 <td align={"right"}>
-                                <Button value={row.id}  variant={"outline-danger"} onClick={deleteFriend}>X</Button>
+                                    <Button value={row.id} variant={"outline-danger"}
+                                            onClick={methods.deleteFriend}>X</Button>
                                 </td>
                             )
                         }
@@ -88,9 +69,9 @@ export default function FriendList(props) {
                 }
                 </tbody>
             </Table>
-            {props.isDare ?(
+            {props.isDare ? (
                 <Button onClick={handleFriendIdClick}>Submit</Button>
-            ):(
+            ) : (
                 ""
             )}
         </div>
