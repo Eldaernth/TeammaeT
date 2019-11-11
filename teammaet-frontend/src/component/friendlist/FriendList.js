@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom';
 import {Form} from "react-bootstrap";
 
 export default function FriendList(props) {
-    const [friendId,setFriendId] = useState([]);
+    const [friendsId,setFriendsId] = useState([]);
     const [friends, setFriends] = useState([]);
 
     function handleFriendIdClick(event) {
-        props.friendList(friendId);
+        props.friendList(friendsId);
     }
 
     Axios.get(`http://localhost:8080/user/${props.id}/friend`)
