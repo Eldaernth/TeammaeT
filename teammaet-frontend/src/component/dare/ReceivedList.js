@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Axios from 'axios';
 import {Button, Table} from "react-bootstrap";
+import {ReceivedDareContext} from "./ReceivedDareContext";
 
 
 function ReceivedList(props) {
-    const [dares, setDares] = useState([]);
-    Axios.get(`http://localhost:8080/user/${props.id}/dare/type/received`)
-        .then((ret) => {
-            setDares(ret.data);
-        });
+    const [dares,setDares] = useContext(ReceivedDareContext);
 
     const deleteDare = (evt) => {
         evt.preventDefault();
@@ -18,7 +15,7 @@ function ReceivedList(props) {
             });
     };
 
-
+    console.log(dares);
     return (
         <div>
             <Table>
