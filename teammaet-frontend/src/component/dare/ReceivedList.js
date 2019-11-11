@@ -1,12 +1,17 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Table} from "react-bootstrap";
-import {DareContext} from "./DareContext";
+import {DareContext} from "../context/DareContext";
+import {UserContext} from "../context/UserContext";
 
 
 function ReceivedList(props) {
-    const [received,sent,methods] = useContext(DareContext);
+    const [received, sent, methods] = useContext(DareContext);
+    const [users,user,userMethods] = useContext(UserContext);
 
-    useEffect(()=> {methods.getReceivedDares();},[methods]);
+
+    useEffect(() => {
+        methods.getReceivedDares(user.id);
+    }, [methods]);
 
     return (
         <div>
@@ -20,9 +25,9 @@ function ReceivedList(props) {
                 <tbody>
                 {received.map((row) =>
                     <tr>
-                        <td > {row.title}</td>
+                        <td> {row.title}</td>
                         <td> {row.dare}</td>
-                        <td><Button value={row.id} variant="outline-danger" onClick={methods.deleteDare}>X</Button></td>
+                        <td><Button value={row.id} variant="outline-danger" onClick={()=>methods.deleteDare(user.id)}>X</Button></td>
                     </tr>
                 )}
                 </tbody>

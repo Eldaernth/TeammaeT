@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import Axios from "axios";
+import React, {useState, useEffect, useContext} from 'react'
 import {Row, Col} from 'react-bootstrap'
 import {Button} from 'react-bootstrap';
 import '../style.css';
@@ -8,22 +7,20 @@ import FriendList from '../component/friendlist/FriendList'
 import Sent from '../component/dare/SentDares'
 import CreateDare from '../component/dare/CreateDare'
 import ReceivedList from "../component/dare/ReceivedList";
-import {DareProvider} from "../component/dare/DareContext";
-import {FriendsProvider} from "../component/friendlist/FriendsContext";
+import {DareProvider} from "../component/context/DareContext";
+import {FriendsProvider} from "../component/context/FriendsContext";
+import {UserContext} from "../component/context/UserContext";
 
 export default function Userpage(props) {
 
-    const [user, setUser] = useState("");
+    const [users, user, methods] = useContext(UserContext);
     const id = props.match.params.id;
 
     useEffect(() => {
-        Axios.get(`http://localhost:8080/user/${id}`)
-            .then((ret) => {
-                setUser(ret.data);
-            });
+        methods.getUser(id);
     }, [id]);
 
-    //TODO change <a href={`http://localhost:3000/user/${id}/friend`}>
+
     return (
         <Row className="user-page">
             <Col className="user">
@@ -34,13 +31,12 @@ export default function Userpage(props) {
                 </Row>
                 <Row className="user-buttons">
                     <div className="user-buttons">
-                        <FriendsProvider id={user.id}>
-                        <Popup modal trigger={
-                            <Button variant="secondary" block>FriendList</Button>}>
-                            <FriendList isDare={false}/>
-                        </Popup>
-                        </FriendsProvider>
-                        <DareProvider id={user.id}>
+                        <FriendsProvider>
+                            <Popup modal trigger={
+                                <Button variant="secondary" block>FriendList</Button>}>
+                                <FriendList isDare={false}/>
+                            </Popup>
+                        <DareProvider>
                             <Popup modal trigger={
                                 <Button variant="secondary" block>Received List</Button>}>
                                 <ReceivedList/>
@@ -49,11 +45,12 @@ export default function Userpage(props) {
                                 <Button variant="secondary" block>Sent List</Button>}>
                                 <Sent/>
                             </Popup>
-                        </DareProvider>
                         <Popup modal trigger={
                             <Button variant="secondary" block>Create Dare</Button>}>
-                            <CreateDare id={user.id}/>
+                            <CreateDare/>
                         </Popup>
+                        </DareProvider>
+                        </FriendsProvider>
                     </div>
                 </Row>
             </Col>

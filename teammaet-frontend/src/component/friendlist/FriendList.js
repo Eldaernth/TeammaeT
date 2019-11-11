@@ -1,26 +1,26 @@
 import React, {useState, useEffect, useContext} from 'react'
-import Axios from 'axios';
 import {Button, Col, Form, Row, Table, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import {FriendsContext} from "./FriendsContext";
+import {FriendsContext} from "../context/FriendsContext";
+import {UserContext} from "../context/UserContext";
 
 export default function FriendList(props) {
+    const [users,user,userMethods] = useContext(UserContext);
     const [friends, methods] = useContext(FriendsContext);
     const [friendsId, setFriendsId] = useState([]);
     const [name, setName] = useState("");
-
     function handleFriendIdClick(event) {
         props.friendList(friendsId);
     }
 
     useEffect(() => {
-        methods.getFriends()
-    }, [methods, props]);
+        methods.getFriends(user.id)
+    }, [props]);
 
 
     return (
         <div>
-            <Form onSubmit={(e) => methods.addFriend(e, name)}>
+            <Form onSubmit={(e) => methods.addFriend(e, name,user.id)}>
                 <Container style={{
                     flexDirection: 'col',
                     alignItems: 'center',
@@ -61,7 +61,7 @@ export default function FriendList(props) {
                             (
                                 <td align={"right"}>
                                     <Button value={row.id} variant={"outline-danger"}
-                                            onClick={methods.deleteFriend}>X</Button>
+                                            onClick={()=>methods.deleteFriend(user.id)}>X</Button>
                                 </td>
                             )
                         }

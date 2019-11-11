@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Table} from "react-bootstrap";
-import {DareContext} from "./DareContext";
+import {DareContext} from "../context/DareContext";
+import {UserContext} from "../context/UserContext";
 
 function SentDares(props) {
-    const[received,sent,methods] = useContext(DareContext);
+    const [received, sent, methods] = useContext(DareContext);
+    const [users,user,userMethods] = useContext(UserContext);
 
-    useEffect(()=>methods.getSentDares(),[methods]);
 
+    useEffect(() => methods.getSentDares(user.id), [methods]);
     return (
         <div>
             <Table>
@@ -19,9 +21,9 @@ function SentDares(props) {
                 <tbody>
                 {sent.map((row) =>
                     <tr>
-                        <td > {row.title}</td>
+                        <td> {row.title}</td>
                         <td> {row.dare}</td>
-                        <td><Button value={row.id} variant="outline-danger" onClick={methods.deleteDare}>X</Button></td>
+                        <td><Button value={row.id} variant="outline-danger" onClick={()=>methods.deleteDare(user.id)}>X</Button></td>
                     </tr>
                 )}
                 </tbody>
