@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Axios from 'axios';
 import {Button, Table} from "react-bootstrap";
-import {SentDareContext} from "./SentDareContext";
+import {DareContext} from "./DareContext";
 
 function SentDares(props) {
-    const[dares,setDares,methods] = useContext(SentDareContext);
+    const[received,sent,methods] = useContext(DareContext);
 
     useEffect(()=>methods.getSentDares(),[methods]);
 
@@ -18,7 +18,7 @@ function SentDares(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {dares.map((row) =>
+                {sent.map((row) =>
                     <tr>
                         <td > {row.title}</td>
                         <td> {row.dare}</td>

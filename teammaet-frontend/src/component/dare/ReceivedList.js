@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Axios from 'axios';
 import {Button, Table} from "react-bootstrap";
-import {ReceivedDareContext} from "./ReceivedDareContext";
+import {DareContext} from "./DareContext";
 
 
 function ReceivedList(props) {
-    const [dares,setDares,methods] = useContext(ReceivedDareContext);
+    const [received,sent,methods] = useContext(DareContext);
 
     useEffect(()=> {methods.getReceivedDares();},[methods]);
 
@@ -19,7 +19,7 @@ function ReceivedList(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {dares.map((row) =>
+                {received.map((row) =>
                     <tr>
                         <td > {row.title}</td>
                         <td> {row.dare}</td>

@@ -8,8 +8,7 @@ import FriendList from '../component/friendlist/FriendList'
 import Sent from '../component/dare/SentDares'
 import CreateDare from '../component/dare/CreateDare'
 import ReceivedList from "../component/dare/ReceivedList";
-import {ReceivedDareProvider} from '../component/dare/ReceivedDareContext';
-import {SentDareProvider} from '../component/dare/SentDareContext';
+import {DareProvider} from "../component/dare/DareContext";
 
 export default function Userpage(props) {
 
@@ -37,18 +36,16 @@ export default function Userpage(props) {
                         <Popup modal trigger={<Button variant="secondary" block>FriendList</Button>}>
                             <FriendList id={user.id} isDare={false}/>
                         </Popup>
-                        <ReceivedDareProvider id={user.id}>
+                        <DareProvider id={user.id}>
                         <Popup modal trigger={
                         <Button variant="secondary" block>Received List</Button>}>
                             <ReceivedList/>
                         </Popup>
-                        </ReceivedDareProvider>
-                        <SentDareProvider id={user.id}>
                         <Popup modal trigger={
                         <Button variant="secondary" block>Sent List</Button>}>
                             <Sent/>
                         </Popup>
-                        </SentDareProvider>
+                        </DareProvider>
                         <Popup modal trigger={
                         <Button variant="secondary" block >Create Dare</Button>}>
                             <CreateDare id={user.id}/>
