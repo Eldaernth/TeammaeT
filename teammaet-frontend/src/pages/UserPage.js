@@ -1,14 +1,9 @@
 import React, {useEffect, useContext} from 'react'
 import {Row, Col} from 'react-bootstrap'
-import {Button} from 'react-bootstrap';
 import '../style.css';
-import Popup from 'reactjs-popup';
-import FriendList from '../component/friendlist/FriendList'
-import CreateDare from '../component/dare/CreateDare'
-import DareList from "../component/dare/DareList";
-import {DareProvider} from "../context/DareContext";
-import {FriendsProvider} from "../context/FriendsContext";
 import {UserContext} from "../context/UserContext";
+import User from "../component/user/User";
+import UserButtons from "../component/user/UserButtons";
 
 export default function Userpage(props) {
 
@@ -23,30 +18,9 @@ export default function Userpage(props) {
     return (
         <Row className="user-page">
             <Col className="user">
-
+                <User/>
                 <Row className="user-buttons">
-                    <div className="user-buttons">
-                        <FriendsProvider>
-                            <Popup modal trigger={
-                                <Button variant="secondary" block>FriendList</Button>}>
-                                <FriendList isDare={false}/>
-                            </Popup>
-                        <DareProvider>
-                            <Popup modal trigger={
-                                <Button variant="secondary" block>Received List</Button>}>
-                                <DareList isReceived={true}/>
-                            </Popup>
-                            <Popup modal trigger={
-                                <Button variant="secondary" block>Sent List</Button>}>
-                                <DareList isReceived={false}/>
-                            </Popup>
-                        <Popup modal trigger={
-                            <Button variant="secondary" block>Create Dare</Button>}>
-                            <CreateDare/>
-                        </Popup>
-                        </DareProvider>
-                        </FriendsProvider>
-                    </div>
+                    <UserButtons/>
                 </Row>
             </Col>
             <Col>

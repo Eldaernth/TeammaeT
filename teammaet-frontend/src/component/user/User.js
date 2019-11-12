@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {Row} from "react-bootstrap";
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 
 export default function User() {
