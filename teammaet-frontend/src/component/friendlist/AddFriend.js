@@ -4,12 +4,12 @@ import {FriendsContext} from "../../context/FriendsContext";
 import {UserContext} from "../../context/UserContext";
 
 export default function AddFriend() {
-    const [users,user,userMethods] = useContext(UserContext);
-    const [friends, methods,friendIds] = useContext(FriendsContext);
+    const [users, user, userMethods] = useContext(UserContext);
+    const [friends, methods, friendIds] = useContext(FriendsContext);
     const [name, setName] = useState("");
 
-    return(
-        <Form onSubmit={(e) => methods.addFriend(e, name,user.id)}>
+    return (
+        <Form onSubmit={(e) => methods.addFriend(e, name, user.id)}>
             <Container style={{
                 flexDirection: 'col',
                 alignItems: 'center',

@@ -5,14 +5,14 @@ import {UserContext} from "../../context/UserContext";
 import ActionButtons from "./ActionButtons";
 
 export default function Friend(props) {
-    const [friends,methods,friendIds] = useContext(FriendsContext);
-    const [users,user,Usermethods] = useContext(UserContext);
+    const [friends, methods, friendIds] = useContext(FriendsContext);
+    const [users, user, Usermethods] = useContext(UserContext);
 
     useEffect(() => {
         methods.getFriends(user.id)
-    }, [props]);
+    }, [methods, user.id, props]);
 
-    return(
+    return (
         <tbody>
         {friends.map((row) =>
             <tr>

@@ -19,14 +19,14 @@ export function DareProvider(props) {
                     setSentDares(ret.data);
                 })
         },
-        deleteDare: (evt,id) => {
+        deleteDare: (evt, id) => {
             evt.preventDefault();
             Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`)
                 .then((ret) => {
                     console.log(ret.data)
                 });
         },
-        addDare:(id,dare,friendIds)=>{
+        addDare: (id, dare, friendIds) => {
             Axios.post(`http://localhost:8080/user/${id}/dare`, {
                 userThatSends: id,
                 title: dare.title,

@@ -8,7 +8,7 @@ import DareList from "../dare/DareList";
 import CreateDare from "../dare/CreateDare";
 
 export default function () {
-    return(
+    return (
         <div className="user-buttons">
             <FriendsProvider>
                 <Popup modal trigger={

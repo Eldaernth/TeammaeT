@@ -7,7 +7,7 @@ export default function User() {
     const [users, user, methods] = useContext(UserContext);
 
 
-    return(
+    return (
         <Row className="user-info">
             <div>
                 <h3>{user.name}</h3>

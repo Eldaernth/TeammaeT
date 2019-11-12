@@ -13,7 +13,7 @@ function DareList(props) {
                     <th>Massage</th>
                 </tr>
                 </thead>
-                    <Dares isReceived={props.isReceived}/>
+                <Dares isReceived={props.isReceived}/>
             </Table>
         </div>
     )

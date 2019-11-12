@@ -12,7 +12,7 @@ export default function Userpage(props) {
 
     useEffect(() => {
         methods.getUser(id);
-    }, [methods,id]);
+    }, [methods, id]);
 
 
     return (

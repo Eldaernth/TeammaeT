@@ -23,7 +23,7 @@ export function UserProvider(props) {
 
 
     return (
-        <UserContext.Provider value={[users, user, methods]}>
+        <UserContext.Provider value={{users: users, user: user, userMethods: methods}}>
             {props.children}
         </UserContext.Provider>
     )

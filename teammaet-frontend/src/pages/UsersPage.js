@@ -5,7 +5,7 @@ import {UserContext} from "../context/UserContext";
 
 function UsersPage() {
 
-    const [users,user, methods] = useContext(UserContext);
+    const [users, user, methods] = useContext(UserContext);
 
     useEffect(() => {
         methods.getUsers();
