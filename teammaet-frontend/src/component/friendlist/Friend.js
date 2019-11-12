@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {Button, Form} from "react-bootstrap";
 import {FriendsContext} from "../../context/FriendsContext";
 import {UserContext} from "../../context/UserContext";
 import ActionButtons from "./ActionButtons";

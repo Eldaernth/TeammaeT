@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import {Row, Col} from 'react-bootstrap'
 import {Button} from 'react-bootstrap';
 import '../style.css';
