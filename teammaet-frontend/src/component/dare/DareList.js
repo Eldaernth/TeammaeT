@@ -1,14 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {Button, Table} from "react-bootstrap";
-import {DareContext} from "../../context/DareContext";
-import {UserContext} from "../../context/UserContext";
+import React from 'react';
+import {Table} from "react-bootstrap";
+import Dares from "./Dares";
 
 function DareList(props) {
-    const [received, sent, methods] = useContext(DareContext);
-    const [users,user,userMethods] = useContext(UserContext);
 
-
-    useEffect(() => props.isReceived ? methods.getReceivedDares(user.id) : methods.getSentDares(user.id), [methods]);
     return (
         <div>
             <Table>
@@ -18,23 +13,7 @@ function DareList(props) {
                     <th>Massage</th>
                 </tr>
                 </thead>
-                <tbody>
-                {props.isReceived ?
-                    received.map((row) =>
-                    <tr>
-                        <td> {row.title}</td>
-                        <td> {row.dare}</td>
-                        <td><Button value={row.id} variant="outline-danger" onClick={(e)=>methods.deleteDare(e,user.id)}>X</Button></td>
-                    </tr>
-                ):
-                    sent.map((row) =>
-                        <tr>
-                            <td> {row.title}</td>
-                            <td> {row.dare}</td>
-                            <td><Button value={row.id} variant="outline-danger" onClick={(e)=>methods.deleteDare(e,user.id)}>X</Button></td>
-                        </tr>
-                    )}
-                </tbody>
+                    <Dares isReceived={props.isReceived}/>
             </Table>
         </div>
     )

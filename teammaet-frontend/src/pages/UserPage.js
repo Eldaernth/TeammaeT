@@ -4,7 +4,6 @@ import {Button} from 'react-bootstrap';
 import '../style.css';
 import Popup from 'reactjs-popup';
 import FriendList from '../component/friendlist/FriendList'
-import Sent from '../component/dare/DareList'
 import CreateDare from '../component/dare/CreateDare'
 import DareList from "../component/dare/DareList";
 import {DareProvider} from "../context/DareContext";
@@ -18,7 +17,7 @@ export default function Userpage(props) {
 
     useEffect(() => {
         methods.getUser(id);
-    }, [id]);
+    }, [methods,id]);
 
 
     return (
