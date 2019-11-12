@@ -1,34 +1,32 @@
 import React, {useContext, useState} from 'react';
 import FriendList from "../friendlist/FriendList";
 import DareForm from "./form";
-import Axios from "axios";
 import {UserContext} from "../../context/UserContext";
 import {DareContext} from "../../context/DareContext";
+import {FriendsContext} from "../../context/FriendsContext";
 
 
 export default function CreateDare(props) {
-    const [users,user,Usermethods]= useContext(UserContext);
-    const [recieved,sent,methods] = useContext(DareContext);
-    const [dare, setDare] = useState({
-        title: "",
-        dare: "",
-        bet: "",
-        deadline: ""
-    });
+    const [users, user, userMethods] = useContext(UserContext);
+    const [recieved, sent, methods] = useContext(DareContext);
+    const [friends, friendMethods, friendIds] = useContext(FriendsContext);
+    const [dare, setDare] = useState({});
     const [isShown, setIsShown] = useState(false);
-    function handleDareClick(shown) {
+
+    const handleDareClick = (shown) => {
         setIsShown(shown.Shown);
-        setDare(prevState => ({
+        setDare({
             title: shown.title,
             dare: shown.dare,
             bet: shown.bet,
             deadline: shown.deadline
-        }));
+        });
 
-    }
-    function handleFriendClick(friendIds) {
-        methods.addDare(user.id,dare,friendIds)
-    }
+    };
+
+    const handleFriendClick = () => {
+        methods.addDare(user.id, dare, friendIds)
+    };
 
     return (
         <div>
