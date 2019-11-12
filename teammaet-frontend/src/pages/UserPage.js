@@ -23,11 +23,7 @@ export default function Userpage(props) {
     return (
         <Row className="user-page">
             <Col className="user">
-                <Row className="user-info">
-                    <div>
-                        <h3>{user.name}</h3>
-                    </div>
-                </Row>
+
                 <Row className="user-buttons">
                     <div className="user-buttons">
                         <FriendsProvider>
