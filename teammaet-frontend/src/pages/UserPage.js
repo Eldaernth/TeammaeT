@@ -5,7 +5,7 @@ import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
 import UserButtons from "../component/user/UserButtons";
 
-export default function Userpage(props) {
+export default function UserPage(props) {
 
     const [users, user, methods] = useContext(UserContext);
     const id = props.match.params.id;
