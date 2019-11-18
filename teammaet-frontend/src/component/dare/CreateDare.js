@@ -1,32 +1,43 @@
-import React from 'react';
-import {Form,Button} from 'react-bootstrap'
+import React, {useContext, useState} from 'react';
+import FriendList from "../friendlist/FriendList";
+import DareForm from "./form";
+import {UserContext} from "../../context/UserContext";
+import {DareContext} from "../../context/DareContext";
+import {FriendsContext} from "../../context/FriendsContext";
+
 
 export default function CreateDare(props) {
+    const [users, user, userMethods] = useContext(UserContext);
+    const [recieved, sent, methods] = useContext(DareContext);
+    const [friends, friendMethods, friendIds] = useContext(FriendsContext);
+    const [dare, setDare] = useState({});
+    const [isShown, setIsShown] = useState(false);
+
+    const handleDareClick = (shown) => {
+        setIsShown(shown.Shown);
+        setDare({
+            title: shown.title,
+            dare: shown.dare,
+            bet: shown.bet,
+            deadline: shown.deadline
+        });
+
+    };
+
+    const handleFriendClick = () => {
+        methods.addDare(user.id, dare, friendIds)
+    };
+
     return (
-        <Form>
-            <Form.Group controlId="Title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title" />
-            </Form.Group>
-
-            <Form.Group controlId="Message">
-                <Form.Label>Massage</Form.Label>
-                <Form.Control as="textarea" rows="3" placeholder="Massage" />
-            </Form.Group>
-
-            <Form.Group controlId="Bet">
-                <Form.Label>Bet</Form.Label>
-                <Form.Control type="text" placeholder="Bet" />
-            </Form.Group>
-
-            <Form.Group controlId="Deadlne">
-                <Form.Label>Deadline</Form.Label>
-                <Form.Control type="date" placeholder="Deadline" />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+        <div>
+            {
+                isShown ? (
+                    <FriendList isDare={true} friendList={handleFriendClick}/>
+                ) : (
+                    <DareForm shown={handleDareClick}/>
+                )
+            }
+        </div>
     )
+
 }

@@ -1,59 +1,29 @@
-import React,{useState} from 'react'
-import Axios from "axios";
-import {Row,Col} from 'react-bootstrap'
-import { Button } from 'react-bootstrap';
+import React, {useEffect, useContext} from 'react'
+import {Row, Col} from 'react-bootstrap'
 import '../style.css';
-import Popup from 'reactjs-popup';
-import FriendList from '../component/friendlist/FriendList'
-import Recived from '../component/ReceivedList'
-import Sent from '../component/SentDares'
-import CreateDare from '../component/CreateDare'
+import {UserContext} from "../context/UserContext";
+import User from "../component/user/User";
+import UserButtons from "../component/user/UserButtons";
 
-export default function Userpage(props) {
+export default function UserPage(props) {
 
-    const [user, setUser] = useState({
-        id:0,
-        name:"nama1",
-        email:"dsadas",
-        password:"asdfasf"
-    })
-    const id = props.match.params.id
+    const [users, user, methods] = useContext(UserContext);
+    const id = props.match.params.id;
 
-    Axios.get(`http://localhost:8080/user/${id}`)
-    .then((ret) => {
-        setUser(ret.data);
-    })
+    useEffect(() => {
+        methods.getUser(id);
+    }, [methods, id]);
 
-    //TODO change <a href={`http://localhost:3000/user/${id}/friend`}>
+
     return (
         <Row className="user-page">
             <Col className="user">
-                <Row className="user-info">
-                    <div>
-                    <h3>{user.name}</h3>
-                    </div>
-                </Row>
+                <User/>
                 <Row className="user-buttons">
-                    <div className="user-buttons">
-                        <Popup modal trigger={<Button variant="secondary" block>FriendList</Button>}>
-                            <FriendList id={user.id}/>
-                        </Popup>
-                        <Popup modal trigger={
-                        <Button variant="secondary" block>Recived List</Button>}>
-                            <Recived id={user.id}/>
-                        </Popup>
-                        <Popup modal trigger={
-                        <Button variant="secondary" block>Sent List</Button>}>
-                            <Sent id={user.id}/>
-                        </Popup>
-                        <Popup modal trigger={
-                        <Button variant="secondary" block >Create Dare</Button>}>
-                            <CreateDare/>>
-                        </Popup>
-                    </div>
+                    <UserButtons/>
                 </Row>
             </Col>
-            <Col >
+            <Col>
                 <p>STATS</p>
             </Col>
         </Row>

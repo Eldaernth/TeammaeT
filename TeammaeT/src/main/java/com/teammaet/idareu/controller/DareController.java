@@ -2,81 +2,57 @@ package com.teammaet.idareu.controller;
 
 
 import com.teammaet.idareu.model.Dare;
-import com.teammaet.idareu.model.Friend;
-import com.teammaet.idareu.model.SentDareInformation;
-import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.model.DareInformation;
+import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.service.DareStorage;
-import com.teammaet.idareu.service.UserStorage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/user/{userId}/dare")
 public class DareController {
 
-    private UserStorage userStorage;
+    @Autowired
+    private DareStorage dareStorage;
 
-    public DareController(UserStorage userStorage) {
-        this.userStorage = userStorage;
-    }
-
-    @GetMapping("/received")
-    public List<Dare> getReceivedDares(@PathVariable("userId") int userId) throws NullPointerException {
-        User user = userStorage.getUserById(userId);
-        return user.getDareStorage().getReceivedDares();
-    }
-
-    @GetMapping("/sent")
-    public List<Dare> getSentDares(@PathVariable("userId") int userId) throws NullPointerException {
-        User user = userStorage.getUserById(userId);
-        return user.getDareStorage().getSentDares();
+    @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
+    public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
+                                       @PathVariable("dareType") String dareType) throws NullPointerException {
+        return dareStorage.getDares(userId, DareType.valueOf(dareType));
     }
 
     @GetMapping
-    public List<Dare> getDares(@PathVariable("userId") int userId) throws NullPointerException {
-        User user = userStorage.getUserById(userId);
-        return user.getDareStorage().getAllDare();
+    public List<Dare> getAllDares(@PathVariable("userId") Long userId) throws NullPointerException {
+        return dareStorage.getAllDare(userId);
     }
 
     @PostMapping
-    public Dare createDare(@PathVariable("userId") int userId,
-                           @RequestBody SentDareInformation sentDareInformation) {
-
-        User user = userStorage.getUserById(userId);
-        Set<Friend> friends = userStorage.getFriends(sentDareInformation.getFriendSet());
-        Dare dare = sentDareInformation.getDare();
-        user.send(dare, friends);
-        return dare;
+    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation) throws NullPointerException{
+        dareStorage.save(dareInformation);
+        return dareInformation;
     }
 
     @GetMapping("/{id}")
-    public Dare getDare(@PathVariable("userId") int userId,
-                        @PathVariable("id") int id) {
-        User user = userStorage.getUserById(userId);
-        DareStorage dareStorage = user.getDareStorage();
-        return dareStorage.getDareBy(id, dareStorage.getAllDare());
+    public Dare getDare(@PathVariable("id") Long dareId) throws NullPointerException {
+        return dareStorage.getDareBy(dareId);
     }
 
-    @PutMapping("/{id}")
-    public Dare updateDare(@PathVariable("userId") int userId,
-                           @PathVariable("id") int id) {
-        User user = userStorage.getUserById(userId);
-        DareStorage dareStorage = user.getDareStorage();
-        Dare dare = dareStorage.getDareBy(id, dareStorage.getReceivedDares());
-        dareStorage.update(dare, user);
-        return dare;
-    }
+//    @PutMapping("/{id}")
+//    public Dare updateDare(@PathVariable("userId") int userId,
+//                           @PathVariable("id") int id) {
+//        User user = userStorage.getUserById(userId);
+//        DareStorage dareStorage = user.getDareStorage();
+//        Dare dare = dareStorage.getDareBy(id, dareStorage.getDares());
+//        dareStorage.update(dare, user);
+//        return dare;
+//    }
 
     @DeleteMapping("/{id}")
-    public String deleteDare(@PathVariable("userId") int userId,
-                             @PathVariable("id") int id) throws NullPointerException {
-        User user = userStorage.getUserById(userId);
-        DareStorage dareStorage = user.getDareStorage();
-        Dare dare = dareStorage.getDareBy(id, dareStorage.getAllDare());
-        dareStorage.delete(dare);
+    public String deleteDare(@PathVariable("id") Long dareId) throws NullPointerException {
+        dareStorage.delete(dareId);
         return "User was deleted";
     }
 }

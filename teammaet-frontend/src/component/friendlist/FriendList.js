@@ -1,41 +1,23 @@
-import React, {useState} from 'react'
-import Axios from 'axios';
+import React from 'react'
 import {Table} from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import Friend from "./Friend";
+import AddFriend from "./AddFriend";
+import BottomButtons from "./BottomButtons";
 
 export default function FriendList(props) {
-
-
-    const [friends, setFriends] = useState([]);
-    Axios.get(`http://localhost:8080/user/${props.id}/friend`)
-        .then((ret) => {
-            setFriends(ret.data);
-        })
-
-        console.log(friends);
     return (
         <div>
-            <h1>FriendList</h1>
-
+            <AddFriend/>
             <Table>
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
                 </thead>
-                <tbody>
-                    {friends.map((row) =>
-                    <tr>
-                        <td>
-                        <Link to={`${row.id}`}>
-                        {row.name}
-                        </Link></td>
-                        <td>{row.email}</td>
-                    </tr>)
-                    }
-                </tbody>
+                <Friend isDare={props.isDare}/>
             </Table>
+            <BottomButtons friendList={props.friendList} isDare={props.isDare}/>
         </div>
     )
 }

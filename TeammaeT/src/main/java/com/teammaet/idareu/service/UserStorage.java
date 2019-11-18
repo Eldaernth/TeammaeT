@@ -1,81 +1,81 @@
 package com.teammaet.idareu.service;
 
-import com.teammaet.idareu.model.Dare;
-import com.teammaet.idareu.model.Friend;
-import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.model.AppUser;
+import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import java.util.HashSet;
 import java.util.List;
-import java.util.*;
+import java.util.Set;
 
 @Service
 public class UserStorage {
-    Logger logger = LoggerFactory.getLogger(UserStorage.class);
 
-    private List<User> users = new ArrayList<>();
+    @Autowired
+    private UserRepository userRepository;
 
-    public User getUser(String name, String password) throws Exception {
-        for (User user : users) {
-            if (user.getName().equals(name)) {
-                if (user.getPassword().equals(password)) {
-                    return user;
-                } else {
-                    Exception e = new Exception("Wrong password.");
-                    logger.info(e.getMessage());
-                    throw e;
-                }
-            }
-        }
-        Exception e = new Exception("Wrong username.");
-        logger.info(e.getMessage());
-        throw e;
+    @Autowired
+    private EntityManager em;
+
+    private Logger logger = LoggerFactory.getLogger(UserStorage.class);
+
+
+    public void register(AppUser user) {
+        userRepository.save(user);
     }
 
-    public void register(User user) {
-        users.add(user);
+    public void deleteUser(AppUser user) {
+        userRepository.delete(user);
     }
 
-    public void deleteUser(User user) {
-        users.remove(user);
-    }
     //TODO:best way to handle this exception
-    public User getUserById(int id) throws NullPointerException {
-        for (User user : users) {
-            if (user.getId() == id)
-                return user;
-        }
-        NullPointerException e = new NullPointerException("User not found.");
-        logger.info(e.getMessage());
-        throw e;
+    public AppUser getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+        });
     }
 
-    public List<User> getUsers() {
-        return users;
+    public AppUser getAppUserByName(String name) {
+        return userRepository.findAppUserByName(name).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+            });
     }
 
-    public void update(User user, String updatedName, String updatedEmail, String updatedPassword) {
-        if (updatedName != null) {
-            user.setName(updatedName);
-        }
-        if (updatedEmail != null) {
-            user.setEmail(updatedEmail);
-        }
-        if (updatedPassword != null) {
-            user.setPassword(updatedPassword);
-        }
+    public List<AppUser> getUsers() {
+        return userRepository.findAll();
     }
 
-    public Set<Friend> getFriends(Set<Integer> friendIdList) {
-        Set<Friend> friends = new HashSet<>();
-        for (Integer id : friendIdList) {
-            try {
-                friends.add(getUserById(id));
-            } catch (Exception e) {
-            }
-        }
-        return friends;
+    @Transactional
+    public AppUser deleteFriend(Long userId, Long friendId) {
+        AppUser user = em.find(AppUser.class, userId);
+        user.getFriendList().remove(friendId);
+        return getUserById(friendId);
     }
+
+    @Transactional
+    public AppUser addFriend(Long userId, Long friendId) {
+        AppUser user = em.find(AppUser.class, userId);
+        user.getFriendList().add(friendId);
+        return getUserById(friendId);
+    }
+
+    public Set<AppUser> getFriends(Long userId) {
+        Set<AppUser> friendList = new HashSet<>();
+        AppUser user = getUserById(userId);
+        Set<Long> friendIds = user.getFriendList();
+        for (Long friendId : friendIds) {
+            friendList.add(getUserById(friendId));
+        }
+        return friendList;
+    }
+
 }

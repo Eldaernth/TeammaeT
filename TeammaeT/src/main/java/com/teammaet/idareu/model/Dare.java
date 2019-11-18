@@ -1,75 +1,37 @@
 package com.teammaet.idareu.model;
 
-import org.springframework.stereotype.Component;
+import lombok.*;
 
-import java.util.*;
+import javax.persistence.*;
+import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class Dare {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String title;
+
     private String dare;
+
     private String bet;
-    private Date deadline;
-    private Set<Friend> doneFriendList = new HashSet<>();
 
-    private static int previousId = 1;
+    private LocalDate deadline;
 
-    public Dare() {}
+    private boolean progress;
 
-    public Dare(String title, String dare, String bet, Date deadline) {
-        this.id = previousId++;
-        this.title = title;
-        this.dare = dare;
-        this.bet = bet;
-        this.deadline = deadline;
-    }
+    @ManyToOne
+    @ToString.Exclude
+    private AppUser user;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDare() {
-        return dare;
-    }
-
-    public void setDare(String dare) {
-        this.dare = dare;
-    }
-
-    public String getBet() {
-        return bet;
-    }
-
-    public void setBet(String bet) {
-        this.bet = bet;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public Set<Friend> getDoneFriendList() {
-        return doneFriendList;
-    }
-
-    public void doneBy(Friend friend) {
-        doneFriendList.add(friend);
-    }
+    @Enumerated(EnumType.STRING)
+    private DareType dareType;
+    
+    
 }

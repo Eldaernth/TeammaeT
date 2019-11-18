@@ -1,65 +1,66 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.Dare;
-import com.teammaet.idareu.model.Friend;
+import com.teammaet.idareu.model.DareInformation;
+import com.teammaet.idareu.model.DareType;
+import com.teammaet.idareu.repository.DareRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Service
 public class DareStorage {
 
-    Logger logger = LoggerFactory.getLogger(DareStorage.class);
+    @Autowired
+    private DareRepository dareRepository;
 
-    private List<Dare> sentDares = new ArrayList<>();
-    private List<Dare> receivedDares = new ArrayList<>();
+    @Autowired
+    private UserStorage userStorage;
 
-    public Dare createDare(String title, String dare, String bet, Date deadline){
-        return new Dare(title,dare,bet,deadline);
-    }
+    private Logger logger = LoggerFactory.getLogger(DareStorage.class);
 
-    public void receive(Dare dare){
-        receivedDares.add(dare);
-    }
-
-    public void saveSentDare(Dare dare) {
-        sentDares.add(dare);
-    }
-
-    public Dare getDareBy(int id, List<Dare> dareList) throws NullPointerException{
-        for(Dare dare : dareList){
-            if(id == dare.getId()){
-                return dare;
-            }
+    public void save(DareInformation dareInformation) {
+        dareRepository.save(Dare.builder()
+                .title(dareInformation.getTitle())
+                .bet(dareInformation.getBet())
+                .dare(dareInformation.getDare())
+                .deadline(dareInformation.getDeadline())
+                .user(userStorage.getUserById(dareInformation.getUserThatSends()))
+                .dareType(DareType.sent)
+                .build());
+        for(int i=0;i<dareInformation.getFriendList().size();i++){
+            dareRepository.save(Dare.builder()
+                    .title(dareInformation.getTitle())
+                    .bet(dareInformation.getBet())
+                    .dare(dareInformation.getDare())
+                    .deadline(dareInformation.getDeadline())
+                    .user(userStorage.getUserById(dareInformation.getFriendList().get(i)))
+                    .dareType(DareType.received)
+                    .build());
         }
-        NullPointerException e = new NullPointerException("User not found.");
-        logger.info(e.getMessage());
-        throw e;
+
     }
 
-    public void delete (Dare dare) {
-        receivedDares.remove(dare);
-        sentDares.remove(dare);
+    public Dare getDareBy(Long id) throws NullPointerException {
+        return dareRepository.findById(id).orElseThrow(() -> {
+            NullPointerException e = new NullPointerException("User not found.");
+            logger.info(e.getMessage());
+            throw e;
+        });
     }
 
-    public void update(Dare dare, Friend user) {
-        dare.doneBy(user);
+    public void delete(Long dareId) {
+        dareRepository.delete(getDareBy(dareId));
     }
 
-    public List<Dare> getSentDares() {
-        return sentDares;
+    public List<Dare> getDares(Long userId, DareType dareType) {
+        return dareRepository.findAllByUserIdAndDareType(userId, dareType);
     }
 
-    public List<Dare> getReceivedDares() {
-        return receivedDares;
-    }
-
-    public List<Dare> getAllDare(){
-        List<Dare> dares = new ArrayList<>();
-        dares.addAll(receivedDares);
-        dares.addAll(sentDares);
-        return dares;
+    public List<Dare> getAllDare(Long userId) {
+        return dareRepository.findAllByUserId(userId);
     }
 }

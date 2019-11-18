@@ -1,6 +1,6 @@
 package com.teammaet.idareu.controller;
 
-import com.teammaet.idareu.model.User;
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.service.UserStorage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,33 +19,33 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUser() {
+    public List<AppUser> getAllUser() throws NullPointerException {
         return userStorage.getUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") int id) throws NullPointerException {
+    public AppUser getUserById(@PathVariable("id") Long id) throws NullPointerException {
         return userStorage.getUserById(id);
     }
 
     @PostMapping
-    public User register(@RequestBody User user) {
+    public AppUser register(@RequestBody AppUser user) throws NullPointerException{
         userStorage.register(user);
         return user;
     }
 
     //TODO:Security question about accessing the api and change data
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) throws NullPointerException {
-        User user = userStorage.getUserById(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) throws NullPointerException {
+        AppUser user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")
-    public User updateUserData(@PathVariable("id") int id, @RequestBody User user) throws NullPointerException {
-        User userToUpdate = userStorage.getUserById(id);
-        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
+    public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user) throws NullPointerException {
+        AppUser userToUpdate = userStorage.getUserById(id);
+//        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
         return userToUpdate;
     }
 

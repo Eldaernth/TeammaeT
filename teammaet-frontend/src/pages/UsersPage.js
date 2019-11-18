@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import Axios from "axios";
+import React, {useContext, useEffect} from 'react';
 import Table from 'react-bootstrap/Table'
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {UserContext} from "../context/UserContext";
 
 function UsersPage() {
 
-    const [users, setUsers] = useState([])
+    const [users, user, methods] = useContext(UserContext);
 
-    Axios.get('http://localhost:8080/user')
-        .then((ret) => {
-            setUsers(ret.data);
-        })
+    useEffect(() => {
+        methods.getUsers();
+    }, [methods]);
 
     return (
         <div>
@@ -18,21 +17,21 @@ function UsersPage() {
 
             <Table>
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {users.map((row) =>
+                {users.map((row) =>
                     <tr>
                         <td>
-                        <Link to={`user/${row.id}`}>
-                        {row.name}
-                        </Link></td>
+                            <Link to={`user/${row.id}`}>
+                                {row.name}
+                            </Link></td>
                         <td>{row.email}</td>
                     </tr>)
-                    }
+                }
                 </tbody>
             </Table>
         </div>
