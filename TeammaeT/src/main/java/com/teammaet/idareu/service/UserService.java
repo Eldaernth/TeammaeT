@@ -1,7 +1,7 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.model.UserInfo;
+import com.teammaet.idareu.model.UserCredentials;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class UserService {
             });
     }
 
-    public AppUser login(UserInfo userInfo){
+    public AppUser login(UserCredentials userInfo){
         AppUser user = getAppUserByName(userInfo.getUserName());
         if (user.getPassword().equals(userInfo.getPassword())) {
             return user;
