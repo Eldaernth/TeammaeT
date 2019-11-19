@@ -20,23 +20,23 @@ public class DareController {
 
     @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
     public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
-                                       @PathVariable("dareType") String dareType) throws NullPointerException {
+                                       @PathVariable("dareType") String dareType){
         return dareStorage.getDares(userId, DareType.valueOf(dareType));
     }
 
     @GetMapping
-    public List<Dare> getAllDares(@PathVariable("userId") Long userId) throws NullPointerException {
+    public List<Dare> getAllDares(@PathVariable("userId") Long userId){
         return dareStorage.getAllDare(userId);
     }
 
     @PostMapping
-    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation) throws NullPointerException{
+    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation){
         dareStorage.save(dareInformation);
         return dareInformation;
     }
 
     @GetMapping("/{id}")
-    public Dare getDare(@PathVariable("id") Long dareId) throws NullPointerException {
+    public Dare getDare(@PathVariable("id") Long dareId){
         return dareStorage.getDareBy(dareId);
     }
 
@@ -51,7 +51,7 @@ public class DareController {
 //    }
 
     @DeleteMapping("/{id}")
-    public String deleteDare(@PathVariable("id") Long dareId) throws NullPointerException {
+    public String deleteDare(@PathVariable("id") Long dareId){
         dareStorage.delete(dareId);
         return "User was deleted";
     }

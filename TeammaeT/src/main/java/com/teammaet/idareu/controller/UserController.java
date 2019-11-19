@@ -19,31 +19,31 @@ public class UserController {
     }
 
     @GetMapping
-    public List<AppUser> getAllUser() throws NullPointerException {
+    public List<AppUser> getAllUser(){
         return userStorage.getUsers();
     }
 
     @GetMapping("/{id}")
-    public AppUser getUserById(@PathVariable("id") Long id) throws NullPointerException {
+    public AppUser getUserById(@PathVariable("id") Long id){
         return userStorage.getUserById(id);
     }
 
     @PostMapping
-    public AppUser register(@RequestBody AppUser user) throws NullPointerException{
+    public AppUser register(@RequestBody AppUser user){
         userStorage.register(user);
         return user;
     }
 
     //TODO:Security question about accessing the api and change data
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) throws NullPointerException {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
         AppUser user = userStorage.getUserById(id);
         userStorage.deleteUser(user);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")
-    public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user) throws NullPointerException {
+    public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user){
         AppUser userToUpdate = userStorage.getUserById(id);
 //        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
         return userToUpdate;
