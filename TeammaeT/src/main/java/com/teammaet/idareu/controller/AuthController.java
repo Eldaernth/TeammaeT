@@ -33,8 +33,8 @@ public class AuthController {
         this.jwtTokenServices = jwtTokenServices;
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity signin(@RequestBody UserCredentials data) {
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody UserCredentials data) {
         try {
             String username = data.getUserName();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
