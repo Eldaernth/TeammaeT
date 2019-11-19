@@ -6,6 +6,7 @@ import UsersPage from "./pages/UsersPage";
 import UserPage from "./pages/UserPage";
 import {UserProvider} from "./context/UserContext";
 import RegistrationPage from "./pages/RegistrationPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                             <Route path="/users" exact component={UsersPage}/>
                             <Route path="/user/:id" exact component={UserPage}/>
                             <Route path="/registration" exact component={RegistrationPage}/>
+                            <Route path="/" exact component={HomePage}/>
                         </UserProvider>
                     </Container>
                 </Switch>
