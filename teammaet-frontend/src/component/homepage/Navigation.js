@@ -4,8 +4,8 @@ import {Col, Nav, Navbar, Row} from "react-bootstrap";
 export default function Navigation() {
     return(
         <Navbar className="bg-light justify-content-between">
-            <Navbar.Brand href="#home">IDareU</Navbar.Brand>
-            <Nav activeKey="/home">
+            <Navbar.Brand href="/">IDareU</Navbar.Brand>
+            <Nav activeKey="/">
                 <Nav.Item>
                     <Nav.Link href="/login">Login</Nav.Link>
                 </Nav.Item>
