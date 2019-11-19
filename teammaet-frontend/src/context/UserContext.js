@@ -11,12 +11,18 @@ export function UserProvider(props) {
             Axios.get('http://localhost:8080/user')
                 .then((ret) => {
                     setUsers(ret.data);
+                })
+                .catch(error => {
+                    console.log(error.response)
                 });
         },
         getUser: (id) => {
             Axios.get(`http://localhost:8080/user/${id}`)
                 .then((ret) => {
                     setUser(ret.data);
+                })
+                .catch(error => {
+                    console.log(error.response)
                 });
         }
     };

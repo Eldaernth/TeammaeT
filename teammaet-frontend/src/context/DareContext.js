@@ -12,18 +12,27 @@ export function DareProvider(props) {
                 .then((ret) => {
                     setReceivedDares(ret.data);
                 })
+                .catch(error => {
+                    console.log(error.response)
+                });
         },
         getSentDares: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/dare/type/sent`)
                 .then((ret) => {
                     setSentDares(ret.data);
                 })
+                .catch(error => {
+                    console.log(error.response)
+                });
         },
         deleteDare: (evt, id) => {
             evt.preventDefault();
             Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`)
                 .then((ret) => {
                     console.log(ret.data)
+                })
+                .catch(error => {
+                    console.log(error.response)
                 });
         },
         addDare: (id, dare, friendIds) => {
@@ -41,6 +50,9 @@ export function DareProvider(props) {
                     'Accept': 'application/json'
                 }
             }).then(res => console.log(res.data))
+                .catch(error => {
+                    console.log(error.response)
+                });
         }
     };
 
