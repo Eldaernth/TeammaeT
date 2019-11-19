@@ -38,8 +38,8 @@ public class AppUser {
     @JsonIgnore
     private List<Dare> dares;
 
+    @Singular("roles")
     @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
     private List<String> roles = new ArrayList<>();
 
 }

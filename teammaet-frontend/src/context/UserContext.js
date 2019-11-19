@@ -21,7 +21,6 @@ export function UserProvider(props) {
         }
     };
 
-
     return (
         <UserContext.Provider value={[users, user, methods]}>
             {props.children}

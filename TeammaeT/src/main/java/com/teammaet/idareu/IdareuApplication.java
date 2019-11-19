@@ -46,22 +46,24 @@ public class IdareuApplication {
                     .email("tom@gmail.com")
                     .password("everyoneKnows")
                     .friendList(3L)
+                    .roles("User")
                     .dares(dare1)
                     .build();
 
             AppUser user1 = AppUser.builder()
-                .name("Tom")
-                .email("tom@gmail.com")
-                .password("everyoneKnows")
-                .friendList(1L)
-                .dares(dare)
-                .build();
+                    .name("Tom")
+                    .email("tom@gmail.com")
+                    .password("everyoneKnows")
+                    .friendList(1L)
+                    .roles("User")
+                    .dares(dare)
+                    .build();
 
-        dare.setUser(user1);
-        dare1.setUser(user);
+            dare.setUser(user1);
+            dare1.setUser(user);
 
-        userRepository.save(user);
-        userRepository.save(user1);
-    };
+            userRepository.save(user);
+            userRepository.save(user1);
+        };
     }
 }

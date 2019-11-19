@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import UsersPage from "./pages/UsersPage";
 import UserPage from "./pages/UserPage";
 import {UserProvider} from "./context/UserContext";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Switch>
                     <Container className="container">
                         <UserProvider>
+                            <Route path="/login" exact component={LoginPage}/>
                             <Route path="/users" exact component={UsersPage}/>
                             <Route path="/user/:id" exact component={UserPage}/>
                         </UserProvider>
