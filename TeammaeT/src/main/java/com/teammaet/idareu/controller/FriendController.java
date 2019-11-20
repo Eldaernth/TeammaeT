@@ -1,7 +1,7 @@
 package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.service.UserStorage;
+import com.teammaet.idareu.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -11,9 +11,9 @@ import java.util.Set;
 @RequestMapping("/user/{userId}/friend")
 public class FriendController {
 
-    private UserStorage userStorage;
+    private UserService userStorage;
 
-    public FriendController(UserStorage userStorage) {
+    public FriendController(UserService userStorage) {
         this.userStorage = userStorage;
     }
 
