@@ -8,7 +8,11 @@ export function DareProvider(props) {
     const [receivedDares, setReceivedDares] = useState([]);
     const methods = {
         getReceivedDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/type/received`)
+            Axios.get(`http://localhost:8080/user/${id}/dare/type/received`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     setReceivedDares(ret.data);
                 })
@@ -17,7 +21,11 @@ export function DareProvider(props) {
                 });
         },
         getSentDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/type/sent`)
+            Axios.get(`http://localhost:8080/user/${id}/dare/type/sent`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     setSentDares(ret.data);
                 })
@@ -27,7 +35,11 @@ export function DareProvider(props) {
         },
         deleteDare: (evt, id) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`)
+            Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     console.log(ret.data)
                 })
@@ -47,7 +59,8 @@ export function DareProvider(props) {
                 headers: {
                     "Content-type": "application/json",
                     "Access-Control-Allow-Origin": "http://localhost:3000",
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             }).then(res => console.log(res.data))
                 .catch(error => {
