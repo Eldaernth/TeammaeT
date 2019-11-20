@@ -32,6 +32,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserCredentials data) {
+        System.out.println(data);
         try {
             String username = data.getUserName();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
@@ -42,7 +43,6 @@ public class AuthController {
                     .collect(Collectors.toList());
 
             String token = jwtTokenServices.createToken(username, roles);
-
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("roles", roles);

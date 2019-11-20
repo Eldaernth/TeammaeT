@@ -6,17 +6,18 @@ import Axios from "axios";
 export default function LoginForm() {
     const {handleSubmit, register, errors} = useForm();
 
+
     const onSubmit = (data) => {
         Axios.post('http://localhost:8080/login', {
-            name: data.username,
+            userName: data.username,
             password: data.password
         }, {
             headers: {
                 "Content-type": "application/json",
-                "Access-Control-Allow-Origin": "http://localhost:3000/"
+                "Access-Control-Allow-Origin": "http://localhost:3000"
             }
         }).then((ret) => {
-            console.log(ret)
+            localStorage.setItem("token", ret.data.token)
         })
     };
 
