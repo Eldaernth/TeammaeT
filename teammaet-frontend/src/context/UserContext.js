@@ -16,6 +16,9 @@ export function UserProvider(props) {
             })
                 .then((ret) => {
                     setUsers(ret.data);
+                })
+                .catch(error => {
+                    console.log(error.response)
                 });
         },
         getUser: (id) => {
@@ -26,6 +29,9 @@ export function UserProvider(props) {
             })
                 .then((ret) => {
                     setUser(ret.data);
+                })
+                .catch(error => {
+                    console.log(error.response)
                 });
         }
     };
