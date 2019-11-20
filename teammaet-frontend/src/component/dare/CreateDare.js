@@ -21,7 +21,6 @@ export default function CreateDare(props) {
             bet: shown.bet,
             deadline: shown.deadline
         });
-
     };
 
     const handleFriendClick = () => {
