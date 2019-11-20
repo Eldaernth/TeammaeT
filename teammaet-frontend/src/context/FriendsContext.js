@@ -13,7 +13,7 @@ export function FriendsProvider(props) {
                     setFriends(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    setFriends(error.response.data)
                 });
         },
         addFriend: (evt, name, id) => {

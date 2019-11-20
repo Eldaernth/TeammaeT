@@ -13,7 +13,7 @@ export function UserProvider(props) {
                     setUsers(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    setUser(error.response.data)
                 });
         },
         getUser: (id) => {
@@ -22,7 +22,7 @@ export function UserProvider(props) {
                     setUser(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    setUser(error.response.data)
                 });
         }
     };

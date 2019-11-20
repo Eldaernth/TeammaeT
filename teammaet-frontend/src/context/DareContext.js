@@ -13,7 +13,7 @@ export function DareProvider(props) {
                     setReceivedDares(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    setReceivedDares(error.response.data)
                 });
         },
         getSentDares: (id) => {
@@ -22,7 +22,7 @@ export function DareProvider(props) {
                     setSentDares(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    setSentDares(error.response.data)
                 });
         },
         deleteDare: (evt, id) => {
