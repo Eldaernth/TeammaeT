@@ -3,6 +3,8 @@ package com.teammaet.idareu.controller;
 import com.teammaet.idareu.model.UserCredentials;
 import com.teammaet.idareu.repository.UserRepository;
 import com.teammaet.idareu.security.JwtTokenServices;
+import com.teammaet.idareu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserService userService;
 
     private final JwtTokenServices jwtTokenServices;
 
