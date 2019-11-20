@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DareStorage {
+public class DareService {
 
     @Autowired
     private DareRepository dareRepository;
 
     @Autowired
-    private UserStorage userStorage;
+    private UserService userStorage;
 
-    private Logger logger = LoggerFactory.getLogger(DareStorage.class);
+    private Logger logger = LoggerFactory.getLogger(DareService.class);
 
     public void save(DareInformation dareInformation) {
         dareRepository.save(Dare.builder()

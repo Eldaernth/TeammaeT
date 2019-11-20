@@ -4,7 +4,7 @@ package com.teammaet.idareu.controller;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
 import com.teammaet.idareu.model.DareType;
-import com.teammaet.idareu.service.DareStorage;
+import com.teammaet.idareu.service.DareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class DareController {
 
     @Autowired
-    private DareStorage dareStorage;
+    private DareService dareStorage;
 
     @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
     public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
