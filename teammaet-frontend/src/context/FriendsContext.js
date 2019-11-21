@@ -8,7 +8,11 @@ export function FriendsProvider(props) {
     let [friendIds, serFriendIds] = useState([]);
     const methods = {
         getFriends: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/friend`)
+            Axios.get(`http://localhost:8080/user/${id}/friend`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     setFriends(ret.data);
                 })
@@ -17,19 +21,31 @@ export function FriendsProvider(props) {
                 });
         },
         addFriend: (evt, name, id) => {
-            console.log(name);
             evt.preventDefault();
-                Axios.post(`http://localhost:8080/user/${id}/friend/add/${name}`)
-                    .then((ret) => {
-                        console.log(ret.data)
-                    })
-                    .catch(error => {
-                        console.log(error.response)
-                    });
+            Axios.post(`http://localhost:8080/user/${id}/friend/add`,{
+                name: name
+            },{
+                headers: {
+                    "Content-type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:3000",
+                    'Accept': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then((ret) => {
+                    console.log(ret.data)
+                })
+                .catch(error => {
+                    console.log(error.response)
+                });
         },
         deleteFriend: (evt, id) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${id}/friend/del/${evt.target.value}`)
+            Axios.delete(`http://localhost:8080/user/${id}/friend/del/${evt.target.value}`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     console.log(ret.data)
                 })

@@ -9,11 +9,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
 @SpringBootApplication
 public class IdareuApplication {
+
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Autowired
     private UserRepository userRepository;
@@ -44,24 +48,26 @@ public class IdareuApplication {
             AppUser user = AppUser.builder()
                     .name("rec")
                     .email("tom@gmail.com")
-                    .password("everyoneKnows")
+                    .password(passwordEncoder.encode("everyoneKnows"))
                     .friendList(3L)
+                    .roles("ROLE_USER")
                     .dares(dare1)
                     .build();
 
             AppUser user1 = AppUser.builder()
-                .name("Tom")
-                .email("tom@gmail.com")
-                .password("everyoneKnows")
-                .friendList(1L)
-                .dares(dare)
-                .build();
+                    .name("Tom")
+                    .email("tom@gmail.com")
+                    .password(passwordEncoder.encode("everyoneKnows"))
+                    .friendList(1L)
+                    .roles("ROLE_USER")
+                    .dares(dare)
+                    .build();
 
-        dare.setUser(user1);
-        dare1.setUser(user);
+            dare.setUser(user1);
+            dare1.setUser(user);
 
-        userRepository.save(user);
-        userRepository.save(user1);
-    };
+            userRepository.save(user);
+            userRepository.save(user1);
+        };
     }
 }

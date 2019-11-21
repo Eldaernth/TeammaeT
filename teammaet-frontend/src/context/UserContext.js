@@ -8,16 +8,25 @@ export function UserProvider(props) {
     const [user, setUser] = useState("");
     const methods = {
         getUsers: () => {
-            Axios.get('http://localhost:8080/user')
+            console.log(localStorage.getItem("token"));
+            Axios.get('http://localhost:8080/user', {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     setUsers(ret.data);
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    console.log(error.response);
                 });
         },
         getUser: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}`)
+            Axios.get(`http://localhost:8080/user/${id}`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
                 .then((ret) => {
                     setUser(ret.data);
                 })
@@ -26,7 +35,6 @@ export function UserProvider(props) {
                 });
         }
     };
-
 
     return (
         <UserContext.Provider value={[users, user, methods]}>

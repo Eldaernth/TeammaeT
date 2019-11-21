@@ -1,7 +1,7 @@
 package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.service.UserStorage;
+import com.teammaet.idareu.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserStorage userStorage;
+    private UserService userStorage;
 
-    public UserController(UserStorage userStorage) {
+    public UserController(UserService userStorage) {
         this.userStorage = userStorage;
     }
 
