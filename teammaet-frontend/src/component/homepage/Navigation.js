@@ -13,7 +13,7 @@ export default function Navigation() {
                     <Nav.Link href="/registration">Register</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link onClick={() => {localStorage.removeItem("token")}}>Logout</Nav.Link>
+                    <Nav.Link onClick={() => {localStorage.clear()}}>Logout</Nav.Link>
                 </Nav.Item>
             </Nav>
         </Navbar>

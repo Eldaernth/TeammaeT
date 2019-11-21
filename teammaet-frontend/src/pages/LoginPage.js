@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Form} from "react-bootstrap";
 import useForm from "react-hook-form";
 import Axios from "axios";
+import {Link} from "react-router-dom";
 
 export default function LoginForm() {
     const {handleSubmit, register, errors} = useForm();
@@ -17,7 +18,9 @@ export default function LoginForm() {
                 "Access-Control-Allow-Origin": "http://localhost:3000"
             }
         }).then((ret) => {
-            localStorage.setItem("token", ret.data.token)
+            localStorage.setItem("token", ret.data.token);
+            localStorage.setItem("id", ret.data.id);
+            window.location.href = `/user/${ret.data.id}`
         })
     };
 

@@ -14,7 +14,7 @@ export default function DareForm({shown}) {
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group controlId="Title">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title" name="title" ref={register({required: true,pattern:/[\w$?^]/})}/>
+                <Form.Control type="text" placeholder="Title" name="title" ref={register({required: true, pattern:/[\w$?^]/})}/>
                 {errors.title && errors.title.type === "required" && <p style={{color: "red"}}>This field is required</p>}
                 {errors.title && errors.title.type === "pattern" && <p style={{color: "red"}}>Name contains invalid character</p>}
             </Form.Group>
