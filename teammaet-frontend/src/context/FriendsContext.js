@@ -21,10 +21,14 @@ export function FriendsProvider(props) {
                 });
         },
         addFriend: (evt, name, id) => {
-            console.log(name);
             evt.preventDefault();
-            Axios.post(`http://localhost:8080/user/${id}/friend/add/${name}`, {
+            Axios.post(`http://localhost:8080/user/${id}/friend/add`,{
+                name: name
+            },{
                 headers: {
+                    "Content-type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:3000",
+                    'Accept': 'application/json',
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })
