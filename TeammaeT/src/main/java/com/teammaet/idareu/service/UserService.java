@@ -6,6 +6,8 @@ import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +25,19 @@ public class UserService {
     @Autowired
     private EntityManager em;
 
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
     public void register(AppUser user) {
-        userRepository.save(user);
+        AppUser newUser = AppUser.builder()
+                .name(user.getName())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .email(user.getEmail())
+                .roles("ROLE_USER")
+                .build();
+        userRepository.save(newUser);
     }
 
     public void deleteUser(AppUser user) {
