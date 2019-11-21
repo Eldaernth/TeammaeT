@@ -1,6 +1,7 @@
 package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
+import com.teammaet.idareu.model.FriendInfo;
 import com.teammaet.idareu.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,9 @@ public class FriendController {
         return userStorage.getFriends(userId);
     }
 
-    @PostMapping("/add/{name}")
-    public AppUser addFriend(@PathVariable("userId") Long userId, @PathVariable("name") String name){
-        Long friendId = userStorage.getAppUserByName(name).getId();
+    @PostMapping("/add")
+    public AppUser addFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo data){
+        Long friendId = userStorage.getAppUserByName(data.getName()).getId();
         userStorage.addFriend(friendId, userId);
         return userStorage.addFriend(userId, friendId);
     }
