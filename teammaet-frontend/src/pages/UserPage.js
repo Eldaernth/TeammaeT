@@ -20,7 +20,7 @@ export default function UserPage(props) {
             <Col className="user">
                 <User/>
                 <Row className="user-buttons">
-                    <UserButtons/>
+                    <UserButtons id={id}/>
                 </Row>
             </Col>
             <Col>

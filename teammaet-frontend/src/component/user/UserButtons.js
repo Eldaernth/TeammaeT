@@ -7,8 +7,9 @@ import {DareProvider} from "../../context/DareContext";
 import DareList from "../dare/DareList";
 import CreateDare from "../dare/CreateDare";
 
-export default function () {
-    return (
+export default function UserButtons(props) {
+    return (<>{
+        props.id === localStorage.getItem("id") ? (
         <div className="user-buttons">
             <FriendsProvider>
                 <Popup modal trigger={
@@ -31,5 +32,6 @@ export default function () {
                 </DareProvider>
             </FriendsProvider>
         </div>
+        ) : ("")}</>
     )
 }

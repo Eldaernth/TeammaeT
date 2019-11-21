@@ -25,6 +25,7 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
 
+
     @Autowired
     UserService userService;
 
@@ -40,6 +41,7 @@ public class AuthController {
         System.out.println(data);
         try {
             String username = data.getUserName();
+            Long id = userService.getAppUserByName(username).getId();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
             List<String> roles = authentication.getAuthorities()
@@ -47,8 +49,9 @@ public class AuthController {
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
 
-            String token = jwtTokenServices.createToken(username, roles);
+            String token = jwtTokenServices.createToken(id, username, roles);
             Map<Object, Object> model = new HashMap<>();
+            model.put("id", id);
             model.put("username", username);
             model.put("roles", roles);
             model.put("token", token);
