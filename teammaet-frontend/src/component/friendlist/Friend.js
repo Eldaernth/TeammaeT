@@ -5,12 +5,12 @@ import {UserContext} from "../../context/UserContext";
 import ActionButtons from "./ActionButtons";
 
 export default function Friend(props) {
-    const [friends, methods, friendIds] = useContext(FriendsContext);
-    const [users, user, Usermethods] = useContext(UserContext);
+    const {friends, friendMethods} = useContext(FriendsContext);
+    const {user} = useContext(UserContext);
 
     useEffect(() => {
-        methods.getFriends(user.id)
-    }, [methods]);
+        friendMethods.getFriends(user.id)
+    }, [friendMethods]);
 
     return (
         <tbody>
@@ -21,7 +21,7 @@ export default function Friend(props) {
                         {row.name}
                     </Link></td>
                 <td>{row.email}</td>
-                <ActionButtons methods={methods} user={user} row={row} isDare={props.isDare}/>
+                <ActionButtons methods={friendMethods} user={user} row={row} isDare={props.isDare}/>
             </tr>)
         }
         </tbody>

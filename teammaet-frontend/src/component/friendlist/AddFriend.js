@@ -4,8 +4,8 @@ import {FriendsContext} from "../../context/FriendsContext";
 import {UserContext} from "../../context/UserContext";
 
 export default function AddFriend() {
-    const [users, user, userMethods] = useContext(UserContext);
-    const [friends, methods, friendIds] = useContext(FriendsContext);
+    const {user} = useContext(UserContext);
+    const {methods} = useContext(FriendsContext);
     const [name, setName] = useState("");
 
     return (

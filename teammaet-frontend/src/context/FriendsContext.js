@@ -6,7 +6,7 @@ export const FriendsContext = createContext();
 export function FriendsProvider(props) {
     const [friends, setFriends] = useState([]);
     let [friendIds, serFriendIds] = useState([]);
-    const methods = {
+    const friendMethods = {
         getFriends: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/friend`, {
                 headers: {
@@ -56,7 +56,7 @@ export function FriendsProvider(props) {
         addFriendId: (id) => friendIds.push(id)
     };
     return (
-        <FriendsContext.Provider value={[friends, methods, friendIds]}>
+        <FriendsContext.Provider value={{friends, friendMethods, friendIds}}>
             {props.children}
         </FriendsContext.Provider>
     )

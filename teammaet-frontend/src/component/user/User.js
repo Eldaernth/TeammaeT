@@ -4,7 +4,7 @@ import {UserContext} from "../../context/UserContext";
 
 
 export default function User() {
-    const [users, user, methods] = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
 
     return (

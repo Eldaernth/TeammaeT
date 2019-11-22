@@ -7,11 +7,11 @@ import UserButtons from "../component/user/UserButtons";
 
 export default function UserPage(props) {
 
-    const [users, user, methods] = useContext(UserContext);
+    const {userMethods} = useContext(UserContext);
     const id = props.match.params.id;
 
     useEffect(() => {
-        methods.getUser(id);
+        userMethods.getUser(id);
     }, [id]);
 
 

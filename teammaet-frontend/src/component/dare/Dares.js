@@ -4,8 +4,8 @@ import {UserContext} from "../../context/UserContext";
 import {DareContext} from "../../context/DareContext";
 
 export default function Dares(props) {
-    const [users, user, userMethods] = useContext(UserContext);
-    const [received, sent, dareMethods] = useContext(DareContext);
+    const {user} = useContext(UserContext);
+    const {received, sent, dareMethods} = useContext(DareContext);
 
     useEffect(() =>
             props.isReceived ? dareMethods.getReceivedDares(user.id) : dareMethods.getSentDares(user.id),

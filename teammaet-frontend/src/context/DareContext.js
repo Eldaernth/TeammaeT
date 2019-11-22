@@ -6,7 +6,7 @@ export const DareContext = createContext();
 export function DareProvider(props) {
     const [sentDares, setSentDares] = useState([]);
     const [receivedDares, setReceivedDares] = useState([]);
-    const methods = {
+    const dareMethods = {
         getReceivedDares: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/dare/type/received`, {
                 headers: {
@@ -70,7 +70,7 @@ export function DareProvider(props) {
     };
 
     return (
-        <DareContext.Provider value={[receivedDares, sentDares, methods]}>
+        <DareContext.Provider value={{receivedDares, sentDares, dareMethods}}>
             {props.children}
         </DareContext.Provider>
     );
