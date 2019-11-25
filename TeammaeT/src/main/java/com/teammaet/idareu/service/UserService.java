@@ -1,7 +1,7 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.model.UserCredentials;
+import com.teammaet.idareu.model.FriendInfo;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -61,40 +60,31 @@ public class UserService {
             });
     }
 
-    public AppUser login(UserCredentials userInfo){
-        AppUser user = getAppUserByName(userInfo.getUserName());
-        if (user.getPassword().equals(userInfo.getPassword())) {
-            return user;
-        }
-        throw new NullPointerException("Wrong user/password");
-    }
-
     public List<AppUser> getUsers() {
         return userRepository.findAll();
     }
 
     @Transactional
     public AppUser deleteFriend(Long userId, Long friendId) {
-        AppUser user = em.find(AppUser.class, userId);
-        user.getFriendList().remove(friendId);
+        AppUser user = userRepository.findById(userId).get();
+        AppUser friend = userRepository.findById(friendId).get();
+        user.getFriendList().remove(friend);
+        userRepository.save(user);
         return getUserById(friendId);
     }
 
     @Transactional
     public AppUser addFriend(Long userId, Long friendId) {
-        AppUser user = em.find(AppUser.class, userId);
-        user.getFriendList().add(friendId);
+        AppUser user = userRepository.findById(userId).get();
+        AppUser friend = userRepository.findById(friendId).get();
+        user.getFriendList().add(friend);
+        userRepository.save(user);
         return getUserById(friendId);
     }
 
     public Set<AppUser> getFriends(Long userId) {
-        Set<AppUser> friendList = new HashSet<>();
-        AppUser user = getUserById(userId);
-        Set<Long> friendIds = user.getFriendList();
-        for (Long friendId : friendIds) {
-            friendList.add(getUserById(friendId));
-        }
-        return friendList;
+        AppUser user = userRepository.findById(userId).get();
+        return user.getFriendList();
     }
 
 }

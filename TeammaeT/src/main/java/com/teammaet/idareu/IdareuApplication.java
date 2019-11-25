@@ -49,7 +49,6 @@ public class IdareuApplication {
                     .name("rec")
                     .email("tom@gmail.com")
                     .password(passwordEncoder.encode("everyoneKnows"))
-                    .friendList(3L)
                     .roles("ROLE_USER")
                     .dares(dare1)
                     .build();
@@ -58,7 +57,7 @@ public class IdareuApplication {
                     .name("Tom")
                     .email("tom@gmail.com")
                     .password(passwordEncoder.encode("everyoneKnows"))
-                    .friendList(1L)
+                    .friendList(user)
                     .roles("ROLE_USER")
                     .dares(dare)
                     .build();

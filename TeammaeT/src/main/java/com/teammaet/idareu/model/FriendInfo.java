@@ -1,14 +1,11 @@
 package com.teammaet.idareu.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class FriendInfo {
-    String name;
+    private String name;
 }

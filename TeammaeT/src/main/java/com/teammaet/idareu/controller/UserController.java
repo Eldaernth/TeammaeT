@@ -30,6 +30,8 @@ public class UserController {
 
     @PostMapping
     public AppUser register(@RequestBody AppUser user){
+        System.out.println("REGISTER");
+        System.out.println(user);
         userStorage.register(user);
         return user;
     }
