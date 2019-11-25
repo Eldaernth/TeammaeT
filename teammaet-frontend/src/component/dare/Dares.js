@@ -9,7 +9,7 @@ export default function Dares(props) {
 
     useEffect(() =>
             props.isReceived ? dareMethods.getReceivedDares(user.id) : dareMethods.getSentDares(user.id),
-        [dareMethods, props.isReceived, user.id]);
+        [props.isReceived, user.id]); //removed userMethods (loop)
 
     return (
         <tbody>

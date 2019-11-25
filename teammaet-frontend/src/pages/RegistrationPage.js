@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import Axios from "axios";
 import useForm from "react-hook-form";
-import {Link} from "react-router-dom";
 
 export default function RegistrationPage() {
     const {register, handleSubmit, errors} = useForm();
@@ -17,7 +16,11 @@ export default function RegistrationPage() {
                 "Access-Control-Allow-Origin": "http://localhost:3000",
                 'Accept': 'application/json'
             }
-        }).then(res => console.log(res.data))
+        }).then(res => {
+                console.log(res.data);
+                window.location.href = `/login`;
+            }
+        )
     };
 
 
@@ -46,7 +49,7 @@ export default function RegistrationPage() {
                 {errors.password && errors.password.type === "maxLength" && <p style={{color: "red"}}>Max length is 20 character</p>}
             </Form.Group>
 
-            <Link to={"/login"}><Button type="submit">Register</Button></Link>
+            <Button type="submit">Register</Button>
         </Form>
     );
 }

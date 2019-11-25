@@ -10,7 +10,7 @@ export default function Friend(props) {
 
     useEffect(() => {
         methods.getFriends(user.id)
-    }, [methods]);
+    }, []);
 
     return (
         <tbody>
