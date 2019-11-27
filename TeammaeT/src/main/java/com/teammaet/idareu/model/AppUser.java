@@ -34,6 +34,12 @@ public class AppUser {
     @EqualsAndHashCode.Exclude
     private Set<AppUser> friendList = new HashSet<>();
 
+    @Singular("friendRequests")
+    @ManyToMany
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    private Set<AppUser> friendRequests = new HashSet<>();
+
     @Singular("dares")
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JsonIgnore

@@ -7,5 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class FriendInfo {
+    private Long id;
     private String name;
 }

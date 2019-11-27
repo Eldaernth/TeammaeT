@@ -23,11 +23,20 @@ public class FriendController {
         return userStorage.getFriends(userId);
     }
 
-    @PostMapping("/add")
-    public AppUser addFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo data){
+    @PostMapping("/accept")
+    public AppUser acceptFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo){
+        return userStorage.accept(userId, friendInfo.getId());
+    }
+
+    @PostMapping("/decline")
+    public AppUser declineFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo){
+        return userStorage.decline(userId, friendInfo.getId());
+    }
+
+    @PostMapping("/request")
+    public AppUser sendFriendRequest(@PathVariable("userId") Long userId, @RequestBody FriendInfo data){
         Long friendId = userStorage.getAppUserByName(data.getName()).getId();
-        userStorage.addFriend(friendId, userId);
-        return userStorage.addFriend(userId, friendId);
+        return userStorage.sendFriendRequest(userId, friendId);
     }
 
     @DeleteMapping("/del/{id}")

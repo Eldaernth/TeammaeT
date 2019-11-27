@@ -73,12 +73,21 @@ public class UserService {
         return getUserById(friendId);
     }
 
+//    @Transactional
+//    public AppUser addFriend(Long userId, Long friendId) {
+//        AppUser user = userRepository.findById(userId).get();
+//        AppUser friend = userRepository.findById(friendId).get();
+//        user.getFriendList().add(friend);
+//        userRepository.save(user);
+//        return getUserById(friendId);
+//    }
+
     @Transactional
-    public AppUser addFriend(Long userId, Long friendId) {
+    public AppUser sendFriendRequest(Long userId, Long friendId) {
         AppUser user = userRepository.findById(userId).get();
         AppUser friend = userRepository.findById(friendId).get();
-        user.getFriendList().add(friend);
-        userRepository.save(user);
+        friend.getFriendRequests().add(user);
+        userRepository.save(friend);
         return getUserById(friendId);
     }
 
@@ -87,4 +96,27 @@ public class UserService {
         return user.getFriendList();
     }
 
+    @Transactional
+    public AppUser decline(Long userId, Long friendId) {
+        AppUser user = userRepository.findById(userId).get();
+        AppUser friend = userRepository.findById(friendId).get();
+        user.getFriendRequests().remove(friend);
+        userRepository.save(user);
+        return friend;
+    }
+
+    @Transactional
+    public AppUser accept(Long userId, Long friendId) {
+        AppUser user = userRepository.findById(userId).get();
+        AppUser friend = userRepository.findById(friendId).get();
+
+        user.getFriendRequests().remove(friend);
+        user.getFriendList().add(friend);
+        userRepository.save(user);
+
+        friend.getFriendList().add(user);
+        userRepository.save(friend);
+
+        return friend;
+    }
 }
