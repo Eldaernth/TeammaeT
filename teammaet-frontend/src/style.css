@@ -20,7 +20,8 @@ h3{
 
 .user-info{
     min-height: 25vmin;
-
+    align-items: center;
+    justify-content: center;
 }
 .user-buttons{
     min-height: 25vmin;
@@ -28,4 +29,17 @@ h3{
     flex-direction: column;
     justify-content: space-between;
     padding:10px;
+}
+.file-input{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.avatar{
+    border: 2px solid black;
+    border-radius: 60px;
+    padding: 50px;
 }

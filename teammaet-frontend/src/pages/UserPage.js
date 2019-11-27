@@ -23,9 +23,6 @@ export default function UserPage(props) {
                     <UserButtons id={id}/>
                 </Row>
             </Col>
-            <Col>
-                <p>STATS</p>
-            </Col>
         </Row>
     )
 }
