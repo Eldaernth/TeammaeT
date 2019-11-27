@@ -8,7 +8,7 @@ body{
     background-color: #f2f2f2;
 }
 
-h3{
+h1{
     text-align: center;
 }
 .user-page{
@@ -39,7 +39,72 @@ h3{
     z-index: -1;
 }
 .avatar{
+    width:20vmin;
+    min-height: 20vmin;
     border: 2px solid black;
-    border-radius: 60px;
-    padding: 50px;
+    border-radius: 100px;
+}
+.icon{
+    width:20vmin;
+    min-height: 20vmin;
+    overflow: hidden;
+}
+
+.form{
+    margin-top: 100px;
+}
+
+.form-group{
+    width:100%;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #f2f2f2;
+    padding-top: 55px;
+    outline: none;
+}
+.input-label{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+    border-bottom: 1px solid black;
+    pointer-events: none;
+}
+.input-label::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    border-bottom: 3px solid #5fa8d3;
+    transform: translate(-100%);
+    transition: transform 0.3s ease;
+}
+
+.input-text{
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.input:focus + .input-label .input-text,
+.input:valid + .input-label .input-text
+{
+    transform: translateY(-150%);
+    outline: none;
+}
+.input:focus + .input-label::after,
+.input:valid + .input-label::after
+{
+    transform: translateX(0%);
 }
