@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import {Row, Col} from 'react-bootstrap'
 import '../style.css';
 import {UserContext} from "../context/UserContext";
@@ -8,21 +8,20 @@ import Axios from "axios";
 
 export default function UserPage(props) {
 
+    const [blob, setBlob] = useState();
     const {userMethods} = useContext(UserContext);
     const id = props.match.params.id;
 
     useEffect(() => {
         userMethods.getUser(id);
-        let outside;
         Axios.get(`http://localhost:8080/user/${id}/avatar`, {
             headers: {
-                "Authoization": `Bearer ${localStorage.getItem("token")}`,
-                responseType: 'arraybuffer'
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
         })
             .then(response => {
-                const buffer = Buffer.from(response.data, 'base64');
-                console.log(buffer);
+                console.log(response.data);
+                setBlob(new Blob([response.data], {type: 'image/jpeg'}))
             })
             .catch(ex => {
                 console.error(ex);
@@ -33,7 +32,7 @@ export default function UserPage(props) {
     return (
         <Row className="user-page">
             <Col className="user">
-                <User/>
+                <User blob={blob}/>
                 <Row className="user-buttons">
                     <UserButtons id={id}/>
                 </Row>

@@ -4,8 +4,10 @@ import {UserContext} from "../../context/UserContext";
 import Axios from "axios";
 
 
-export default function User() {
+export default function User(props) {
+
     const {user} = useContext(UserContext);
+
     const  onUpload =(e) => {
         const fd = new FormData();
         fd.append("avatar",e.target.files[0]);
@@ -20,10 +22,13 @@ export default function User() {
                 }
             }).then(res => console.log(res.data))
     };
+
+    console.log(props.blob);
     return (
         <Row className="user-info">
             <div>
                 <Form encType="multipart/form-data">
+                    <img src={window.URL.createObjectURL(props.blob)}/>
                     <label htmlFor="avatar" className="avatar">{user.avatar}</label>
                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="file-input" onChange={(e)=>onUpload(e)}/>
                 </Form>
