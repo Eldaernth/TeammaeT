@@ -42,4 +42,7 @@ public class AppUser {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
+    @OneToOne
+    private Avatar avatar;
+
 }
