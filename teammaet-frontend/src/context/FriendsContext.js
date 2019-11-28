@@ -4,9 +4,25 @@ import Axios from "axios";
 export const FriendsContext = createContext();
 
 export function FriendsProvider(props) {
+    const [friendRequest, setFriendRequest] = useState([]);
     const [friends, setFriends] = useState([]);
     let [friendIds, serFriendIds] = useState([]);
+
     const methods = {
+        getFriendRequestList: (id) => {
+            Axios.get(`http://localhost:8080/user/${id}/friend/request`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then((ret) => {
+                    setFriendRequest(ret.data);
+                })
+                .catch(error => {
+                    console.log(error.response)
+                });
+        },
+
         getFriends: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/friend`, {
                 headers: {
@@ -20,9 +36,10 @@ export function FriendsProvider(props) {
                     console.log(error.response)
                 });
         },
+
         addFriend: (evt, name, id) => {
             evt.preventDefault();
-            Axios.post(`http://localhost:8080/user/${id}/friend/add`,{
+            Axios.post(`http://localhost:8080/user/${id}/friend/request`,{
                 name: name
             },{
                 headers: {
@@ -47,7 +64,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
-                    console.log(ret.data)
+                    console.log(ret.data);
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -56,7 +73,7 @@ export function FriendsProvider(props) {
         addFriendId: (id) => friendIds.push(id)
     };
     return (
-        <FriendsContext.Provider value={[friends, methods, friendIds]}>
+        <FriendsContext.Provider value={[friends, methods, friendIds, friendRequest]}>
             {props.children}
         </FriendsContext.Provider>
     )

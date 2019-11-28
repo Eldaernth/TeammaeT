@@ -21,9 +21,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private EntityManager em;
-
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -118,5 +115,9 @@ public class UserService {
         userRepository.save(friend);
 
         return friend;
+    }
+
+    public Set<AppUser> getFriendRequestList(Long userId) {
+        return userRepository.findById(userId).get().getFriendRequests();
     }
 }
