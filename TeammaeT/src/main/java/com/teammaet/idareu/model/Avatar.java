@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -21,8 +19,14 @@ public class Avatar {
     @GeneratedValue
     private long id;
 
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     private byte[] image;
 
-    @OneToOne
-    private AppUser appUser;
+    private Long appUser;
+
+    public Avatar(byte[] image, Long appUser) {
+        this.image = image;
+        this.appUser = appUser;
+    }
 }

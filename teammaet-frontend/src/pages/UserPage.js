@@ -22,6 +22,7 @@ export default function UserPage(props) {
         })
             .then(response => {
                 const buffer = Buffer.from(response.data, 'base64');
+                console.log(buffer);
             })
             .catch(ex => {
                 console.error(ex);

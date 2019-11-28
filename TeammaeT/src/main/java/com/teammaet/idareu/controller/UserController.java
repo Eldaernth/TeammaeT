@@ -1,8 +1,13 @@
 package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
+import com.teammaet.idareu.model.Avatar;
+import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.service.UserService;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +23,9 @@ public class UserController {
         this.userStorage = userStorage;
     }
 
+    @Autowired
+    AvatarRepository avatarRepository;
+
     @GetMapping
     public List<AppUser> getAllUser(){
         return userStorage.getUsers();
@@ -27,6 +35,11 @@ public class UserController {
     public AppUser getUserById(@PathVariable("id") Long id){
         return userStorage.getUserById(id);
     }
+    @GetMapping("/{id}/avatar")
+    public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long id){
+        Avatar avatar = avatarRepository.findByAppUser(id);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(avatar.getImage());
+    }
 
     @PostMapping
     public AppUser register(@RequestBody AppUser user){
@@ -34,7 +47,6 @@ public class UserController {
         return user;
     }
 
-    //TODO:Security question about accessing the api and change data
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
         AppUser user = userStorage.getUserById(id);
