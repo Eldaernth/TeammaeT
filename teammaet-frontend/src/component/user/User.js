@@ -28,8 +28,7 @@ export default function User(props) {
         <Row className="user-info">
             <div>
                 <Form encType="multipart/form-data">
-                    <img src={window.URL.createObjectURL(props.blob)}/>
-                    <label htmlFor="avatar" className="avatar">{user.avatar}</label>
+                    <label htmlFor="avatar" className="avatar"><img id="photo" width="200px" height="200px"/></label>
                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="file-input" onChange={(e)=>onUpload(e)}/>
                 </Form>
                 <h1>{user.name}</h1>

@@ -5,6 +5,7 @@ import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
 import UserButtons from "../component/user/UserButtons";
 import Axios from "axios";
+import Navigation from "../component/homepage/Navigation";
 
 export default function UserPage(props) {
 
@@ -15,13 +16,19 @@ export default function UserPage(props) {
     useEffect(() => {
         userMethods.getUser(id);
         Axios.get(`http://localhost:8080/user/${id}/avatar`, {
+            responseType:"arraybuffer",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
         })
             .then(response => {
-                console.log(response.data);
-                setBlob(new Blob([response.data], {type: 'image/jpeg'}))
+                let arrayBufferView = new Uint8Array( response.data );
+                let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
+                let urlCreator = window.URL || window.webkitURL;
+                let imageUrl = urlCreator.createObjectURL( blob );
+                let img = document.querySelector( "#photo" );
+                img.src = imageUrl;
+                console.log(img);
             })
             .catch(ex => {
                 console.error(ex);
@@ -32,6 +39,7 @@ export default function UserPage(props) {
     return (
         <Row className="user-page">
             <Col className="user">
+                <Navigation/>
                 <User blob={blob}/>
                 <Row className="user-buttons">
                     <UserButtons id={id}/>
