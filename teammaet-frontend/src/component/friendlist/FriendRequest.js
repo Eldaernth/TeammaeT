@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 export default function FriendRequest(props) {
 
-    const [friendRequest, methods] = useContext(FriendsContext);
+    const [friends, methods, friendIds, friendRequest] = useContext(FriendsContext);
     const [users, user, Usermethods] = useContext(UserContext);
 
     useEffect(() => {
