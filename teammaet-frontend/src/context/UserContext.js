@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export function UserProvider(props) {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState("");
-    const methods = {
+    const userMethods = {
         getUsers: () => {
             console.log(localStorage.getItem("token"));
             Axios.get('http://localhost:8080/user', {
@@ -29,6 +29,7 @@ export function UserProvider(props) {
             })
                 .then((ret) => {
                     setUser(ret.data);
+                    console.log(ret.data);
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -37,7 +38,7 @@ export function UserProvider(props) {
     };
 
     return (
-        <UserContext.Provider value={[users, user, methods]}>
+        <UserContext.Provider value={{users, user, userMethods}}>
             {props.children}
         </UserContext.Provider>
     )

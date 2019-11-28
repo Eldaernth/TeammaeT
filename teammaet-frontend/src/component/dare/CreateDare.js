@@ -7,9 +7,9 @@ import {FriendsContext} from "../../context/FriendsContext";
 
 
 export default function CreateDare(props) {
-    const [users, user, userMethods] = useContext(UserContext);
-    const [recieved, sent, methods] = useContext(DareContext);
-    const [friends, friendMethods, friendIds] = useContext(FriendsContext);
+    const {user} = useContext(UserContext);
+    const {dareMethods} = useContext(DareContext);
+    const {friendIds} = useContext(FriendsContext);
     const [dare, setDare] = useState({});
     const [isShown, setIsShown] = useState(false);
 
@@ -24,7 +24,7 @@ export default function CreateDare(props) {
     };
 
     const handleFriendClick = () => {
-        methods.addDare(user.id, dare, friendIds)
+        dareMethods.addDare(user.id, dare, friendIds)
     };
 
     return (

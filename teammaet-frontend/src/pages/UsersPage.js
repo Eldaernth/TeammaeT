@@ -5,10 +5,10 @@ import {UserContext} from "../context/UserContext";
 
 function UsersPage() {
 
-    const [users, user, methods] = useContext(UserContext);
+    const {users,userMethods} = useContext(UserContext);
 
     useEffect(() => {
-        methods.getUsers();
+        userMethods.getUsers();
     }, []);
 
     return (
