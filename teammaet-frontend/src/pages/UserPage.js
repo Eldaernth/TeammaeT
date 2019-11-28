@@ -4,7 +4,6 @@ import '../style.css';
 import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
 import UserButtons from "../component/user/UserButtons";
-import Axios from "axios";
 
 export default function UserPage(props) {
 
@@ -13,20 +12,6 @@ export default function UserPage(props) {
 
     useEffect(() => {
         userMethods.getUser(id);
-        let outside;
-        Axios.get(`http://localhost:8080/user/${id}/avatar`, {
-            headers: {
-                "Authoization": `Bearer ${localStorage.getItem("token")}`,
-                responseType: 'arraybuffer'
-            }
-        })
-            .then(response => {
-                const buffer = Buffer.from(response.data, 'base64');
-                console.log(buffer);
-            })
-            .catch(ex => {
-                console.error(ex);
-            });
     }, [id]);
 
 
