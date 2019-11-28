@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, Form, Row} from "react-bootstrap";
 import {UserContext} from "../../context/UserContext";
 import Axios from "axios";
@@ -9,7 +9,8 @@ export default function User() {
     const  onUpload =(e) => {
         const fd = new FormData();
         fd.append("avatar",e.target.files[0]);
-        Axios.post(`http://localhost:8080/uploadFile`,
+        console.log(fd);
+        Axios.post(`http://localhost:8080/user/${user.id}/uploadFile`,
             fd, {
                 headers: {
                     "Content-type": "application/json",
@@ -23,7 +24,7 @@ export default function User() {
         <Row className="user-info">
             <div>
                 <Form encType="multipart/form-data">
-                    <label htmlFor="avatar" className="avatar">+</label>
+                    <label htmlFor="avatar" className="avatar">{user.avatar}</label>
                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="file-input" onChange={(e)=>onUpload(e)}/>
                 </Form>
                 <h1>{user.name}</h1>

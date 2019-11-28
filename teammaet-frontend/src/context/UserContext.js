@@ -29,6 +29,7 @@ export function UserProvider(props) {
             })
                 .then((ret) => {
                     setUser(ret.data);
+                    console.log(ret.data);
                 })
                 .catch(error => {
                     console.log(error.response)
