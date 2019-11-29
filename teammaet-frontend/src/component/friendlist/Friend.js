@@ -14,8 +14,7 @@ export default function Friend(props) {
     }, []);
 
     return (
-        <tbody>
-        <FriendRequest/>
+        <>
         {friends.map((row) =>
             <tr>
                 <td>
@@ -26,6 +25,6 @@ export default function Friend(props) {
                 <ActionButtons methods={friendMethods} user={user} row={row} isDare={props.isDare}/>
             </tr>)
         }
-        </tbody>
+        </>
     )
 }

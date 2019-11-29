@@ -38,7 +38,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserCredentials data) {
-        System.out.println(data);
         try {
             String username = data.getUserName();
             Long id = userService.getAppUserByName(username).getId();

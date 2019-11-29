@@ -16,7 +16,11 @@ export default function FriendList(props) {
                     <th>Email</th>
                 </tr>
                 </thead>
+                <tbody>
+                    <FriendRequest/>
                     <Friend isDare={props.isDare}/>
+                </tbody>
+
             </Table>
             <BottomButtons friendList={props.friendList} isDare={props.isDare}/>
         </div>

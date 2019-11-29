@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {FriendsContext} from "../../context/FriendsContext";
 import {UserContext} from "../../context/UserContext";
@@ -6,12 +6,11 @@ import Button from "react-bootstrap/Button";
 
 export default function FriendRequest(props) {
 
-    const [friends, methods, friendIds, friendRequest] = useContext(FriendsContext);
-    const [users, user, Usermethods] = useContext(UserContext);
+    const {friendMethods, friendRequest} = useContext(FriendsContext);
+    const {user} = useContext(UserContext);
 
     useEffect(() => {
-        methods.getFriendRequestList(user.id);
-        friendRequest.map(row => console.log(row.name));
+        friendMethods.getFriendRequestList(user.id);
     }, []);
 
     return (
