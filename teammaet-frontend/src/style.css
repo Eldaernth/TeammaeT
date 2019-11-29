@@ -195,3 +195,7 @@ h2 {
 .pre-card{
     cursor: pointer;
 }
+
+.navigation-bar{
+    display: inline-block;
+}
