@@ -4,7 +4,6 @@ import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,6 +34,7 @@ public class UserController {
     public AppUser getUserById(@PathVariable("id") Long id){
         return userStorage.getUserById(id);
     }
+
     @GetMapping("/{id}/avatar")
     public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long id){
         Avatar avatar = avatarRepository.findByAppUser(id);

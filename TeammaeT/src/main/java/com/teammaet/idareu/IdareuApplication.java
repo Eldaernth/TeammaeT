@@ -49,8 +49,7 @@ public class IdareuApplication {
             AppUser user = AppUser.builder()
                     .name("rec")
                     .email("tom@gmail.com")
-                    .password(passwordEncoder.encode("everyoneKnows"))
-                    .friendList(3L)
+                    .password(passwordEncoder.encode("pass1"))
                     .roles("ROLE_USER")
                     .dares(dare1)
                     .build();
@@ -58,8 +57,8 @@ public class IdareuApplication {
             AppUser user1 = AppUser.builder()
                     .name("Tom")
                     .email("tom@gmail.com")
-                    .password(passwordEncoder.encode("everyoneKnows"))
-                    .friendList(1L)
+                    .password(passwordEncoder.encode("pass2"))
+                    .friendList(user)
                     .roles("ROLE_USER")
                     .dares(dare)
                     .build();

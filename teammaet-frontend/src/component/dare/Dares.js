@@ -1,10 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {Button} from "react-bootstrap";
+import {UserContext} from "../../context/UserContext";
 import {DareContext} from "../../context/DareContext";
 import DareCard from "./DareCard";
 
 export default function Dares(props) {
-    const {receivedDares, sentDares, dareMethods} = useContext(DareContext);
+    const {received, sent, dareMethods} = useContext(DareContext);
 
     return (
         <div className="Cards">

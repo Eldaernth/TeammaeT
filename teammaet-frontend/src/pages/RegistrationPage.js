@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import Axios from "axios";
 import useForm from "react-hook-form";
-import {Link} from "react-router-dom";
 
 export default function RegistrationPage() {
     const {register, handleSubmit, errors} = useForm();
@@ -17,8 +16,11 @@ export default function RegistrationPage() {
                 "Access-Control-Allow-Origin": "http://localhost:3000",
                 'Accept': 'application/json'
             }
-        }).then(res => {console.log(res.data);
-        window.location.href="/login"})
+        }).then(res => {
+                console.log(res.data);
+                window.location.href = `/login`;
+            }
+        )
     };
 
 
@@ -47,7 +49,7 @@ export default function RegistrationPage() {
                 <label htmlFor="password" className="input-label"><span className="input-text">Password</span></label>
             </div>
 
-           <Button type="submit">Register</Button>
+            <Button type="submit">Register</Button>
         </Form>
     );
 }

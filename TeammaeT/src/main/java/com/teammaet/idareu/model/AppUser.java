@@ -3,6 +3,7 @@ package com.teammaet.idareu.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,10 +29,16 @@ public class AppUser {
     private String password;
 
     @Singular("friendList")
-    @ElementCollection
-    @CollectionTable(name = "app_user_friend_list", joinColumns = @JoinColumn(name = "app_user_id"))
-    @OrderColumn
-    private Set<Long> friendList = new HashSet<>();
+    @ManyToMany
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    private Set<AppUser> friendList = new HashSet<>();
+
+    @Singular("friendRequests")
+    @ManyToMany
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    private Set<AppUser> friendRequests = new HashSet<>();
 
     @Singular("dares")
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
