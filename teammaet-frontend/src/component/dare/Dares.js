@@ -5,7 +5,7 @@ import {DareContext} from "../../context/DareContext";
 import DareCard from "./DareCard";
 
 export default function Dares(props) {
-    const {received, sent, dareMethods} = useContext(DareContext);
+    const {receivedDares, sentDares} = useContext(DareContext);
 
     return (
         <div className="Cards">

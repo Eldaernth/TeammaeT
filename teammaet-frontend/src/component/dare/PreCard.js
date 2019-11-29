@@ -1,7 +1,8 @@
 import React from "react";
 
-export default function PreCard({row}) {
-    return <div className="card pre-card">
+export default function PreCard({row,setCardState}) {
+    return (
+    <div className="card pre-card" onClick={()=>setCardState(true)}>
         <div className="card-top">
             <h2>{row.title}</h2>
             <p>Progress:{row.progress}</p>
@@ -10,4 +11,5 @@ export default function PreCard({row}) {
             <p>Deadline:{row.deadline}</p>
         </div>
     </div>
+    )
 }
