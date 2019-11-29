@@ -45,13 +45,12 @@ export default function UserPage(props) {
                     <Tab eventKey="Sent" title="Sent" className="dare-tab">
                         <Dares isReceived={false}/>
                     </Tab>
+                    <Tab eventKey="CreateAdd" title="+" className="create-dare-tab">
+                        <FriendsProvider>
+                            <CreateDare/>
+                        </FriendsProvider>
+                    </Tab>
                 </Tabs>
-                    <FriendsProvider>
-                    <Popup modal trigger={
-                        <span>+</span>}>
-                        <CreateDare/>
-                    </Popup>
-                </FriendsProvider>
                 </div>
             </Col>
         </Row>

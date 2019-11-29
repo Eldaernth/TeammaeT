@@ -24,6 +24,7 @@ export default function CreateDare(props) {
     };
 
     const handleFriendClick = () => {
+        setIsShown(false);
         dareMethods.addDare(user.id, dare, friendIds)
     };
 

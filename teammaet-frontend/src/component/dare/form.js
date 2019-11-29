@@ -37,10 +37,8 @@ export default function DareForm({shown}) {
                 <Form.Control type="date" placeholder="Deadline" name="deadline" ref={register({pattern:/[\w$?^]/})}/>
                 {errors.username && errors.username.type === "pattern" && <p style={{color: "red"}}>Name contains invalid character</p>}
             </Form.Group>
-            <Form.Group controlId="Shown">
                 <Form.Control type="hidden" name="Shown" ref={register}/>
-            </Form.Group>
-            <Button type="submit" onClick={() => setValue("Shown",true)}>Next</Button>
+                <Button type="submit" onClick={() => setValue("Shown",true)}>Next</Button>
         </Form>
     )
 

@@ -8,7 +8,10 @@ import FriendRequest from "./FriendRequest";
 export default function FriendList(props) {
     return (
         <div>
-            <AddFriend/>
+            {props.isDare ?
+                <h2>Select friends:</h2> :
+                <AddFriend/>}
+
             <Table>
                 <thead>
                 <tr>

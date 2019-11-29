@@ -71,6 +71,7 @@ h1 {
 }
 
 .dare-tab {
+    width: 100%;
     font-size: 2vmin;
 }
 
@@ -199,4 +200,13 @@ h2 {
 
 .navigation-bar{
     display: inline-block;
+}
+
+.tab-content{
+    width: 100%;
+}
+
+#tabs-tab-CreateAdd{
+    position: relative;
+    left:37vmin
 }
