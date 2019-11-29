@@ -5,7 +5,6 @@ import Navigation from "../component/homepage/Navigation";
 export default function HomePage(){
     return(
         <Col>
-            <Navigation/>
             <Row>
                 <p>Here comes some design and advertisement</p>
             </Row>

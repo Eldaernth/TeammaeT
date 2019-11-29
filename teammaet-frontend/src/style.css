@@ -1,36 +1,45 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #f2f2f2;
 }
 
-h1{
+h1 {
     text-align: center;
+    font-size: 10vmin;
 }
-.user-page{
+
+.row {
+    flex-wrap: nowrap;
+}
+
+.user-page {
     min-height: 100vh;
     background-color: #f2f2f2;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
 }
 
-.user-info{
+.user {
+    align-self: center;
+}
+
+.user-info {
     min-height: 25vmin;
-    align-items: center;
     justify-content: center;
 }
-.user-buttons{
+
+.user-buttons {
     min-height: 25vmin;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding:10px;
+    padding: 10px;
 }
-.file-input{
+
+.file-input {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -38,30 +47,51 @@ h1{
     position: absolute;
     z-index: -1;
 }
-.avatar{
-    width:20vmin;
-    min-height: 20vmin;
+
+.avatar {
     border: 2px solid black;
-    border-radius: 100px;
+    border-radius: 50%;
+    overflow: hidden;
 }
-.icon{
-    width:20vmin;
+
+.avatar-icon {
+    width: 30vmin;
+    height: 30vmin;
+}
+
+.dares {
+    width: 70vmin;
+    height: 70vmin;
+    margin-top: 1vmin;
+    overflow-y: scroll;
+}
+
+.nav-tabs .nav-link {
+    font-size: 3vmin;
+}
+
+.dare-tab {
+    font-size: 2vmin;
+}
+
+.icon {
+    width: 20vmin;
     min-height: 20vmin;
     overflow: hidden;
 }
 
-.form{
+.form {
     margin-top: 100px;
 }
 
-.form-group{
-    width:100%;
+.form-group {
+    width: 100%;
     height: 100px;
     position: relative;
     overflow: hidden;
 }
 
-.input{
+.input {
     width: 100%;
     height: 100%;
     border: none;
@@ -69,7 +99,8 @@ h1{
     padding-top: 55px;
     outline: none;
 }
-.input-label{
+
+.input-label {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -78,7 +109,8 @@ h1{
     border-bottom: 1px solid black;
     pointer-events: none;
 }
-.input-label::after{
+
+.input-label::after {
     content: "";
     width: 100%;
     height: 100%;
@@ -90,7 +122,7 @@ h1{
     transition: transform 0.3s ease;
 }
 
-.input-text{
+.input-text {
     position: absolute;
     bottom: 5px;
     left: 0px;
@@ -98,13 +130,68 @@ h1{
 }
 
 .input:focus + .input-label .input-text,
-.input:valid + .input-label .input-text
-{
+.input:valid + .input-label .input-text {
     transform: translateY(-150%);
     outline: none;
 }
+
 .input:focus + .input-label::after,
-.input:valid + .input-label::after
-{
+.input:valid + .input-label::after {
     transform: translateX(0%);
+}
+
+h2 {
+    display: inline-block;
+}
+
+.card {
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: 0 10px 6px -6px #777;
+    margin-bottom: 4px;
+    margin-top: 8px;
+}
+
+.card-top {
+    position: relative;
+}
+
+.card-button,.card-top p {
+    position: absolute;
+    right: 1vmin;
+    top: 1vmin;
+}
+
+.Cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+}
+.card-body-1{
+    width: 50%;
+}
+
+.card-body-1 p {
+    width: 100%;
+    overflow-y:scroll;
+}
+.card-body-2{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer {
+    height: 4vmin;
+    text-align: right;
+}
+
+.pre-card{
+    cursor: pointer;
 }

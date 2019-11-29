@@ -34,6 +34,26 @@ export function UserProvider(props) {
                 .catch(error => {
                     console.log(error.response)
                 });
+        },
+        getAvatar: (id) => {
+            Axios.get(`http://localhost:8080/user/${id}/avatar`, {
+                responseType:"arraybuffer",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then(response => {
+                    let arrayBufferView = new Uint8Array( response.data );
+                    let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
+                    let urlCreator = window.URL || window.webkitURL;
+                    let imageUrl = urlCreator.createObjectURL( blob );
+                    let img = document.querySelector( "#photo" );
+                    img.src = imageUrl;
+                    console.log(img);
+                })
+                .catch(ex => {
+                    console.error(ex);
+                });
         }
     };
 
