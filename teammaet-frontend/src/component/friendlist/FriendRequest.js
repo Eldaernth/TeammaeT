@@ -25,7 +25,12 @@ export default function FriendRequest(props) {
                 <td>
                     {row.email}
                 </td>
-                <td align={"right"}><Button>+</Button><Button>x</Button></td>
+                <td align={"right"}>
+                    <Button variant={"outline-success"}
+                            onClick={(e) => friendMethods.acceptFriendRequest(e, user.id, row.id)}>+</Button>
+                    <Button variant={"outline-danger"}
+                        onClick={(e) => friendMethods.declineFriendRequest(e, user.id, row.id)}>-</Button>
+                </td>
             </tr>)
         }
         </>

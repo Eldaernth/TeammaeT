@@ -8,6 +8,43 @@ export function FriendsProvider(props) {
     const [friends, setFriends] = useState([]);
     let [friendIds, serFriendIds] = useState([]);
     const friendMethods = {
+
+        acceptFriendRequest: (e, userId, friendId) => {
+            e.preventDefault();
+            Axios.post(`http://localhost:8080/user/${userId}/friend/accept`,{
+                id: friendId
+            }, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then((ret) => {
+                    console.log("NEW FRIEND:");
+                    console.log(ret);
+                })
+                .catch(error => {
+                    console.log(error.response)
+                });
+        },
+
+        declineFriendRequest: (e, userId, friendId) => {
+            e.preventDefault();
+            Axios.post(`http://localhost:8080/user/${userId}/friend/decline`,{
+                id: friendId
+            }, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+                .then((ret) => {
+                    console.log("NEW FRIEND:");
+                    console.log(ret);
+                })
+                .catch(error => {
+                    console.log(error.response)
+                });
+        },
+
         getFriendRequestList: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/friend/request`, {
                 headers: {
