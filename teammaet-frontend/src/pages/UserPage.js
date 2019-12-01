@@ -10,14 +10,15 @@ import DareList from "../component/dare/DareList";
 import CreateDare from "../component/dare/CreateDare";
 import Popup from "reactjs-popup";
 import Friend from "../component/friendlist/Friend";
-import {FriendsProvider} from "../context/FriendsContext";
+import {FriendsContext, FriendsProvider} from "../context/FriendsContext";
 import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {
 
     const [blob, setBlob] = useState();
     const {userMethods} = useContext(UserContext);
-    const {dareMethods} = useContext(DareContext)
+    const {dareMethods} = useContext(DareContext);
+    const {friendMethods} = useContext(FriendsContext);
     const id = props.match.params.id;
 
     useEffect(() => {
@@ -25,6 +26,7 @@ export default function UserPage(props) {
         userMethods.getAvatar(id);
         dareMethods.getSentDares(id);
         dareMethods.getReceivedDares(id);
+        friendMethods.getFriends(id);
         }, [id]);
 
 
@@ -38,7 +40,7 @@ export default function UserPage(props) {
             </Col>
             <Col>
                 <div className="dares">
-                <Tabs defaultActiveKey="Received" id="tabs" classname="dare-tabs">
+                <Tabs defaultActiveKey="Received" id="tabs" className="dare-tabs">
                     <Tab eventKey="Received" title="Received" className="dare-tab">
                         <Dares isReceived={true}/>
                     </Tab>
@@ -46,9 +48,7 @@ export default function UserPage(props) {
                         <Dares isReceived={false}/>
                     </Tab>
                     <Tab eventKey="CreateAdd" title="+" className="create-dare-tab">
-                        <FriendsProvider>
-                            <CreateDare/>
-                        </FriendsProvider>
+                        <CreateDare/>
                     </Tab>
                 </Tabs>
                 </div>

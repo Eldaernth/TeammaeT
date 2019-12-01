@@ -6,6 +6,7 @@ export const UserContext = createContext();
 export function UserProvider(props) {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState("");
+    let [blob,setBlob] = useState("");
     const userMethods = {
         getUsers: () => {
             console.log(localStorage.getItem("token"));
@@ -29,7 +30,6 @@ export function UserProvider(props) {
             })
                 .then((ret) => {
                     setUser(ret.data);
-                    console.log(ret.data);
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -46,10 +46,7 @@ export function UserProvider(props) {
                     let arrayBufferView = new Uint8Array( response.data );
                     let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
                     let urlCreator = window.URL || window.webkitURL;
-                    let imageUrl = urlCreator.createObjectURL( blob );
-                    let img = document.querySelector( "#photo" );
-                    img.src = imageUrl;
-                    console.log(img);
+                    setBlob( urlCreator.createObjectURL( blob ));
                 })
                 .catch(ex => {
                     console.error(ex);
@@ -58,7 +55,7 @@ export function UserProvider(props) {
     };
 
     return (
-        <UserContext.Provider value={{users, user, userMethods}}>
+        <UserContext.Provider value={{users, user, userMethods,blob}}>
             {props.children}
         </UserContext.Provider>
     )

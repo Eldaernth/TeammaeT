@@ -58,12 +58,41 @@ h1 {
     width: 30vmin;
     height: 30vmin;
 }
+.friend-avatar-icon{
+    width:6vmin;
+    height:6vmin;
+}
+.img-wrap {
+    position: relative;
+    height: 8vmin;
+    width: 8vmin;
+    display: inline-block;
+}
+.img-description {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-size: 1.5em;
+    background: #f2f2f2;
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+}
+.img-wrap:hover .img-description {
+    visibility: visible;
+    opacity: 0.9;
+}
 
 .dares {
     width: 70vmin;
     height: 70vmin;
     margin-top: 1vmin;
     overflow-y: scroll;
+    scrollbar-width:none;
+}
+
+.dares::-webkit-scrollbar{
+    width: 0px;
 }
 
 .nav-tabs .nav-link {

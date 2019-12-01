@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @Autowired
-    AvatarRepository avatarRepository;
+    private AvatarRepository avatarRepository;
 
     @GetMapping
     public List<AppUser> getAllUser(){

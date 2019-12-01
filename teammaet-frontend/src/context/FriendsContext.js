@@ -7,11 +7,12 @@ export function FriendsProvider(props) {
     const [friendRequest, setFriendRequest] = useState([]);
     const [friends, setFriends] = useState([]);
     let [friendIds, serFriendIds] = useState([]);
+    const [friendBlob, setBlob] = useState([]);
     const friendMethods = {
 
         acceptFriendRequest: (e, userId, friendId) => {
             e.preventDefault();
-            Axios.post(`http://localhost:8080/user/${userId}/friend/accept`,{
+            Axios.post(`http://localhost:8080/user/${userId}/friend/accept`, {
                 id: friendId
             }, {
                 headers: {
@@ -29,7 +30,7 @@ export function FriendsProvider(props) {
 
         declineFriendRequest: (e, userId, friendId) => {
             e.preventDefault();
-            Axios.post(`http://localhost:8080/user/${userId}/friend/decline`,{
+            Axios.post(`http://localhost:8080/user/${userId}/friend/decline`, {
                 id: friendId
             }, {
                 headers: {
@@ -67,6 +68,17 @@ export function FriendsProvider(props) {
             })
                 .then((ret) => {
                     setFriends(ret.data);
+                    for (let re of ret.data) {
+                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
+                            responseType: "arraybuffer",
+                            headers: {
+                                "Authorization": `Bearer ${localStorage.getItem("token")}`
+                            }
+                        }).then((res)=> {let arrayBufferView = new Uint8Array( res.data );
+                        let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
+                        let urlCreator = window.URL || window.webkitURL;
+                        setBlob((prev)=>([...prev,{id:re.id,name:re.name,friendBlob:urlCreator.createObjectURL( blob )}]))});
+                    }
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -75,9 +87,9 @@ export function FriendsProvider(props) {
 
         addFriend: (evt, name, id) => {
             evt.preventDefault();
-            Axios.post(`http://localhost:8080/user/${id}/friend/request`,{
+            Axios.post(`http://localhost:8080/user/${id}/friend/request`, {
                 name: name
-            },{
+            }, {
                 headers: {
                     "Content-type": "application/json",
                     "Access-Control-Allow-Origin": "http://localhost:3000",
@@ -106,10 +118,12 @@ export function FriendsProvider(props) {
                     console.log(error.response)
                 });
         },
-        addFriendId: (id) => friendIds.push(id)
+        addFriendId: (id) => friendIds.push(id),
+
     };
+    console.log(friendBlob);
     return (
-        <FriendsContext.Provider value={{friends, friendMethods, friendIds, friendRequest}}>
+        <FriendsContext.Provider value={{friends, setFriends, friendMethods, friendIds, friendRequest, friendBlob}}>
             {props.children}
         </FriendsContext.Provider>
     )
