@@ -2,6 +2,7 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
+import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

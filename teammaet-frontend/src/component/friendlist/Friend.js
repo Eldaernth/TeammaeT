@@ -9,9 +9,6 @@ export default function Friend(props) {
     const {friends, friendMethods} = useContext(FriendsContext);
     const {user} = useContext(UserContext);
 
-    useEffect(() => {
-        friendMethods.getFriends(user.id)
-    }, []);
 
     return (
         <>

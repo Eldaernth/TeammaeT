@@ -8,17 +8,27 @@ import {UserProvider} from "./context/UserContext";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import HomePage from "./pages/HomePage";
+import Navigation from "./component/homepage/Navigation";
+import FriendsPage from "./pages/FriendsPage";
+import {DareProvider} from "./context/DareContext";
+import {FriendsProvider} from "./context/FriendsContext";
 
 function App() {
     return (
         <Router>
+            <Navigation/>
             <div className="App">
                 <Switch>
                     <Container className="container">
                         <UserProvider>
                             <Route path="/login" exact component={LoginPage}/>
                             <Route path="/users" exact component={UsersPage}/>
-                            <Route path="/user/:id" exact component={UserPage}/>
+                            <DareProvider>
+                                <FriendsProvider>
+                                    <Route path="/user/:id" exact component={UserPage}/>
+                                    <Route path="/friends" exact component={FriendsPage}/>
+                                </FriendsProvider>
+                            </DareProvider>
                             <Route path="/registration" exact component={RegistrationPage}/>
                             <Route path="/" exact component={HomePage}/>
                         </UserProvider>

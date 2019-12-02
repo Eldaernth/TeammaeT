@@ -2,35 +2,21 @@ import React, {useContext, useEffect} from "react";
 import {Button} from "react-bootstrap";
 import {UserContext} from "../../context/UserContext";
 import {DareContext} from "../../context/DareContext";
+import DareCard from "./DareCard";
 
 export default function Dares(props) {
-    const {user} = useContext(UserContext);
-    const {received, sent, dareMethods} = useContext(DareContext);
-
-    useEffect(() =>
-            props.isReceived ? dareMethods.getReceivedDares(user.id) : dareMethods.getSentDares(user.id),
-        [props.isReceived, user.id]); //removed userMethods (loop)
+    const {receivedDares, sentDares} = useContext(DareContext);
 
     return (
-        <tbody>
-        {props.isReceived ?
-            received.map((row) =>
-                <tr>
-                    <td> {row.title}</td>
-                    <td> {row.dare}</td>
-                    <td><Button value={row.id} variant="outline-danger"
-                                onClick={(e) => dareMethods.deleteDare(e, user.id)}>X</Button></td>
-                </tr>
-            ) :
-            sent.map((row) =>
-                <tr>
-                    <td> {row.title}</td>
-                    <td> {row.dare}</td>
-                    <td><Button value={row.id} variant="outline-danger"
-                                onClick={(e) => dareMethods.deleteDare(e, user.id)}>X</Button></td>
-                </tr>
-            )}
-        </tbody>
+        <div className="Cards">
+            {props.isReceived ?
+                receivedDares.map((row) =>
+                    <DareCard row={row}/>
+                ) : (
+                    sentDares.map((row) =>
+                        <DareCard row={row}/>
+                    ))}
+        </div>
     )
 
 }

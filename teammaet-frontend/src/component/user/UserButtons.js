@@ -12,24 +12,10 @@ export default function UserButtons(props) {
         props.id === localStorage.getItem("id") ? (
         <div className="user-buttons">
             <FriendsProvider>
-                <Popup modal trigger={
-                    <Button variant="secondary" block>FriendList</Button>}>
-                    <FriendList isDare={false}/>
-                </Popup>
-                <DareProvider>
-                    <Popup modal trigger={
-                        <Button variant="secondary" block>Received List</Button>}>
-                        <DareList isReceived={true}/>
-                    </Popup>
-                    <Popup modal trigger={
-                        <Button variant="secondary" block>Sent List</Button>}>
-                        <DareList isReceived={false}/>
-                    </Popup>
-                    <Popup modal trigger={
-                        <Button variant="secondary" block>Create Dare</Button>}>
-                        <CreateDare/>
-                    </Popup>
-                </DareProvider>
+                {/*<Popup modal trigger={*/}
+                {/*    <Button variant="secondary" block>FriendList</Button>}>*/}
+                {/*    <FriendList isDare={false}/>*/}
+                {/*</Popup>*/}
             </FriendsProvider>
         </div>
         ) : ("")}</>
