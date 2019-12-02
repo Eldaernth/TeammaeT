@@ -1,17 +1,11 @@
 package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.model.FriendInfo;
-import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @CrossOrigin
@@ -24,9 +18,6 @@ public class FriendController {
     public FriendController(UserService userStorage) {
         this.userStorage = userStorage;
     }
-
-    @Autowired
-    private AvatarRepository avatarRepository;
 
     @GetMapping
     public Set<AppUser> getFriendList(@PathVariable("userId") Long userId){

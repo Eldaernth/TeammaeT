@@ -27,6 +27,8 @@ public class AppUser {
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
     private Avatar avatar;
 
     @Singular("friendList")
