@@ -2,8 +2,6 @@ package com.teammaet.idareu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,6 +25,9 @@ public class AppUser {
     private String email;
 
     private String password;
+
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Avatar avatar;
 
     @Singular("friendList")
     @ManyToMany

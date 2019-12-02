@@ -2,14 +2,10 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
-import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 
@@ -17,16 +13,20 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/user/{userId}")
 public class FileController {
-    @Autowired
-    AvatarRepository avatarRepository;
 
     @Autowired
     UserRepository userRepository;
 
     @PostMapping("/uploadFile")
-    public String submit(@RequestParam("avatar") MultipartFile file,@PathVariable("userId")long id) throws IOException {
-        Avatar avatar = new Avatar(file.getBytes(),id);
-        avatarRepository.save(avatar);
+    public String submit(@RequestParam("avatar") MultipartFile file, @PathVariable("userId")Long id) throws IOException {
+        AppUser user = userRepository.findById(id).get();
+        Avatar avatar = Avatar.builder()
+                .image(file.getBytes())
+                .user(user)
+                .build();
+
+        user.setAvatar(avatar);
+        userRepository.save(user);
 
         return "fileUploadView";
     }

@@ -2,7 +2,6 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
-import com.teammaet.idareu.repository.AvatarRepository;
 import com.teammaet.idareu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,47 +15,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserService userStorage;
-
-    public UserController(UserService userStorage) {
-        this.userStorage = userStorage;
-    }
 
     @Autowired
-    AvatarRepository avatarRepository;
+    private UserService userService;
 
     @GetMapping
     public List<AppUser> getAllUser(){
-        return userStorage.getUsers();
+        return userService.getUsers();
     }
 
     @GetMapping("/{id}")
     public AppUser getUserById(@PathVariable("id") Long id){
-        return userStorage.getUserById(id);
+        return userService.getUserById(id);
     }
 
     @GetMapping("/{id}/avatar")
-    public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long id){
-        Avatar avatar = avatarRepository.findByAppUser(id);
+    public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long userId){
+        Avatar avatar = userService.getUserById(userId).getAvatar();
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(avatar.getImage());
     }
 
     @PostMapping
     public AppUser register(@RequestBody AppUser user){
-        userStorage.register(user);
+        userService.register(user);
         return user;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
-        AppUser user = userStorage.getUserById(id);
-        userStorage.deleteUser(user);
+        AppUser user = userService.getUserById(id);
+        userService.deleteUser(user);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")
     public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user){
-        AppUser userToUpdate = userStorage.getUserById(id);
+        AppUser userToUpdate = userService.getUserById(id);
 //        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
         return userToUpdate;
     }

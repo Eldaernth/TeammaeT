@@ -13,6 +13,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+
+
+
 public class Avatar {
 
     @Id
@@ -23,10 +26,7 @@ public class Avatar {
     @Type(type="org.hibernate.type.BinaryType")
     private byte[] image;
 
-    private Long appUser;
+    @OneToOne
+    private AppUser user;
 
-    public Avatar(byte[] image, Long appUser) {
-        this.image = image;
-        this.appUser = appUser;
-    }
 }
