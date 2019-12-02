@@ -37,12 +37,12 @@ export default function User(props) {
                 <h1>{user.name}</h1>
                 {friendBlob.map((row)=>
                     <div className="img-wrap">
-                        <Link to={`/user/${row.id}`}><label className="avatar"><img id="photo" className="friend-avatar-icon" src={row.friendBlob}/></label></Link>
+                        <Link to={`/user/${row.id}`}className="link"><label className="avatar"><img id="photo" className="friend-avatar-icon" src={row.friendBlob}/></label></Link>
                         <p className="img-description">{row.name}</p>
                     </div>
                 )
                 }
-                <Link to="">more</Link>
+                <Link to="/friends">more</Link>
             </div>
         </Row>
     )

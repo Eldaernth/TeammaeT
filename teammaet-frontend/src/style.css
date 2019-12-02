@@ -13,9 +13,6 @@ h1 {
     font-size: 10vmin;
 }
 
-.row {
-    flex-wrap: nowrap;
-}
 
 .user-page {
     min-height: 100vh;
@@ -49,6 +46,8 @@ h1 {
 }
 
 .avatar {
+    width:100%;
+    min-height: 100%;
     border: 2px solid black;
     border-radius: 50%;
     overflow: hidden;
@@ -58,14 +57,38 @@ h1 {
     width: 30vmin;
     height: 30vmin;
 }
+.friend-card{
+    width:50%;
+    min-height: 10vmin;
+    flex-direction: row;
+    box-shadow: none;
+}
+.friend-avatar-icon-warp{
+    width: 20%;
+    min-height: 100%;
+}
 .friend-avatar-icon{
-    width:6vmin;
-    height:6vmin;
+    width:100%;
+    height:100%;
+    display: inline-block;
+}
+.friend-name-warp{
+    width:80%;
+    min-height:100%;
+    display: flex;
+    align-items: center;
+}
+.friend-name-warp h2 {
+    font-style: normal;
+}
+.link{
+    width: 100%;
+    min-height: 100%;
 }
 .img-wrap {
     position: relative;
-    height: 8vmin;
-    width: 8vmin;
+    height: 10vmin;
+    width: 10vmin;
     display: inline-block;
 }
 .img-description {
