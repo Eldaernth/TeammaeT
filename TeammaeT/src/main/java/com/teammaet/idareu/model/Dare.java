@@ -1,9 +1,11 @@
 package com.teammaet.idareu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,6 +34,15 @@ public class Dare {
 
     @Enumerated(EnumType.STRING)
     private DareType dareType;
+
+    @Singular("videos")
+    @OneToMany(mappedBy = "dare", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Video> videos;
+
+    public void addVideo(Video video){
+        this.videos.add(video);
+    }
     
     
 }

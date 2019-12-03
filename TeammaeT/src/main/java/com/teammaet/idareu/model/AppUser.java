@@ -52,4 +52,13 @@ public class AppUser {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
+    @Singular("videos")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Video> videos;
+
+    public void addVideo(Video video){
+        this.videos.add(video);
+    }
+
 }

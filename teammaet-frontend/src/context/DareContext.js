@@ -4,9 +4,15 @@ import Axios from "axios";
 export const DareContext = createContext();
 
 export function DareProvider(props) {
+    const [dare,setDare] = useState({});
     const [sentDares, setSentDares] = useState([]);
     const [receivedDares, setReceivedDares] = useState([]);
     const dareMethods = {
+        getDare:(userId,id)=>{
+            Axios.get(`http://localhost:8080/user/${userId}/dare/${id}`,{
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }}).then((res)=>setDare(res.data))},
         getReceivedDares: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/dare/type/received`, {
                 headers: {
@@ -68,9 +74,8 @@ export function DareProvider(props) {
                 });
         }
     };
-
     return (
-        <DareContext.Provider value={{receivedDares, sentDares, dareMethods}}>
+        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare}}>
             {props.children}
         </DareContext.Provider>
     );

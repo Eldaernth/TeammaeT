@@ -12,6 +12,7 @@ import Navigation from "./component/homepage/Navigation";
 import FriendsPage from "./pages/FriendsPage";
 import {DareProvider} from "./context/DareContext";
 import {FriendsProvider} from "./context/FriendsContext";
+import DarePage from "./pages/DarePage";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                                 <FriendsProvider>
                                     <Route path="/user/:id" exact component={UserPage}/>
                                     <Route path="/friends" exact component={FriendsPage}/>
+                                    <Route path="/user/:userId/dare/:id/" exact component={DarePage}/>
                                 </FriendsProvider>
                             </DareProvider>
                             <Route path="/registration" exact component={RegistrationPage}/>

@@ -3,6 +3,7 @@ package com.teammaet.idareu.service;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
 import com.teammaet.idareu.model.DareType;
+import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.DareRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,11 @@ public class DareService {
 
     private Logger logger = LoggerFactory.getLogger(DareService.class);
 
-    public void save(DareInformation dareInformation) {
+    public void save(Dare dare){
+        dareRepository.save(dare);
+    }
+
+    public void createDare(DareInformation dareInformation) {
         dareRepository.save(Dare.builder()
                 .title(dareInformation.getTitle())
                 .bet(dareInformation.getBet())
@@ -63,4 +68,5 @@ public class DareService {
     public List<Dare> getAllDare(Long userId) {
         return dareRepository.findAllByUserId(userId);
     }
+
 }

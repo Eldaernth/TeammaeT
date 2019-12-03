@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router-dom";
+import {UserContext} from "../../context/UserContext";
 
 export default function PreCard({row,setCardState}) {
+    const {user} = useContext(UserContext)
     return (
     <div className="card pre-card" onClick={()=>setCardState(true)}>
-        <Link to={`/dares/${row.id}`} className="dare-link">
+        <Link to={`${user.id}/dare/${row.id}`} className="dare-link">
         <div className="card-top">
             <h2>{row.title}</h2>
             <p>Progress:{row.progress}</p>

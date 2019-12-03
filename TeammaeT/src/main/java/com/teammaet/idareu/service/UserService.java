@@ -2,6 +2,7 @@ package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.FriendInfo;
+import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    public void save(AppUser appUser){
+        userRepository.save(appUser);
+    }
 
     public void register(AppUser user) {
         AppUser newUser = AppUser.builder()
@@ -120,4 +124,5 @@ public class UserService {
     public Set<AppUser> getFriendRequestList(Long userId) {
         return userRepository.findById(userId).get().getFriendRequests();
     }
+
 }

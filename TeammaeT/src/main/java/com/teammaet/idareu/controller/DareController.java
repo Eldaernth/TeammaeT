@@ -31,7 +31,7 @@ public class DareController {
 
     @PostMapping
     public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation){
-        dareStorage.save(dareInformation);
+        dareStorage.createDare(dareInformation);
         return dareInformation;
     }
 
