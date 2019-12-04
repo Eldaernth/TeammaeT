@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {DareContext} from "../context/DareContext";
-import {Link, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import Axios from "axios";
-import {Card, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 
 export default function DarePage() {
     const {dareMethods, dare} = useContext(DareContext);

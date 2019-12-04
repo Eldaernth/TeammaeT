@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react'
-import {Dropdown, Table} from 'react-bootstrap';
-import {useParams} from "react-router-dom"
+import {Dropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faTrashAlt} from "@fortawesome/free-solid-svg-icons";

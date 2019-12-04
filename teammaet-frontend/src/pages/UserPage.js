@@ -1,16 +1,12 @@
-import React, {useEffect, useContext, useState} from 'react'
-import {Row, Col, Tabs, Tab, Button} from 'react-bootstrap'
+import React, {useEffect, useContext} from 'react'
+import {Row, Col, Tabs, Tab} from 'react-bootstrap'
 import '../style.css';
 import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
 import UserButtons from "../component/user/UserButtons";
-import Axios from "axios";
-import {DareContext, DareProvider} from "../context/DareContext";
-import DareList from "../component/dare/DareList";
+import {DareContext} from "../context/DareContext";
 import CreateDare from "../component/dare/CreateDare";
-import Popup from "reactjs-popup";
-import Friend from "../component/friendlist/Friend";
-import {FriendsContext, FriendsProvider} from "../context/FriendsContext";
+import {FriendsContext} from "../context/FriendsContext";
 import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {

@@ -1,6 +1,4 @@
-import React, {useContext, useEffect} from "react";
-import {Button} from "react-bootstrap";
-import {UserContext} from "../../context/UserContext";
+import React, {useContext} from "react";
 import {DareContext} from "../../context/DareContext";
 import DareCard from "./DareCard";
 

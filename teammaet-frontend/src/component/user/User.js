@@ -1,10 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Form, Row} from "react-bootstrap";
+import React, {useContext} from "react";
+import {Form, Row} from "react-bootstrap";
 import {UserContext} from "../../context/UserContext";
 import Axios from "axios";
 import {FriendsContext} from "../../context/FriendsContext";
 import {Link} from "react-router-dom";
-import ActionButtons from "../friendlist/ActionButtons";
 
 
 export default function User(props) {

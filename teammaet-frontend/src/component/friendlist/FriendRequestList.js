@@ -1,10 +1,9 @@
 import React, {useContext, useEffect} from 'react'
 import {FriendsContext} from "../../context/FriendsContext";
-import {UserContext} from "../../context/UserContext";
 import {Link} from "react-router-dom";
-import {Card, Image, Button, Dropdown} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faTrashAlt, faCheck} from "@fortawesome/free-solid-svg-icons";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
 
 export default function FriendRequestList(props) {
 
