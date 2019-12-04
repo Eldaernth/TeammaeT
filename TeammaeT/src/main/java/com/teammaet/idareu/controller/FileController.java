@@ -4,12 +4,9 @@ import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.Video;
-import com.teammaet.idareu.repository.DareRepository;
-import com.teammaet.idareu.repository.UserRepository;
 import com.teammaet.idareu.service.DareService;
 import com.teammaet.idareu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

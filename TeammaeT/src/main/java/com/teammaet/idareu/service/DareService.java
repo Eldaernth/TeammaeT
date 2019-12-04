@@ -1,15 +1,15 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
-import com.teammaet.idareu.model.DareType;
-import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.DareRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +19,7 @@ public class DareService {
     private DareRepository dareRepository;
 
     @Autowired
-    private UserService userStorage;
+    private UserService userService;
 
     private Logger logger = LoggerFactory.getLogger(DareService.class);
 
@@ -28,24 +28,20 @@ public class DareService {
     }
 
     public void createDare(DareInformation dareInformation) {
+
+        List<AppUser> friendList = new ArrayList<>();
+        for (Long friendId : dareInformation.getFriendList()) {
+            friendList.add(userService.getUserById(friendId));
+        }
+
         dareRepository.save(Dare.builder()
                 .title(dareInformation.getTitle())
                 .bet(dareInformation.getBet())
                 .dare(dareInformation.getDare())
                 .deadline(dareInformation.getDeadline())
-                .user(userStorage.getUserById(dareInformation.getUserThatSends()))
-                .dareType(DareType.sent)
+                .userFrom(userService.getUserById(dareInformation.getUserThatSends()))
+                .userTo(friendList)
                 .build());
-        for(int i=0;i<dareInformation.getFriendList().size();i++){
-            dareRepository.save(Dare.builder()
-                    .title(dareInformation.getTitle())
-                    .bet(dareInformation.getBet())
-                    .dare(dareInformation.getDare())
-                    .deadline(dareInformation.getDeadline())
-                    .user(userStorage.getUserById(dareInformation.getFriendList().get(i)))
-                    .dareType(DareType.received)
-                    .build());
-        }
 
     }
 
@@ -61,13 +57,23 @@ public class DareService {
         dareRepository.delete(getDareBy(dareId));
     }
 
-    public List<Dare> getDares(Long userId, DareType dareType) {
-        return dareRepository.findAllByUserIdAndDareType(userId, dareType);
+//    public List<Dare> getDares(Long userId, DareType dareType) {
+//        return dareRepository.findAllByUserIdAndDareType(userId, dareType);
+//    }
+
+    public List<Dare> getReceivedDares(Long userId) {
+        AppUser user = userService.getUserById(userId);
+        return dareRepository.findAllByUserToContains(user);
     }
 
-    public List<Dare> getAllDare(Long userId) {
-        return dareRepository.findAllByUserId(userId);
+    public List<Dare> getSentDares(Long userId) {
+        AppUser user = userService.getUserById(userId);
+        return dareRepository.findAllByUserFrom(user);
     }
+
+//    public List<Dare> getAllDare(Long userId) {
+//        return dareRepository.findAllByUserId(userId);
+//    }
 
 
 }

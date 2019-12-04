@@ -14,7 +14,7 @@ export function DareProvider(props) {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }}).then((res)=>setDare(res.data))},
         getReceivedDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/type/received`, {
+            Axios.get(`http://localhost:8080/user/${id}/dare/received`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -27,7 +27,7 @@ export function DareProvider(props) {
                 });
         },
         getSentDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/type/sent`, {
+            Axios.get(`http://localhost:8080/user/${id}/dare/sent`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -39,6 +39,7 @@ export function DareProvider(props) {
                     console.log(error.response.data)
                 });
         },
+
         deleteDare: (evt, id) => {
             evt.preventDefault();
             Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`, {

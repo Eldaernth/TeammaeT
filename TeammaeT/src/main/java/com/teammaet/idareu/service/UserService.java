@@ -1,8 +1,6 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.AppUser;
-import com.teammaet.idareu.model.FriendInfo;
-import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Set;
 

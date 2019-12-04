@@ -3,7 +3,6 @@ package com.teammaet.idareu.controller;
 
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
-import com.teammaet.idareu.model.DareType;
 import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.VideoRepository;
 import com.teammaet.idareu.service.DareService;
@@ -23,15 +22,14 @@ public class DareController {
     @Autowired
     private DareService dareStorage;
 
-    @GetMapping("/type/{dareType}") //TODO ? UPPERCASE
-    public List<Dare> getReceivedDares(@PathVariable("userId") Long userId,
-                                       @PathVariable("dareType") String dareType){
-        return dareStorage.getDares(userId, DareType.valueOf(dareType));
+    @GetMapping("/received")
+    public List<Dare> getReceivedDares(@PathVariable("userId") Long userId){
+        return dareStorage.getReceivedDares(userId);
     }
 
-    @GetMapping
-    public List<Dare> getAllDares(@PathVariable("userId") Long userId){
-        return dareStorage.getAllDare(userId);
+    @GetMapping("/sent")
+    public List<Dare> getSentDares(@PathVariable("userId") Long userId){
+        return dareStorage.getSentDares(userId);
     }
 
     @PostMapping

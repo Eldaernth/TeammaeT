@@ -43,10 +43,10 @@ public class AppUser {
     @EqualsAndHashCode.Exclude
     private Set<AppUser> friendRequests = new HashSet<>();
 
-    @Singular("dares")
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JsonIgnore
-    private List<Dare> dares;
+//    @Singular("dares")
+//    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//    @JsonIgnore
+//    private List<Dare> dares;
 
     @Singular("roles")
     @ElementCollection(fetch = FetchType.EAGER)

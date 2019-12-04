@@ -30,10 +30,12 @@ public class Dare {
 
     @ManyToOne
     @ToString.Exclude
-    private AppUser user;
+    private AppUser userFrom;
 
-    @Enumerated(EnumType.STRING)
-    private DareType dareType;
+    @Singular("userTo")
+    @ManyToMany
+    @ToString.Exclude
+    private List<AppUser> userTo;
 
     @Singular("videos")
     @OneToMany(mappedBy = "dare", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
