@@ -13,6 +13,7 @@ export default function FriendsPage() {
 
     return (
         <>
+            <br/>
             <Row>
                 <AddFriend id={id}/>
             </Row>
@@ -24,9 +25,6 @@ export default function FriendsPage() {
                         </Tab>
                         <Tab eventKey="Requests" title="Requests" className="dare-tab">
                             <FriendRequestList id={id}/>
-                        </Tab>
-                        <Tab eventKey="SendFriendRequest" title="+" className="create-dare-tab">
-                            <input type={"text"}/>
                         </Tab>
                     </Tabs>
                 </div>
