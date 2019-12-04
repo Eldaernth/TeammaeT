@@ -1,28 +1,31 @@
 import React, {useContext, useState} from "react";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {FriendsContext} from "../../context/FriendsContext";
-import {UserContext} from "../../context/UserContext";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import useForm from "react-hook-form";
 
-export default function AddFriend() {
-    const {user} = useContext(UserContext);
+export default function AddFriend(props) {
+
     const {friendMethods} = useContext(FriendsContext);
+    const {register, errors} = useForm();
     const [name, setName] = useState("");
 
     return (
-        <Form onSubmit={(e) => friendMethods.addFriend(e, name, user.id)}>
-            <Container style={{
-                flexDirection: 'col',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <Row>
-                    <Col><h2>FriendList</h2></Col>
-                    <Col><Form.Control type="text" placeholder="Name" value={name} onChange={(e) => {
-                        setName(e.target.value)
-                    }}/></Col>
-                    <Col><Button type="Submit" variant="primary" block>Add Friend</Button></Col>
-                </Row>
-            </Container>
+        <Form onSubmit={(e) => friendMethods.addFriend(e, name, props.id)} className={"flex"}>
+            <div className="form-group">
+                <input value={props.id} type={"text"} hidden/>
+                <input id="name" className="input" type="text" name="username" value={name} onChange={(e) => {
+                    setName(e.target.value)
+                }} required ref={register({required: true, maxLength: 20})}/>
+                {errors.username && errors.username.type === "required" &&
+                <p style={{color: "red"}}>This field is required</p>}
+                {errors.username && errors.username.type === "maxLength" &&
+                <p style={{color: "red"}}>Max length is 20 character</p>}
+                <label htmlFor="name" className="input-label"><span
+                    className="input-text">Add friend</span></label>
+            </div>
+            <Button type="submit" variant={"outline-primary"} className={"small-button center"}><FontAwesomeIcon size={"2x"} icon={faUserPlus}/></Button>
         </Form>
     )
 }

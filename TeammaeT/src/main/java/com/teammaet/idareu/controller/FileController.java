@@ -45,7 +45,7 @@ public class FileController {
         Dare dare = dareService.getDareBy(id);
 
         byte[] bytes = file.getBytes();
-        String pathString = "/home/norbert/codecool/advanced/TeammaeT/teammaet-frontend/public/Videos/"+file.getOriginalFilename();
+        String pathString = "/home/tom/codecool/advanced/TeammaeT/teammaet-frontend/public/Videos/"+file.getOriginalFilename();
         Path path = Paths.get(pathString);
         Files.write(path, bytes);
 

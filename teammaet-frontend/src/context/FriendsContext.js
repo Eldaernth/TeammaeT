@@ -6,7 +6,7 @@ export const FriendsContext = createContext();
 export function FriendsProvider(props) {
     const [friendRequest, setFriendRequest] = useState([]);
     const [friends, setFriends] = useState([]);
-    let [friendIds, serFriendIds] = useState([]);
+    let [friendIds] = useState([]);
     const friendMethods = {
 
         acceptFriendRequest: (e, userId, friendId) => {
