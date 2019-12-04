@@ -51,9 +51,7 @@ export function FriendsProvider(props) {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })
-                .then((ret) => {
-                    setFriendRequest(ret.data);
-                    for (let re of ret.data) {
+                .then((ret)=>{for (let re of ret.data) {
                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",
                             headers: {
@@ -63,7 +61,7 @@ export function FriendsProvider(props) {
                             let arrayBufferView = new Uint8Array(res.data);
                             let blob = new Blob([arrayBufferView], {type: "image/png"});
                             let urlCreator = window.URL || window.webkitURL;
-                            setBlob((prev) => ([...prev, {
+                            setFriendRequest((prev) => ([...prev, {
                                 id: re.id,
                                 name: re.name,
                                 friendBlob: urlCreator.createObjectURL(blob)
@@ -83,7 +81,6 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
-                    setFriends([]);
                     for (let re of ret.data) {
                          Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",

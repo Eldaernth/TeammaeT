@@ -8,15 +8,16 @@ import {FriendsContext} from "../../context/FriendsContext";
 
 export default function FriendListCards(props) {
 
-    const {friendBlob, friendMethods} = useContext(FriendsContext);
+    const {friends, friendMethods,setFriends} = useContext(FriendsContext);
 
     useEffect(() => {
+        setFriends([]);
         friendMethods.getFriends(props.id)
     }, []);
 
     return (
         <>
-            {friendBlob.map((row) =>
+            {friends.map((row) =>
                 <div className="friend-avatar-link">
                     <div className="card friend-card">
                         <div className="friend-avatar-icon-warp">

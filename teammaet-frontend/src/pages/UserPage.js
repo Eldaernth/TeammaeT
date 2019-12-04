@@ -17,10 +17,11 @@ export default function UserPage(props) {
 
     const {userMethods} = useContext(UserContext);
     const {dareMethods} = useContext(DareContext);
-    const {friendMethods} = useContext(FriendsContext);
+    const {friendMethods,setFriends} = useContext(FriendsContext);
     const id = props.match.params.id;
 
     useEffect(() => {
+        setFriends([]);
         userMethods.getUser(id);
         userMethods.getAvatar(id);
         dareMethods.getSentDares(id);

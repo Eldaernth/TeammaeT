@@ -14,6 +14,7 @@ export default function FriendRequestList(props) {
         friendMethods.getFriendRequestList(props.id);
     }, []);
 
+    console.log(friendRequest);
     return (
         <>
             {friendRequest.map((row) =>
