@@ -47,7 +47,7 @@ export default function User(props) {
                     </Link>
                 )
                 }
-                <Link to="/friends">more</Link>
+                <Link to={`${user.id}/friends`}>more</Link>
             </div>
         </Row>
     )
