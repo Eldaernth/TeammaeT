@@ -48,14 +48,14 @@ public class FileController {
         Dare dare = dareService.getDareBy(id);
 
         byte[] bytes = file.getBytes();
-        String pathString = "/home/norbert/document"+file.getOriginalFilename();
+        String pathString = "/home/norbert/codecool/advanced/TeammaeT/teammaet-frontend/public/Videos/"+file.getOriginalFilename();
         Path path = Paths.get(pathString);
         Files.write(path, bytes);
 
         Video video = Video.builder()
                 .user(user)
                 .dare(dare)
-                .videoPath(pathString)
+                .videoPath(file.getOriginalFilename())
                 .build();
 
         user.addVideo(video);

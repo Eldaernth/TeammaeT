@@ -4,6 +4,8 @@ package com.teammaet.idareu.controller;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
 import com.teammaet.idareu.model.DareType;
+import com.teammaet.idareu.model.Video;
+import com.teammaet.idareu.repository.VideoRepository;
 import com.teammaet.idareu.service.DareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/{userId}/dare")
 public class DareController {
+
+    @Autowired
+    private VideoRepository videoRepository;
 
     @Autowired
     private DareService dareStorage;
@@ -39,6 +44,12 @@ public class DareController {
     public Dare getDare(@PathVariable("id") Long dareId){
         return dareStorage.getDareBy(dareId);
     }
+
+    @GetMapping("/{id}/videos")
+    public List<Video> getVideos(@PathVariable("id") Long dareId){
+        return videoRepository.findAllByDareId(dareId);
+    }
+
 
 //    @PutMapping("/{id}")
 //    public Dare updateDare(@PathVariable("userId") int userId,
