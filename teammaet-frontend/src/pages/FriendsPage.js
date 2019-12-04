@@ -4,12 +4,14 @@ import {Link} from "react-router-dom";
 import {Col, Row} from "react-bootstrap";
 
 export default function FriendsPage() {
-    const {friendBlob} = useContext(FriendsContext);
+    const {friends} = useContext(FriendsContext);
 
-    console.log(friendBlob);
+
+
+
     return (
         <Row>
-        {friendBlob.map((row)=>
+        {friends.map((row)=>
             <Link to={`/user/${row.id}`} className="friend-avatar-link">
                 <div className="card friend-card">
                     <div className="friend-avatar-icon-warp">

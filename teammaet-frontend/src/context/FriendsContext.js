@@ -7,7 +7,6 @@ export function FriendsProvider(props) {
     const [friendRequest, setFriendRequest] = useState([]);
     const [friends, setFriends] = useState([]);
     let [friendIds, serFriendIds] = useState([]);
-    const [friendBlob, setBlob] = useState([]);
     const friendMethods = {
 
         acceptFriendRequest: (e, userId, friendId) => {
@@ -67,7 +66,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
-                    setFriends(ret.data);
+                    setFriends([]);
                     for (let re of ret.data) {
                          Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",
@@ -77,7 +76,7 @@ export function FriendsProvider(props) {
                         }).then((res)=> {let arrayBufferView = new Uint8Array( res.data );
                         let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
                         let urlCreator = window.URL || window.webkitURL;
-                        setBlob((prev)=>([...prev,{id:re.id,name:re.name,friendBlob:urlCreator.createObjectURL( blob )}]))});
+                        setFriends((prev)=>([...prev,{id:re.id,name:re.name,friendBlob:urlCreator.createObjectURL( blob )}]))});
                     }
                 })
                 .catch(error => {
@@ -121,9 +120,8 @@ export function FriendsProvider(props) {
         addFriendId: (id) => friendIds.push(id),
 
     };
-    console.log(friendBlob);
     return (
-        <FriendsContext.Provider value={{friends, setFriends, friendMethods, friendIds, friendRequest, friendBlob}}>
+        <FriendsContext.Provider value={{friends, setFriends, friendMethods, friendIds, friendRequest}}>
             {props.children}
         </FriendsContext.Provider>
     )

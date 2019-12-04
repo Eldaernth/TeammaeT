@@ -15,7 +15,6 @@ import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {
 
-    const [blob, setBlob] = useState();
     const {userMethods} = useContext(UserContext);
     const {dareMethods} = useContext(DareContext);
     const {friendMethods} = useContext(FriendsContext);
@@ -33,7 +32,7 @@ export default function UserPage(props) {
     return (
         <Row className="user-page">
             <Col className="user">
-                <User blob={blob}/>
+                <User/>
                 <Row className="user-buttons">
                     <UserButtons id={id}/>
                 </Row>

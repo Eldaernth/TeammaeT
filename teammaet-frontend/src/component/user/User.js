@@ -10,7 +10,7 @@ import ActionButtons from "../friendlist/ActionButtons";
 export default function User(props) {
 
     const {user, blob} = useContext(UserContext);
-    const {friends, setFriends, friendBlob} = useContext(FriendsContext);
+    const {friends} = useContext(FriendsContext);
 
     const onUpload = (e) => {
         const fd = new FormData();
@@ -26,7 +26,6 @@ export default function User(props) {
                 }
             }).then(res => console.log(res.data))
     };
-    console.log(friendBlob);
     return (
         <Row className="user-info">
             <div>
@@ -37,7 +36,7 @@ export default function User(props) {
                            onChange={(e) => onUpload(e)}/>
                 </Form>
                 <h1>{user.name}</h1>
-                {friendBlob.map((row) =>
+                {friends.map((row) =>
                     <Link to={`/user/${row.id}`} className="link">
                         <div className="img-wrap">
                             <label className="avatar"><img id="photo" className="friend-icon"
