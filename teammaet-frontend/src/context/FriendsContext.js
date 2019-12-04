@@ -53,6 +53,23 @@ export function FriendsProvider(props) {
             })
                 .then((ret) => {
                     setFriendRequest(ret.data);
+                    for (let re of ret.data) {
+                        Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
+                            responseType: "arraybuffer",
+                            headers: {
+                                "Authorization": `Bearer ${localStorage.getItem("token")}`
+                            }
+                        }).then((res) => {
+                            let arrayBufferView = new Uint8Array(res.data);
+                            let blob = new Blob([arrayBufferView], {type: "image/png"});
+                            let urlCreator = window.URL || window.webkitURL;
+                            setBlob((prev) => ([...prev, {
+                                id: re.id,
+                                name: re.name,
+                                friendBlob: urlCreator.createObjectURL(blob)
+                            }]))
+                        });
+                    }
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -73,10 +90,16 @@ export function FriendsProvider(props) {
                             headers: {
                                 "Authorization": `Bearer ${localStorage.getItem("token")}`
                             }
-                        }).then((res)=> {let arrayBufferView = new Uint8Array( res.data );
-                        let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
-                        let urlCreator = window.URL || window.webkitURL;
-                        setFriends((prev)=>([...prev,{id:re.id,name:re.name,friendBlob:urlCreator.createObjectURL( blob )}]))});
+                        }).then((res) => {
+                            let arrayBufferView = new Uint8Array(res.data);
+                            let blob = new Blob([arrayBufferView], {type: "image/png"});
+                            let urlCreator = window.URL || window.webkitURL;
+                            setFriends((prev) => ([...prev, {
+                                id: re.id,
+                                name: re.name,
+                                friendBlob: urlCreator.createObjectURL(blob)
+                            }]))
+                        });
                     }
                 })
                 .catch(error => {
@@ -103,9 +126,9 @@ export function FriendsProvider(props) {
                     console.log(error.response)
                 });
         },
-        deleteFriend: (evt, id) => {
+        deleteFriend: (evt, userId, friendId) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${id}/friend/del/${evt.target.value}`, {
+            Axios.delete(`http://localhost:8080/user/${userId}/friend/del/${friendId}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }

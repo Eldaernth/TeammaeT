@@ -279,3 +279,30 @@ h2 {
     position: relative;
     left:37vmin
 }
+
+.small-button {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    border-spacing: 15px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.asd {
+    justify-content: right;
+}
+
+.friends {
+    width: 100%;
+}

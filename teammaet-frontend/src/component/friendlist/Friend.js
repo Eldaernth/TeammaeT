@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import {FriendsContext} from "../../context/FriendsContext";
 import {UserContext} from "../../context/UserContext";
 import ActionButtons from "./ActionButtons";
-import FriendRequest from "./FriendRequest";
 
 export default function Friend(props) {
     const {friends, friendMethods} = useContext(FriendsContext);

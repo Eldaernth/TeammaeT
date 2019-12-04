@@ -3,7 +3,6 @@ import {Table} from 'react-bootstrap';
 import Friend from "./Friend";
 import AddFriend from "./AddFriend";
 import BottomButtons from "./BottomButtons";
-import FriendRequest from "./FriendRequest";
 
 export default function FriendList(props) {
     return (
@@ -20,7 +19,6 @@ export default function FriendList(props) {
                 </tr>
                 </thead>
                 <tbody>
-                    <FriendRequest/>
                     <Friend isDare={props.isDare}/>
                 </tbody>
 
