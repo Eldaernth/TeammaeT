@@ -4,17 +4,20 @@ import {Col, Nav, Navbar, Row} from "react-bootstrap";
 export default function Navigation(props) {
     return(
                 <Navbar className="bg-light justify-content-between">
-                    <div>
+                    <div className="navigation-bar">
                     <Navbar.Brand href="/">IDareU</Navbar.Brand>
-                    <Nav activeKey={`/user/${localStorage.getItem("id")}`} className="navigation-bar">
+                    <Nav>
                         <Nav.Item>
                             <Nav.Link href={`/user/${localStorage.getItem("id")}`}>Profile</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href={`/user/${localStorage.getItem("id")}/friends`}>Friends</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     </div>
                     <div>
                     {localStorage.length === 0 ? (
-                        <Nav activeKey="/">
+                        <Nav>
                             <Nav.Item>
                                 <Nav.Link href="/login">Login</Nav.Link>
                             </Nav.Item>

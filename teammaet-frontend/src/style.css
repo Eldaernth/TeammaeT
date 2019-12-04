@@ -268,7 +268,8 @@ h1 {
 }
 
 .navigation-bar{
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
 }
 
 .tab-content{

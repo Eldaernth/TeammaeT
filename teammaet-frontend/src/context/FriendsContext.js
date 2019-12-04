@@ -81,6 +81,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
+                    console.log(ret.data);
                     for (let re of ret.data) {
                          Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",

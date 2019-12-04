@@ -8,7 +8,7 @@ import {UserProvider} from "./context/UserContext";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import HomePage from "./pages/HomePage";
-import Navigation from "./component/homepage/Navigation";
+import Navigation from "./component/Navigation/Navigation";
 import FriendsPage from "./pages/FriendsPage";
 import {DareProvider} from "./context/DareContext";
 import {FriendsProvider} from "./context/FriendsContext";
