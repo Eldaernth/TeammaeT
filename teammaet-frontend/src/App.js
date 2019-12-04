@@ -27,8 +27,8 @@ function App() {
                             <DareProvider>
                                 <FriendsProvider>
                                     <Route path="/user/:id" exact component={UserPage}/>
-                                    <Route path="/friends" exact component={FriendsPage}/>
                                     <Route path="/user/:userId/dare/:id/" exact component={DarePage}/>
+                                    <Route path="/user/:id/friends" exact component={FriendsPage}/>
                                 </FriendsProvider>
                             </DareProvider>
                             <Route path="/registration" exact component={RegistrationPage}/>

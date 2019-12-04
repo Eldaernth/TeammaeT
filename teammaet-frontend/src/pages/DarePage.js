@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {DareContext} from "../context/DareContext";
-import {useParams} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import Axios from "axios";
+import {Card, Col, Row} from "react-bootstrap";
 
 export default function DarePage() {
     const {dareMethods, dare} = useContext(DareContext);
@@ -34,15 +35,33 @@ export default function DarePage() {
 
     console.log(url);
     return (
-        <div>
-            <h1>{dare.title}</h1>
+        <Col>
             <input type="file" accept="video/mp4,video/x-m4v,video/*" onChange={onUpload}/>
-            {url.map((row) =>
-                <video width="320" height="240" controls>
-                    <source src={`/Videos/${row.videoPath}`} type="video/mp4"/>
-                    Your browser does not support
-                </video>
-            )}
-        </div>
+            <h1>{dare.title}</h1>
+            <Row>
+                <Col className="details">
+                    <h2>Details</h2>
+                    <p>About the challenge:{dare.dare}</p>
+                    <p>Bet:{dare.bet}</p>
+                    <p>Deadline:{dare.deadline}</p>
+                    <p>Owner:</p>
+                    <p>Participants:</p>
+                </Col>
+            </Row>
+            <Row>
+                <Col className="videos">
+                    <h2>Videos</h2>
+                    {url.map((row) =>
+                        <div>
+                            <p>{row.user.name}</p>
+                            <video width="320" height="240" controls>
+                                <source src={`/Videos/${row.videoPath}`} type="video/mp4"/>
+                                Your browser does not support
+                            </video>
+                        </div>
+                    )}
+                </Col>
+            </Row>
+        </Col>
     )
 }

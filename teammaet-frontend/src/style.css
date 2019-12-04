@@ -210,7 +210,7 @@ h1 {
     transform: translateX(0%);
 }
 
-h2 {
+.card-top h2 {
     display: inline-block;
 }
 
@@ -278,4 +278,41 @@ h2 {
 #tabs-tab-CreateAdd{
     position: relative;
     left:37vmin
+}
+
+.small-button {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    border-spacing: 15px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.asd {
+    justify-content: right;
+}
+
+.friends {
+    width: 100%;
+}
+
+.details,.videos{
+    width:100%;
+    min-height:300px;
+}
+
+.details h2,.videos h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid black;
 }
