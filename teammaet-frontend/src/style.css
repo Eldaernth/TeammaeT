@@ -210,7 +210,7 @@ h1 {
     transform: translateX(0%);
 }
 
-h2 {
+.card-top h2 {
     display: inline-block;
 }
 
@@ -305,4 +305,14 @@ h2 {
 
 .friends {
     width: 100%;
+}
+
+.details,.videos{
+    width:100%;
+    min-height:300px;
+}
+
+.details h2,.videos h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid black;
 }
