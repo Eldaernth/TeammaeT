@@ -1,28 +1,28 @@
 import React, {useContext, useState} from "react";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Form, InputGroup, FormControl} from "react-bootstrap";
 import {FriendsContext} from "../../context/FriendsContext";
-import {UserContext} from "../../context/UserContext";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import useForm from "react-hook-form";
 
-export default function AddFriend() {
-    const {user} = useContext(UserContext);
+export default function AddFriend(props) {
+
     const {friendMethods} = useContext(FriendsContext);
+    const {register, errors} = useForm();
     const [name, setName] = useState("");
 
     return (
-        <Form onSubmit={(e) => friendMethods.addFriend(e, name, user.id)}>
-            <Container style={{
-                flexDirection: 'col',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <Row>
-                    <Col><h2>FriendList</h2></Col>
-                    <Col><Form.Control type="text" placeholder="Name" value={name} onChange={(e) => {
-                        setName(e.target.value)
-                    }}/></Col>
-                    <Col><Button type="Submit" variant="primary" block>Add Friend</Button></Col>
-                </Row>
-            </Container>
-        </Form>
+            <Form onSubmit={(e) => friendMethods.addFriend(e, name, props.id)}>
+                    <InputGroup size={"lg"} className="mb-3 float-right" value={name} onChange={(e) => {setName(e.target.value)}}>
+                        <FormControl
+                            placeholder="Add friend"
+                            aria-label="Add friend"
+                            aria-describedby="basic-addon2"
+                        />
+                        <InputGroup.Append>
+                            <Button type="submit" variant="outline-primary"><FontAwesomeIcon icon={faUserPlus}/></Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+            </Form>
     )
 }

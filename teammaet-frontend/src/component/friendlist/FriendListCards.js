@@ -32,8 +32,7 @@ export default function FriendListCards(props) {
                                 <Dropdown.Menu>
                                     <Dropdown.Item
                                         onClick={(e) => friendMethods.deleteFriend(e, props.id, row.id)}>
-                                        <FontAwesomeIcon icon={faTrashAlt}/> <span
-                                        className={"asd"}>Delete</span>
+                                        <FontAwesomeIcon icon={faTrashAlt}/> <span className={"asd"}>Delete</span>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
