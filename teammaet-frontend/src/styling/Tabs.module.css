@@ -1,0 +1,16 @@
+.dares {
+    width: 70vmin;
+    height: 70vmin;
+    margin-top: 1vmin;
+    overflow-y: scroll;
+    scrollbar-width:none;
+}
+
+.dares::-webkit-scrollbar{
+    width: 0px;
+}
+
+.dare_tab {
+    width: 100%;
+    font-size: 2vmin;
+}

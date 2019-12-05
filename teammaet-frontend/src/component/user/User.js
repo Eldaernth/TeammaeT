@@ -4,6 +4,7 @@ import {UserContext} from "../../context/UserContext";
 import Axios from "axios";
 import {FriendsContext} from "../../context/FriendsContext";
 import {Link} from "react-router-dom";
+import UserStyling from "../../styling/User.module.css"
 
 
 export default function User(props) {
@@ -26,21 +27,21 @@ export default function User(props) {
             }).then(res => console.log(res.data))
     };
     return (
-        <Row className="user-info">
+        <Row className={UserStyling.user_info}>
             <div>
                 <Form encType="multipart/form-data">
-                    <label htmlFor="avatar" className="avatar"><img id="photo" className="avatar-icon"
+                    <label htmlFor="avatar" className={UserStyling.avatar}><img id="photo" className={UserStyling.avatar_icon}
                                                                     src={blob}/></label>
-                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="file-input"
+                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className={UserStyling.file_input}
                            onChange={(e) => onUpload(e)}/>
                 </Form>
                 <h1>{user.name}</h1>
                 {friends.map((row) =>
-                    <Link to={`/user/${row.id}`} className="link">
-                        <div className="img-wrap">
-                            <label className="avatar"><img id="photo" className="friend-icon"
+                    <Link to={`/user/${row.id}`} className={UserStyling.link}>
+                        <div className={UserStyling.img_wrap}>
+                            <label className={UserStyling.avatar}><img id="photo" className={UserStyling.friend_icon}
                                                            src={row.friendBlob}/></label>
-                            <p className="img-description">{row.name}</p>
+                            <p className={UserStyling.img_description}>{row.name}</p>
                         </div>
                     </Link>
                 )

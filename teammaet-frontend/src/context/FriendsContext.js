@@ -52,6 +52,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret)=>{for (let re of ret.data) {
+                    console.log(ret.data);
                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",
                             headers: {
@@ -66,6 +67,7 @@ export function FriendsProvider(props) {
                                 name: re.name,
                                 friendBlob: urlCreator.createObjectURL(blob)
                             }]))
+                            console.log(friendRequest);
                         });
                     }
                 })
@@ -81,7 +83,6 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
-                    console.log(ret.data);
                     for (let re of ret.data) {
                          Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",

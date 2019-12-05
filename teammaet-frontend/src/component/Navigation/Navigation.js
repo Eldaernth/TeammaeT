@@ -1,10 +1,11 @@
 import React from "react";
-import {Col, Nav, Navbar, Row} from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
+import NavStyling from "../../styling/Nav.module.css"
 
 export default function Navigation(props) {
     return(
                 <Navbar className="bg-light justify-content-between">
-                    <div className="navigation-bar">
+                    <div className={NavStyling.navigation_bar}>
                     <Navbar.Brand href="/">IDareU</Navbar.Brand>
                     <Nav>
                         <Nav.Item>

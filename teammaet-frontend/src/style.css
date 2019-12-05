@@ -13,135 +13,8 @@ h1 {
     font-size: 10vmin;
 }
 
-
-.user-page {
-    min-height: 100vh;
-    background-color: #f2f2f2;
-}
-
-.user {
-    align-self: center;
-}
-
-.user-info {
-    min-height: 25vmin;
-    justify-content: center;
-}
-
-.user-buttons {
-    min-height: 25vmin;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.file-input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-.avatar {
-    width:100%;
-    min-height: 100%;
-    border: 2px solid black;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.avatar-icon {
-    width: 30vmin;
-    height: 30vmin;
-}
-.friend-card{
-    min-height: 14vmin;
-    flex-direction: row;
-}
-.friend-avatar-link{
-    width: 50%;
-}
-.friend-avatar-icon-warp{
-    width: 30%;
-    min-height: 100%;
-}
-.friend-avatar-icon{
-    width:100%;
-    min-height:100%;
-    display: inline-block;
-}
-.friend-icon{
-    cursor: pointer;
-    width: 100%;
-    min-height: 10vmin;
-}
-.friend-name-warp{
-    width:80%;
-    min-height:100%;
-    display: flex;
-    align-items: center;
-}
-.friend-name-warp h2 {
-    margin-left: 10px;
-    font-style: normal;
-}
-.link{
-    width: 100%;
-    min-height: 100%;
-}
-.img-wrap {
-    position: relative;
-    height: 10vmin;
-    width: 10vmin;
-    display: inline-block;
-}
-.img-description {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    font-size: 1.5em;
-    background: #f2f2f2;
-    color: black;
-    visibility: hidden;
-    opacity: 0;
-}
-.img-wrap:hover .img-description {
-    visibility: visible;
-    opacity: 0.9;
-}
-
-.dares {
-    width: 70vmin;
-    height: 70vmin;
-    margin-top: 1vmin;
-    overflow-y: scroll;
-    scrollbar-width:none;
-}
-
-.dares::-webkit-scrollbar{
-    width: 0px;
-}
-.dare-link{
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    color: black;
-}
-.dare-link:hover{
-    text-decoration: none;
-    color: black;
-}
-
 .nav-tabs .nav-link {
     font-size: 3vmin;
-}
-
-.dare-tab {
-    width: 100%;
-    font-size: 2vmin;
 }
 
 .icon {
@@ -149,11 +22,6 @@ h1 {
     min-height: 20vmin;
     overflow: hidden;
 }
-
-.form {
-    margin-top: 100px;
-}
-
 .form-group {
     width: 100%;
     height: 100px;
@@ -161,115 +29,10 @@ h1 {
     overflow: hidden;
 }
 
-.input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: #f2f2f2;
-    padding-top: 55px;
-    outline: none;
-}
-
-.input-label {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0%;
-    border-bottom: 1px solid black;
-    pointer-events: none;
-}
-
-.input-label::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    bottom: -1px;
-    left: 0px;
-    border-bottom: 3px solid #5fa8d3;
-    transform: translate(-100%);
-    transition: transform 0.3s ease;
-}
-
-.input-text {
-    position: absolute;
-    bottom: 5px;
-    left: 0px;
-    transition: all 0.3s ease;
-}
-
-.input:focus + .input-label .input-text,
-.input:valid + .input-label .input-text {
-    transform: translateY(-150%);
-    outline: none;
-}
-
-.input:focus + .input-label::after,
-.input:valid + .input-label::after {
-    transform: translateX(0%);
-}
-
-.card-top h2 {
-    display: inline-block;
-}
-
-.card {
-    cursor: pointer;
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 0 10px 6px -6px #777;
-    margin-bottom: 4px;
-    margin-top: 8px;
-}
-
-.card-top {
-    position: relative;
-}
-
-.card-button,.card-top p {
-    position: absolute;
-    right: 1vmin;
-    top: 1vmin;
-}
-
 .Cards{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.card-body {
-    display: flex;
-    justify-content: space-between;
-}
-.card-body-1{
-    width: 50%;
-}
-
-.card-body-1 p {
-    width: 100%;
-    overflow-y:scroll;
-}
-.card-body-2{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-footer {
-    height: 4vmin;
-    text-align: right;
-}
-
-.pre-card{
-    cursor: pointer;
-}
-
-.navigation-bar{
-    display: flex;
-    flex-direction: row;
 }
 
 .tab-content{
@@ -289,13 +52,6 @@ h1 {
     border-spacing: 15px;
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
-
 .dropdown-toggle::after {
     display: none;
 }
@@ -308,27 +64,3 @@ h1 {
     width: 100%;
 }
 
-.details,.videos{
-    width:100%;
-    min-height:300px;
-}
-
-.details h2,.videos h2 {
-    margin-bottom: 15px;
-    border-bottom: 2px solid black;
-}
-
-.dare-page{
-    position: relative;
-}
-
-.dare-page form{
-    position: absolute;
-    top:0px;
-    right:0px;
-}
-
-.video-form{
-    width: 100px;
-    min-height: 50px;
-}

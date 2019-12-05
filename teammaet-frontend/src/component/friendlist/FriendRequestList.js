@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import FriendCardStyling from "../../styling/FriendCard.module.css"
 
 export default function FriendRequestList(props) {
 
@@ -17,15 +18,15 @@ export default function FriendRequestList(props) {
     return (
         <>
             {friendRequest.map((row) =>
-                <div className="friend-avatar-link">
-                    <div className="card friend-card">
-                        <div className="friend-avatar-icon-warp">
-                            <img id="photo" className="friend-avatar-icon" src={row.friendBlob}/>
+                <div className={FriendCardStyling.friend_avatar_link}>
+                    <div className={`${FriendCardStyling.card} ${FriendCardStyling.friend_card}`}>
+                        <div className={FriendCardStyling.friend_avatar_icon_warp}>
+                            <img id="photo" className={FriendCardStyling.friend_avatar_icon} src={row.friendBlob}/>
                         </div>
-                        <div className="friend-name-warp">
+                        <div className={FriendCardStyling.friend_name_warp}>
                             <Link to={`/user/${row.id}`}><h2>{row.name}</h2></Link>
                         </div>
-                        <div className="center">
+                        <div className={FriendCardStyling.center}>
                             <Button onClick={(e) => friendMethods.acceptFriendRequest(e, props.id, row.id)} variant={"success"}>
                                 <FontAwesomeIcon icon={faCheck}/>
                             </Button>

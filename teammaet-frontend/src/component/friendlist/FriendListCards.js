@@ -1,9 +1,10 @@
 import React, {useContext, useEffect} from 'react'
-import {Dropdown} from 'react-bootstrap';
+import {Card, Dropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FriendsContext} from "../../context/FriendsContext";
+import FriendCardStyling from "../../styling/FriendCard.module.css";
 
 export default function FriendListCards(props) {
 
@@ -17,16 +18,16 @@ export default function FriendListCards(props) {
     return (
         <>
             {friends.map((row) =>
-                <div className="friend-avatar-link">
-                    <div className="card friend-card">
-                        <div className="friend-avatar-icon-warp">
-                            <img id="photo" className="friend-avatar-icon" src={row.friendBlob}/>
+                <div className={FriendCardStyling.friend_avatar_link}>
+                    <Card className={`${FriendCardStyling.card} ${FriendCardStyling.friend_card}`}>
+                        <div className={FriendCardStyling.friend_avatar_icon_warp}>
+                            <img id="photo" className={FriendCardStyling.friend_avatar_icon} src={row.friendBlob}/>
                         </div>
-                        <div className="friend-name-warp">
+                        <div className={FriendCardStyling.friend_name_warp}>
                             <Link to={`/user/${row.id}`}><h2>{row.name}</h2></Link>
                         </div>
-                        <div className="center">
-                            <Dropdown className="small-button center">
+                        <div className={FriendCardStyling.center}>
+                            <Dropdown className={`small-button ${FriendCardStyling.center}`}>
                                 <Dropdown.Toggle variant={"primary"}><FontAwesomeIcon
                                     icon={faChevronDown}/></Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -37,7 +38,7 @@ export default function FriendListCards(props) {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             )}</>
     )

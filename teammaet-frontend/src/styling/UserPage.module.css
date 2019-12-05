@@ -1,0 +1,8 @@
+.user_page {
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.user {
+    align-self: center;
+}

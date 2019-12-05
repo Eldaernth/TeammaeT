@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {DareContext} from "../../context/DareContext";
-import DareCard from "./DareCard";
+import PreCard from "./PreCard";
 
 export default function Dares(props) {
     const {receivedDares, sentDares} = useContext(DareContext);
@@ -9,10 +9,10 @@ export default function Dares(props) {
         <div className="Cards">
             {props.isReceived ?
                 receivedDares.map((row) =>
-                    <DareCard row={row}/>
+                    <PreCard row={row}/>
                 ) : (
                     sentDares.map((row) =>
-                        <DareCard row={row}/>
+                        <PreCard row={row}/>
                     ))}
         </div>
     )

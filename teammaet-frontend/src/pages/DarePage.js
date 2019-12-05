@@ -3,6 +3,8 @@ import {DareContext} from "../context/DareContext";
 import {useParams} from 'react-router-dom'
 import Axios from "axios";
 import {Col, Form, Row} from "react-bootstrap";
+import DarePageStyling from "../styling/DarePage.module.css"
+import FileInputStyling from "../styling/User.module.css"
 
 export default function DarePage() {
     const {dareMethods, dare} = useContext(DareContext);
@@ -34,15 +36,15 @@ export default function DarePage() {
 
     console.log(url);
     return (
-        <Col className="dare-page">
-            <Form encType="multipart/form-data" className="video-form">
+        <Col className={DarePageStyling.dare_page}>
+            <Form encType="multipart/form-data">
                 {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
-                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*" className="file-input"
+                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*" className={FileInputStyling.file_input}
                        onChange={onUpload}/>
             </Form>
             <h1>{dare.title}</h1>
             <Row>
-                <Col className="details">
+                <Col className={DarePageStyling.details}>
                     <h2>Details</h2>
                     <p>About the challenge:{dare.dare}</p>
                     <p>Bet:{dare.bet}</p>
@@ -52,7 +54,7 @@ export default function DarePage() {
                 </Col>
             </Row>
             <Row>
-                <Col className="videos">
+                <Col className={DarePageStyling.videos}>
                     <h2>Videos</h2>
                     {url.map((row) =>
                         <div>

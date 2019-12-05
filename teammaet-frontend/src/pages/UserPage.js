@@ -1,9 +1,10 @@
 import React, {useEffect, useContext} from 'react'
 import {Row, Col, Tabs, Tab} from 'react-bootstrap'
 import '../style.css';
+import PageStyling from "../styling/UserPage.module.css"
+import TabsStyling from "../styling/Tabs.module.css"
 import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
-import UserButtons from "../component/user/UserButtons";
 import {DareContext} from "../context/DareContext";
 import CreateDare from "../component/dare/CreateDare";
 import {FriendsContext} from "../context/FriendsContext";
@@ -27,23 +28,20 @@ export default function UserPage(props) {
 
 
     return (
-        <Row className="user-page">
-            <Col className="user">
+        <Row className={PageStyling.user_page}>
+            <Col className={PageStyling.user}>
                 <User/>
-                <Row className="user-buttons">
-                    <UserButtons id={id}/>
-                </Row>
             </Col>
             <Col>
-                <div className="dares">
-                <Tabs defaultActiveKey="Received" id="tabs" className="dare-tabs">
-                    <Tab eventKey="Received" title="Received" className="dare-tab">
+                <div className={TabsStyling.dares}>
+                <Tabs defaultActiveKey="Received" id="tabs">
+                    <Tab eventKey="Received" title="Received" className={TabsStyling.dare_tab}>
                         <Dares isReceived={true}/>
                     </Tab>
-                    <Tab eventKey="Sent" title="Sent" className="dare-tab">
+                    <Tab eventKey="Sent" title="Sent" className={TabsStyling.dare_tab}>
                         <Dares isReceived={false}/>
                     </Tab>
-                    <Tab eventKey="CreateAdd" title="+" className="create-dare-tab">
+                    <Tab eventKey="CreateAdd" title="+">
                         <CreateDare/>
                     </Tab>
                 </Tabs>

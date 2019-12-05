@@ -1,0 +1,54 @@
+.user_info {
+    min-height: 25vmin;
+    justify-content: center;
+}
+.avatar {
+    width:100%;
+    min-height: 100%;
+    border: 2px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar_icon {
+    width: 30vmin;
+    height: 30vmin;
+}
+
+.file_input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.link{
+    width: 100%;
+    min-height: 100%;
+}
+.img_wrap {
+    position: relative;
+    height: 10vmin;
+    width: 10vmin;
+    display: inline-block;
+}
+.img_description {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-size: 1.5em;
+    background: #f2f2f2;
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+}
+.img_wrap:hover .img_description {
+    visibility: visible;
+    opacity: 0.9;
+}
+.friend_icon{
+    cursor: pointer;
+    width: 100%;
+    min-height: 10vmin;
+}

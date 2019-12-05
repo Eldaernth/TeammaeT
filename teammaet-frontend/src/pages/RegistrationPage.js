@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Form} from "react-bootstrap";
 import Axios from "axios";
 import useForm from "react-hook-form";
+import RegistrationInputStyling from "../styling/LogonInput.module.css"
 
 export default function RegistrationPage() {
     const {register, handleSubmit, errors} = useForm();
@@ -25,25 +26,25 @@ export default function RegistrationPage() {
 
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} className="form">
+        <Form onSubmit={handleSubmit(onSubmit)} className={RegistrationInputStyling.form}>
             <div className="form-group">
-                <input className="input" id="name" type="text" name="username" ref={register({required: true, pattern: /[\w$?^]/, maxLength: 20})} required/>
+                <input className={RegistrationInputStyling.input} id="name" type="text" name="username" ref={register({required: true, pattern: /[\w$?^]/, maxLength: 20})} required/>
                 {errors.username && errors.username.type === "required" && <p style={{color: "red"}}>This field is required</p>}{errors.username && errors.username.type === "pattern" && <p style={{color: "red"}}>Name contains invalid character</p>}{errors.username && errors.username.type === "maxLength" && <p style={{color: "red"}}>Max length is 20 character</p>}
-                <label htmlFor="name" className="input-label"><span className="input-text">Name</span></label>
+                <label htmlFor="name" className={RegistrationInputStyling.input_label}><span className={RegistrationInputStyling.input_text}>Name</span></label>
             </div>
 
             <div className="form-group">
-                <input type="email" id="email" className="input" name="email" required ref={register({required: true, maxLength: 40})}/>
+                <input type="email" id="email" className={RegistrationInputStyling.input} name="email" required ref={register({required: true, maxLength: 40})}/>
                 {errors.email && errors.email.type === "required" && <p style={{color: "red"}}>This field is required</p>}{errors.email && errors.email.type === "maxLength" && <p style={{color: "red"}}>Max length is 20 character</p>}
-                <label htmlFor="email" className="input-label"><span className="input-text">Email</span></label>
+                <label htmlFor="email" className={RegistrationInputStyling.input_label}><span className={RegistrationInputStyling.input_text}>Email</span></label>
             </div>
 
             <div className="form-group">
-                <input type="password" id="password" className="input" name="password" required ref={register({required: true, pattern: /[\w$?^]/, maxLength: 20})}/>
+                <input type="password" id="password" className={RegistrationInputStyling.input} name="password" required ref={register({required: true, pattern: /[\w$?^]/, maxLength: 20})}/>
                 {errors.password && errors.password.type === "required" && <p style={{color: "red"}}>This field is required</p>}
                 {errors.password && errors.password.type === "pattern" && <p style={{color: "red"}}>Name contains invalid character</p>}
                 {errors.password && errors.password.type === "maxLength" && <p style={{color: "red"}}>Max length is 20 character</p>}
-                <label htmlFor="password" className="input-label"><span className="input-text">Password</span></label>
+                <label htmlFor="password" className={RegistrationInputStyling.input_label}><span className={RegistrationInputStyling.input_text}>Password</span></label>
             </div>
 
             <Button type="submit">Register</Button>
