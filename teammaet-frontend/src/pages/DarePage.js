@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {DareContext} from "../context/DareContext";
 import {useParams} from 'react-router-dom'
 import Axios from "axios";
-import {Col, Row} from "react-bootstrap";
+import {Col, Form, Row} from "react-bootstrap";
 
 export default function DarePage() {
     const {dareMethods, dare} = useContext(DareContext);
@@ -20,7 +20,6 @@ export default function DarePage() {
     const onUpload = (e) => {
         const fd = new FormData();
         fd.append("video", e.target.files[0]);
-        console.log(fd);
         Axios.post(`http://localhost:8080/user/${userId}/dare/${id}/uploadVideoFile`,
             fd, {
                 headers: {
@@ -35,8 +34,12 @@ export default function DarePage() {
 
     console.log(url);
     return (
-        <Col>
-            <input type="file" accept="video/mp4,video/x-m4v,video/*" onChange={onUpload}/>
+        <Col className="dare-page">
+            <Form encType="multipart/form-data" className="video-form">
+                {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
+                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*" className="file-input"
+                       onChange={onUpload}/>
+            </Form>
             <h1>{dare.title}</h1>
             <Row>
                 <Col className="details">

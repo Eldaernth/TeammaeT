@@ -317,3 +317,18 @@ h1 {
     margin-bottom: 15px;
     border-bottom: 2px solid black;
 }
+
+.dare-page{
+    position: relative;
+}
+
+.dare-page form{
+    position: absolute;
+    top:0px;
+    right:0px;
+}
+
+.video-form{
+    width: 100px;
+    min-height: 50px;
+}

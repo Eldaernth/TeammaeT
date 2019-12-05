@@ -1,6 +1,7 @@
 package com.teammaet.idareu.service;
 
 import com.teammaet.idareu.model.AppUser;
+import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +22,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FileService fileService;
+
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -27,13 +33,21 @@ public class UserService {
         userRepository.save(appUser);
     }
 
-    public void register(AppUser user) {
+    public void register(AppUser user) throws IOException {
+
         AppUser newUser = AppUser.builder()
                 .name(user.getName())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .email(user.getEmail())
                 .roles("ROLE_USER")
                 .build();
+
+        Avatar avatar = Avatar.builder()
+                .image(fileService.extractBytes("/image/anonymous.jpg"))
+                .user(newUser)
+                .build();
+
+        newUser.setAvatar(avatar);
         userRepository.save(newUser);
     }
 

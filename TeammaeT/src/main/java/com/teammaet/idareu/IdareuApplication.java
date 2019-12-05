@@ -1,9 +1,11 @@
 package com.teammaet.idareu;
 
 import com.teammaet.idareu.model.AppUser;
+import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.repository.DareRepository;
 import com.teammaet.idareu.repository.UserRepository;
+import com.teammaet.idareu.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +27,9 @@ public class IdareuApplication {
     @Autowired
     private DareRepository dareRepository;
 
+    @Autowired
+    private FileService fileService;
+
     public static void main(String[] args) {
         SpringApplication.run(IdareuApplication.class, args);
     }
@@ -32,6 +37,7 @@ public class IdareuApplication {
     @Bean
     public CommandLineRunner init() {
         return args -> {
+
             AppUser user = AppUser.builder()
                     .name("rec")
                     .email("tom@gmail.com")
@@ -45,6 +51,15 @@ public class IdareuApplication {
                     .password(passwordEncoder.encode("pass2"))
                     .friendList(user)
                     .roles("ROLE_USER")
+                    .build();
+
+            Avatar avatar = Avatar.builder()
+                    .image(fileService.extractBytes("/image/anonymous.jpg"))
+                    .user(user1)
+                    .build();
+            Avatar avatar1 = Avatar.builder()
+                    .image(fileService.extractBytes("/image/anonymous.jpg"))
+                    .user(user)
                     .build();
 
             Dare dare = Dare.builder()
@@ -65,6 +80,8 @@ public class IdareuApplication {
                     .userTo(user)
                     .build();
 
+            user.setAvatar(avatar1);
+            user1.setAvatar(avatar);
             userRepository.save(user);
             userRepository.save(user1);
             dareRepository.save(dare);
