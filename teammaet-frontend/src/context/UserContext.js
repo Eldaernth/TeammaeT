@@ -46,7 +46,8 @@ export function UserProvider(props) {
                     let arrayBufferView = new Uint8Array( response.data );
                     let blob = new Blob( [ arrayBufferView ], { type: "image/png" } );
                     let urlCreator = window.URL || window.webkitURL;
-                    setBlob( urlCreator.createObjectURL( blob ));
+                    if(urlCreator !== blob){
+                    setBlob( urlCreator.createObjectURL( blob ));}
                 })
                 .catch(ex => {
                     console.error(ex);
@@ -55,7 +56,7 @@ export function UserProvider(props) {
     };
 
     return (
-        <UserContext.Provider value={{users, user, userMethods,blob}}>
+        <UserContext.Provider value={{users, user, userMethods,blob,setBlob}}>
             {props.children}
         </UserContext.Provider>
     )

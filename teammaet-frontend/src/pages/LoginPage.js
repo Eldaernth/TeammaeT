@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import useForm from "react-hook-form";
 import Axios from "axios";
 import LoginInputStyling from "../styling/LogonInput.module.css"
+import {Redirect} from "react-router-dom";
 
 export default function LoginForm() {
     const {handleSubmit, register, errors} = useForm();
-
+    const [isSignUp,setIsSignUp] = useState(false);
 
     const onSubmit = (data) => {
         Axios.post('http://localhost:8080/login', {
@@ -20,7 +21,7 @@ export default function LoginForm() {
         }).then((ret) => {
             localStorage.setItem("token", ret.data.token);
             localStorage.setItem("id", ret.data.id);
-            window.location.href = `/user/${ret.data.id}`
+            setIsSignUp(true);
         }).catch((error) => {alert(error.response.data)})
     };
 
@@ -39,6 +40,7 @@ export default function LoginForm() {
                 <label htmlFor="password" className={LoginInputStyling.input_label}><span className={LoginInputStyling.input_text}>Password</span></label>
             </div>
             <Button type="submit">Login</Button>
+            {isSignUp && <Redirect to={`user/${localStorage.getItem("id")}`}/>}
         </Form>
     )
 }

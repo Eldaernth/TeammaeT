@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import Axios from "axios";
 import useForm from "react-hook-form";
 import RegistrationInputStyling from "../styling/LogonInput.module.css"
+import {Redirect} from "react-router-dom";
 
 export default function RegistrationPage() {
     const {register, handleSubmit, errors} = useForm();
+    const [isSignUp,setIsSignUp] = useState(false);
     const onSubmit = (data) => {
         Axios.post(`http://localhost:8080/user/`, {
             name: data.username,
@@ -19,7 +21,7 @@ export default function RegistrationPage() {
             }
         }).then(res => {
                 console.log(res.data);
-                window.location.href = `/login`;
+                setIsSignUp(true);
             }
         )
     };
@@ -48,6 +50,7 @@ export default function RegistrationPage() {
             </div>
 
             <Button type="submit">Register</Button>
+            {isSignUp && <Redirect to={`/login`}/>}
         </Form>
     );
 }

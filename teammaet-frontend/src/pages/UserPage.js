@@ -12,7 +12,7 @@ import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {
 
-    const {userMethods} = useContext(UserContext);
+    const {userMethods,blob} = useContext(UserContext);
     const {dareMethods} = useContext(DareContext);
     const {friendMethods,setFriends} = useContext(FriendsContext);
     const id = props.match.params.id;
