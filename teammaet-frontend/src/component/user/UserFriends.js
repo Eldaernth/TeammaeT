@@ -18,7 +18,7 @@ export default function UserFriends({id}) {
                 <Link to={`/user/${row.id}`} className={UserStyling.link}>
                     <div className={UserStyling.img_wrap}>
                         <label className={UserStyling.avatar}><img id="photo" className={UserStyling.friend_icon}
-                                                                   src={row.friendBlob}/></label>
+                                                                   src={row.friendBlob} alt=""/></label>
                         <p className={UserStyling.img_description}>{row.name}</p>
                     </div>
                 </Link>

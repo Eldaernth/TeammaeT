@@ -1,13 +1,10 @@
-import React, {useEffect, useContext} from 'react'
+import React from 'react'
 import {Row, Col, Tabs, Tab} from 'react-bootstrap'
 import '../style.css';
 import PageStyling from "../styling/UserPage.module.css"
 import TabsStyling from "../styling/Tabs.module.css"
-import {UserContext} from "../context/UserContext";
 import User from "../component/user/User";
-import {DareContext} from "../context/DareContext";
 import CreateDare from "../component/dare/CreateDare";
-import {FriendsContext} from "../context/FriendsContext";
 import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {

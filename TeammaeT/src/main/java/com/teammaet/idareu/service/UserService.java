@@ -133,6 +133,7 @@ public class UserService {
     }
 
     public Set<AppUser> getFriendRequestList(Long userId) {
+        System.out.println(userRepository.findById(userId).get().getFriendRequests());
         return userRepository.findById(userId).get().getFriendRequests();
     }
 

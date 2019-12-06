@@ -8,7 +8,6 @@ import useForm from "react-hook-form";
 export default function AddFriend(props) {
 
     const {friendMethods} = useContext(FriendsContext);
-    const {register, errors} = useForm();
     const [name, setName] = useState("");
 
     return (

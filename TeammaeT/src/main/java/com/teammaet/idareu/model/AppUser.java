@@ -24,11 +24,13 @@ public class AppUser {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JsonIgnore
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Avatar avatar;
 
     @Singular("friendList")

@@ -1,7 +1,6 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {DareContext} from "../context/DareContext";
 import {useParams} from 'react-router-dom'
-import Axios from "axios";
 import {Col, Form, Row} from "react-bootstrap";
 import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
