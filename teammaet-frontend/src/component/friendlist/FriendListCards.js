@@ -8,12 +8,12 @@ import FriendCardStyling from "../../styling/FriendCard.module.css";
 
 export default function FriendListCards(props) {
 
-    const {friends, friendMethods,setFriends} = useContext(FriendsContext);
+    const {friends, friendMethods,setFriends,friendDependency} = useContext(FriendsContext);
 
     useEffect(() => {
         setFriends([]);
         friendMethods.getFriends(props.id)
-    }, []);
+    }, [friendDependency]);
 
     return (
         <>

@@ -1,25 +1,26 @@
 import React, {useContext, useEffect} from 'react'
 import {FriendsContext} from "../../context/FriendsContext";
 import {Link} from "react-router-dom";
-import {Button} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
 import FriendCardStyling from "../../styling/FriendCard.module.css"
 
 export default function FriendRequestList(props) {
 
-    const {friendMethods, friendRequest} = useContext(FriendsContext);
+    const {friendMethods, friendRequest,setFriendRequest,friendRequestDependency} = useContext(FriendsContext);
 
     useEffect(() => {
+        setFriendRequest([]);
         friendMethods.getFriendRequestList(props.id);
-    }, []);
+    }, [friendRequestDependency]);
 
     console.log(friendRequest);
     return (
         <>
             {friendRequest.map((row) =>
                 <div className={FriendCardStyling.friend_avatar_link}>
-                    <div className={`${FriendCardStyling.card} ${FriendCardStyling.friend_card}`}>
+                    <Card className={`${FriendCardStyling.card} ${FriendCardStyling.friend_card}`}>
                         <div className={FriendCardStyling.friend_avatar_icon_warp}>
                             <img id="photo" className={FriendCardStyling.friend_avatar_icon} src={row.friendBlob}/>
                         </div>
@@ -34,7 +35,7 @@ export default function FriendRequestList(props) {
                                 <FontAwesomeIcon icon={faCheck}/>
                             </Button>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             )}
         </>

@@ -7,40 +7,20 @@ import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
 
 export default function DarePage() {
-    const {dareMethods, dare} = useContext(DareContext);
+    const {dareMethods, dare, dareDependency, url} = useContext(DareContext);
     const {userId, id} = useParams();
-    const [url, setUrl] = useState([]);
     useEffect(() => {
         dareMethods.getDare(userId, id);
-        Axios.get(`http://localhost:8080/user/${userId}/dare/${id}/videos`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            }
-        }).then((res) => setUrl(res.data))
-    }, []);
+        dareMethods.getVideos(userId, id)
+    }, [dareDependency]);
 
-    const onUpload = (e) => {
-        const fd = new FormData();
-        fd.append("video", e.target.files[0]);
-        Axios.post(`http://localhost:8080/user/${userId}/dare/${id}/uploadVideoFile`,
-            fd, {
-                headers: {
-                    "Content-type": "application/json",
-                    "Access-Control-Allow-Origin": "http://localhost:3000",
-                    'Accept': 'application/json',
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            }).then(res => console.log(res.data))
-    };
-
-
-    console.log(url);
     return (
         <Col className={DarePageStyling.dare_page}>
             <Form encType="multipart/form-data">
                 {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
-                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*" className={FileInputStyling.file_input}
-                       onChange={onUpload}/>
+                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*"
+                       className={FileInputStyling.file_input}
+                       onChange={(e) => dareMethods.onUpload(e,userId,id)}/>
             </Form>
             <h1>{dare.title}</h1>
             <Row>

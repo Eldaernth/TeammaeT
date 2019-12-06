@@ -11,35 +11,21 @@ import {FriendsContext} from "../context/FriendsContext";
 import Dares from "../component/dare/Dares";
 
 export default function UserPage(props) {
-
-    const {userMethods,blob} = useContext(UserContext);
-    const {dareMethods} = useContext(DareContext);
-    const {friendMethods,setFriends} = useContext(FriendsContext);
     const id = props.match.params.id;
-
-    useEffect(() => {
-        setFriends([]);
-        userMethods.getUser(id);
-        userMethods.getAvatar(id);
-        dareMethods.getSentDares(id);
-        dareMethods.getReceivedDares(id);
-        friendMethods.getFriends(id);
-        }, [id]);
-
 
     return (
         <Row className={PageStyling.user_page}>
             <Col className={PageStyling.user}>
-                <User/>
+                <User id={id}/>
             </Col>
             <Col>
                 <div className={TabsStyling.dares}>
                 <Tabs defaultActiveKey="Received" id="tabs">
                     <Tab eventKey="Received" title="Received" className={TabsStyling.dare_tab}>
-                        <Dares isReceived={true}/>
+                        <Dares isReceived={true} id={id}/>
                     </Tab>
                     <Tab eventKey="Sent" title="Sent" className={TabsStyling.dare_tab}>
-                        <Dares isReceived={false}/>
+                        <Dares isReceived={false} id={id}/>
                     </Tab>
                     <Tab eventKey="CreateAdd" title="+">
                         <CreateDare/>

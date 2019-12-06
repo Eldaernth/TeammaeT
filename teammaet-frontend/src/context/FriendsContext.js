@@ -7,6 +7,8 @@ export function FriendsProvider(props) {
     const [friendRequest, setFriendRequest] = useState([]);
     const [friends, setFriends] = useState([]);
     let [friendIds] = useState([]);
+    const [friendDependency, setFriendDependency] = useState(false);
+    const [friendRequestDependency, setFriendRequestDependency] = useState(false);
     const friendMethods = {
 
         acceptFriendRequest: (e, userId, friendId) => {
@@ -19,6 +21,8 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
+                    friendRequestDependency ? setFriendRequestDependency(false) : setFriendRequestDependency(true);
+                    friendDependency ? setFriendDependency(false) : setFriendDependency(true);
                     console.log("NEW FRIEND:");
                     console.log(ret);
                 })
@@ -37,6 +41,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
+                    friendRequestDependency ? setFriendRequestDependency(false) : setFriendRequestDependency(true);
                     console.log("NEW FRIEND:");
                     console.log(ret);
                 })
@@ -51,8 +56,9 @@ export function FriendsProvider(props) {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })
-                .then((ret)=>{for (let re of ret.data) {
-                    console.log(ret.data);
+                .then((ret) => {
+                    for (let re of ret.data) {
+                        console.log(ret.data);
                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",
                             headers: {
@@ -66,7 +72,7 @@ export function FriendsProvider(props) {
                                 id: re.id,
                                 name: re.name,
                                 friendBlob: urlCreator.createObjectURL(blob)
-                            }]))
+                            }]));
                             console.log(friendRequest);
                         });
                     }
@@ -84,7 +90,7 @@ export function FriendsProvider(props) {
             })
                 .then((ret) => {
                     for (let re of ret.data) {
-                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
+                        Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
                             responseType: "arraybuffer",
                             headers: {
                                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -119,6 +125,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
+                    friendDependency ? setFriendRequestDependency(false) : setFriendRequestDependency(true);
                     console.log(ret.data)
                 })
                 .catch(error => {
@@ -133,6 +140,7 @@ export function FriendsProvider(props) {
                 }
             })
                 .then((ret) => {
+                    friendDependency ? setFriendDependency(false) : setFriendDependency(true);
                     console.log(ret.data);
                 })
                 .catch(error => {
@@ -143,7 +151,16 @@ export function FriendsProvider(props) {
 
     };
     return (
-        <FriendsContext.Provider value={{friends, setFriends, friendMethods, friendIds, friendRequest}}>
+        <FriendsContext.Provider value={{
+            friends,
+            setFriends,
+            friendMethods,
+            friendIds,
+            friendRequest,
+            setFriendRequest,
+            friendDependency,
+            friendRequestDependency
+        }}>
             {props.children}
         </FriendsContext.Provider>
     )

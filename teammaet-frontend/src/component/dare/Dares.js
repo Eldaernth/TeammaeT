@@ -1,13 +1,19 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {DareContext} from "../../context/DareContext";
 import PreCard from "./PreCard";
 
-export default function Dares(props) {
-    const {receivedDares, sentDares} = useContext(DareContext);
+export default function Dares({id,isReceived}) {
+    const {receivedDares, sentDares,dareMethods,dareDependency} = useContext(DareContext);
+
+    useEffect(() => {
+        dareMethods.getSentDares(id);
+        dareMethods.getReceivedDares(id);
+    }, [id,dareDependency]);
+
 
     return (
         <div className="Cards">
-            {props.isReceived ?
+            {isReceived ?
                 receivedDares.map((row) =>
                     <PreCard row={row}/>
                 ) : (
