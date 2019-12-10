@@ -10,7 +10,6 @@ export default function FriendsPage() {
     const {id} = useParams();
 
 
-
     return (
         <>
             <br/>

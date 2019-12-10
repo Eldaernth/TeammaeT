@@ -19,7 +19,7 @@ public class FriendController {
     }
 
     @GetMapping
-    public Set<AppUser> getFriendList(@PathVariable("userId") Long userId){
+    public Set<AppUser> getFriendList(@PathVariable("userId") Long userId) {
         return userStorage.getFriends(userId);
     }
 
@@ -30,18 +30,18 @@ public class FriendController {
     }
 
     @PostMapping("/request")
-    public AppUser sendFriendRequest(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo){
+    public AppUser sendFriendRequest(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo) {
         Long friendId = userStorage.getAppUserByName(friendInfo.getName()).getId();
         return userStorage.sendFriendRequest(userId, friendId);
     }
 
     @PostMapping("/accept")
-    public AppUser acceptFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo){
+    public AppUser acceptFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo) {
         return userStorage.accept(userId, friendInfo.getId());
     }
 
     @PostMapping("/decline")
-    public AppUser declineFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo){
+    public AppUser declineFriend(@PathVariable("userId") Long userId, @RequestBody FriendInfo friendInfo) {
         return userStorage.decline(userId, friendInfo.getId());
     }
 

@@ -46,6 +46,7 @@
 .input:valid + .input_label::after {
     transform: translateX(0%);
 }
+
 .form {
     margin-top: 100px;
 }

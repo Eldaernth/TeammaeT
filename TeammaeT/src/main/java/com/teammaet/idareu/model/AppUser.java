@@ -59,7 +59,7 @@ public class AppUser {
     @JsonIgnore
     private List<Video> videos;
 
-    public void addVideo(Video video){
+    public void addVideo(Video video) {
         this.videos.add(video);
     }
 

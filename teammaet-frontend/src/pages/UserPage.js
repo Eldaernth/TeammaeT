@@ -17,17 +17,17 @@ export default function UserPage(props) {
             </Col>
             <Col>
                 <div className={TabsStyling.dares}>
-                <Tabs defaultActiveKey="Received" id="tabs">
-                    <Tab eventKey="Received" title="Received" className={TabsStyling.dare_tab}>
-                        <Dares isReceived={true} id={id}/>
-                    </Tab>
-                    <Tab eventKey="Sent" title="Sent" className={TabsStyling.dare_tab}>
-                        <Dares isReceived={false} id={id}/>
-                    </Tab>
-                    <Tab eventKey="CreateAdd" title="+">
-                        <CreateDare/>
-                    </Tab>
-                </Tabs>
+                    <Tabs defaultActiveKey="Received" id="tabs">
+                        <Tab eventKey="Received" title="Received" className={TabsStyling.dare_tab}>
+                            <Dares isReceived={true} id={id}/>
+                        </Tab>
+                        <Tab eventKey="Sent" title="Sent" className={TabsStyling.dare_tab}>
+                            <Dares isReceived={false} id={id}/>
+                        </Tab>
+                        <Tab eventKey="CreateAdd" title="+">
+                            <CreateDare/>
+                        </Tab>
+                    </Tabs>
                 </div>
             </Col>
         </Row>

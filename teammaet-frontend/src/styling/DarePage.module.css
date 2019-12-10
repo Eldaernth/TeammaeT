@@ -1,21 +1,21 @@
-.dare_page{
+.dare_page {
     position: relative;
 }
 
-.dare_page form{
+.dare_page form {
     position: absolute;
-    top:0px;
-    right:0px;
+    top: 0px;
+    right: 0px;
     width: 100px;
     min-height: 50px;
 }
 
-.details,.videos{
-    width:100%;
-    min-height:300px;
+.details, .videos {
+    width: 100%;
+    min-height: 300px;
 }
 
-.details h2,.videos h2 {
+.details h2, .videos h2 {
     margin-bottom: 15px;
     border-bottom: 2px solid black;
 }

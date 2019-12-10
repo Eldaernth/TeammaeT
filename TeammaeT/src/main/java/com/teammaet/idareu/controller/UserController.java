@@ -21,17 +21,17 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<AppUser> getAllUser(){
+    public List<AppUser> getAllUser() {
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-    public AppUser getUserById(@PathVariable("id") Long id){
+    public AppUser getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/{id}/avatar")
-    public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long userId){
+    public ResponseEntity<byte[]> getAvatar(@PathVariable("id") Long userId) {
         Avatar avatar = userService.getUserById(userId).getAvatar();
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(avatar.getImage());
     }
@@ -43,14 +43,14 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
         AppUser user = userService.getUserById(id);
         userService.deleteUser(user);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}")
-    public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user){
+    public AppUser updateUserData(@PathVariable("id") Long id, @RequestBody AppUser user) {
         AppUser userToUpdate = userService.getUserById(id);
 //        userStorage.update(userToUpdate, user.getName(), user.getEmail(), user.getPassword());
         return userToUpdate;

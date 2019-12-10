@@ -9,6 +9,7 @@ export function DareProvider(props) {
     const [receivedDares, setReceivedDares] = useState([]);
     const [url, setUrl] = useState([]);
     const [dareDependency, setDareDependency] = useState(false);
+    const [isExist, setIsExist] = useState(true);
     const dareMethods = {
         getDare: (userId, id) => {
             Axios.get(`http://localhost:8080/user/${userId}/dare/${id}`, {
@@ -25,6 +26,7 @@ export function DareProvider(props) {
             })
                 .then((ret) => {
                     setReceivedDares(ret.data);
+                    setIsExist(true);
                 })
                 .catch(error => {
                     console.log(error.response.data)
@@ -38,21 +40,23 @@ export function DareProvider(props) {
             })
                 .then((ret) => {
                     setSentDares(ret.data);
+                    setIsExist(true);
                 })
                 .catch(error => {
                     console.log(error.response.data)
                 });
         },
 
-        deleteDare: (evt, id) => {
+        deleteDare: (evt, userId, id) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${id}/dare/${evt.target.value}`, {
+            Axios.delete(`http://localhost:8080/user/${userId}/dare/${id}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })
                 .then((ret) => {
                     dareDependency ? setDareDependency(false) : setDareDependency(true);
+                    setIsExist(false);
                     console.log(ret.data)
                 })
                 .catch(error => {
@@ -107,7 +111,7 @@ export function DareProvider(props) {
         }
     };
     return (
-        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare, dareDependency, url}}>
+        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare, dareDependency, url, isExist}}>
             {props.children}
         </DareContext.Provider>
     );

@@ -8,7 +8,7 @@ import FriendCardStyling from "../../styling/FriendCard.module.css";
 
 export default function FriendListCards(props) {
 
-    const {friends, friendMethods,setFriends,friendDependency} = useContext(FriendsContext);
+    const {friends, friendMethods, setFriends, friendDependency} = useContext(FriendsContext);
 
     useEffect(() => {
         setFriends([]);
@@ -21,7 +21,8 @@ export default function FriendListCards(props) {
                 <div className={FriendCardStyling.friend_avatar_link}>
                     <Card className={`${FriendCardStyling.card} ${FriendCardStyling.friend_card}`}>
                         <div className={FriendCardStyling.friend_avatar_icon_warp}>
-                            <img id="photo" className={FriendCardStyling.friend_avatar_icon} src={row.friendBlob} alt=""/>
+                            <img id="photo" className={FriendCardStyling.friend_avatar_icon} src={row.friendBlob}
+                                 alt=""/>
                         </div>
                         <div className={FriendCardStyling.friend_name_warp}>
                             <Link to={`/user/${row.id}`}><h2>{row.name}</h2></Link>

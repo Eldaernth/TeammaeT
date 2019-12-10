@@ -27,7 +27,7 @@ public class FileController {
     DareService dareService;
 
     @PostMapping("/uploadFile")
-    public String submit(@RequestParam("avatar") MultipartFile file, @PathVariable("userId")Long id) throws IOException {
+    public String submit(@RequestParam("avatar") MultipartFile file, @PathVariable("userId") Long id) throws IOException {
         AppUser user = userService.getUserById(id);
         Avatar avatar = Avatar.builder()
                 .image(file.getBytes())
@@ -39,13 +39,14 @@ public class FileController {
 
         return "fileUploadView";
     }
+
     @PostMapping("dare/{id}/uploadVideoFile")
-    public String submitVideo(@RequestParam("video") MultipartFile file, @PathVariable("userId")Long userId,@PathVariable("id")Long id) throws IOException {
+    public String submitVideo(@RequestParam("video") MultipartFile file, @PathVariable("userId") Long userId, @PathVariable("id") Long id) throws IOException {
         AppUser user = userService.getUserById(userId);
         Dare dare = dareService.getDareBy(id);
 
         byte[] bytes = file.getBytes();
-        String pathString = "/home/norbert/codecool/advanced/TeammaeT/teammaet-frontend/public/Videos/"+file.getOriginalFilename();
+        String pathString = "/home/norbert/codecool/advanced/TeammaeT/teammaet-frontend/public/Videos/" + file.getOriginalFilename();
         Path path = Paths.get(pathString);
         Files.write(path, bytes);
 

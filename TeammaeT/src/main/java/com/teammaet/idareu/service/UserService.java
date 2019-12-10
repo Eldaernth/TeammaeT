@@ -29,7 +29,7 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public void save(AppUser appUser){
+    public void save(AppUser appUser) {
         userRepository.save(appUser);
     }
 
@@ -69,7 +69,7 @@ public class UserService {
             NullPointerException e = new NullPointerException("User not found.");
             logger.info(e.getMessage());
             throw e;
-            });
+        });
     }
 
     public List<AppUser> getUsers() {

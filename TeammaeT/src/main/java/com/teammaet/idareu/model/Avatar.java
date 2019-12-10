@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Entity
 
 
-
 public class Avatar {
 
     @Id
@@ -23,7 +22,7 @@ public class Avatar {
     private long id;
 
     @Lob
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] image;
 
     @OneToOne

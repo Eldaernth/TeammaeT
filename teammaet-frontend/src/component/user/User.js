@@ -8,12 +8,12 @@ import UserFriends from "./UserFriends";
 
 export default function User({id}) {
 
-    const {user, userBlob, userMethods,blobDependency} = useContext(UserContext);
+    const {user, userBlob, userMethods, blobDependency} = useContext(UserContext);
 
     useEffect(() => {
             userMethods.getUser(id);
             userMethods.getAvatar(id);
-        },[id,blobDependency]
+        }, [id, blobDependency]
     )
 
     return (

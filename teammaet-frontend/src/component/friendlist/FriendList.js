@@ -19,7 +19,7 @@ export default function FriendList(props) {
                 </tr>
                 </thead>
                 <tbody>
-                    <Friend isDare={props.isDare}/>
+                <Friend isDare={props.isDare}/>
                 </tbody>
 
             </Table>

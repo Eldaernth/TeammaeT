@@ -4,17 +4,17 @@ import UserStyling from "../../styling/User.module.css";
 import {FriendsContext} from "../../context/FriendsContext";
 
 export default function UserFriends({id}) {
-    const {friends,friendMethods,setFriends} = useContext(FriendsContext);
+    const {friends, friendMethods, setFriends} = useContext(FriendsContext);
 
     useEffect(() => {
             setFriends([]);
             friendMethods.getFriends(id);
-        },[id]
+        }, [id]
     );
 
-    return(
+    return (
         <>
-        {friends.map((row) =>
+            {friends.map((row) =>
                 <Link to={`/user/${row.id}`} className={UserStyling.link}>
                     <div className={UserStyling.img_wrap}>
                         <label className={UserStyling.avatar}><img id="photo" className={UserStyling.friend_icon}
@@ -23,7 +23,7 @@ export default function UserFriends({id}) {
                     </div>
                 </Link>
             )
-        }
+            }
         </>
     )
 }

@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from "react";
 import {DareContext} from "../context/DareContext";
-import {useParams} from 'react-router-dom'
-import {Col, Form, Row} from "react-bootstrap";
+import {Redirect, useParams} from 'react-router-dom'
+import {Button, Col, Form, Row} from "react-bootstrap";
 import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
 
 export default function DarePage() {
-    const {dareMethods, dare, dareDependency, url} = useContext(DareContext);
+    const {dareMethods, dare, dareDependency, url, isExist} = useContext(DareContext);
     const {userId, id} = useParams();
     useEffect(() => {
         dareMethods.getDare(userId, id);
@@ -19,8 +19,9 @@ export default function DarePage() {
                 {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
                 <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*"
                        className={FileInputStyling.file_input}
-                       onChange={(e) => dareMethods.onUpload(e,userId,id)}/>
+                       onChange={(e) => dareMethods.onUpload(e, userId, id)}/>
             </Form>
+            <Button variant="secondary" onClick={(e) => dareMethods.deleteDare(e, userId, id)}>Delete dare</Button>
             <h1>{dare.title}</h1>
             <Row>
                 <Col className={DarePageStyling.details}>
@@ -46,6 +47,7 @@ export default function DarePage() {
                     )}
                 </Col>
             </Row>
+            {isExist || <Redirect to={`/user/${localStorage.getItem("id")}`}/>}>
         </Col>
     )
 }

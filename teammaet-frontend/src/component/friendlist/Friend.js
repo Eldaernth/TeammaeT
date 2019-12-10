@@ -11,16 +11,16 @@ export default function Friend(props) {
 
     return (
         <>
-        {friends.map((row) =>
-            <tr>
-                <td>
-                    <Link to={`${row.id}`}>
-                        {row.name}
-                    </Link></td>
-                <td>{row.email}</td>
-                <ActionButtons methods={friendMethods} user={user} row={row} isDare={props.isDare}/>
-            </tr>)
-        }
+            {friends.map((row) =>
+                <tr>
+                    <td>
+                        <Link to={`${row.id}`}>
+                            {row.name}
+                        </Link></td>
+                    <td>{row.email}</td>
+                    <ActionButtons methods={friendMethods} user={user} row={row} isDare={props.isDare}/>
+                </tr>)
+            }
         </>
     )
 }

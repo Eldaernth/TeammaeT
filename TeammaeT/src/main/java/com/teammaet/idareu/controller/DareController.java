@@ -7,6 +7,7 @@ import com.teammaet.idareu.model.Video;
 import com.teammaet.idareu.repository.VideoRepository;
 import com.teammaet.idareu.service.DareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,28 +24,28 @@ public class DareController {
     private DareService dareStorage;
 
     @GetMapping("/received")
-    public List<Dare> getReceivedDares(@PathVariable("userId") Long userId){
+    public List<Dare> getReceivedDares(@PathVariable("userId") Long userId) {
         return dareStorage.getReceivedDares(userId);
     }
 
     @GetMapping("/sent")
-    public List<Dare> getSentDares(@PathVariable("userId") Long userId){
+    public List<Dare> getSentDares(@PathVariable("userId") Long userId) {
         return dareStorage.getSentDares(userId);
     }
 
     @PostMapping
-    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation){
+    public DareInformation createAndSendDare(@RequestBody DareInformation dareInformation) {
         dareStorage.createDare(dareInformation);
         return dareInformation;
     }
 
     @GetMapping("/{id}")
-    public Dare getDare(@PathVariable("id") Long dareId){
+    public Dare getDare(@PathVariable("id") Long dareId) {
         return dareStorage.getDareBy(dareId);
     }
 
     @GetMapping("/{id}/videos")
-    public List<Video> getVideos(@PathVariable("id") Long dareId){
+    public List<Video> getVideos(@PathVariable("id") Long dareId) {
         return videoRepository.findAllByDareId(dareId);
     }
 
@@ -60,8 +61,8 @@ public class DareController {
 //    }
 
     @DeleteMapping("/{id}")
-    public String deleteDare(@PathVariable("id") Long dareId){
+    public ResponseEntity<String> deleteDare(@PathVariable("id") Long dareId) {
         dareStorage.delete(dareId);
-        return "User was deleted";
+        return ResponseEntity.ok("deleted");
     }
 }

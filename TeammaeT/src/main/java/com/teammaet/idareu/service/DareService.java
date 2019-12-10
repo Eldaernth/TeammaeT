@@ -23,7 +23,7 @@ public class DareService {
 
     private Logger logger = LoggerFactory.getLogger(DareService.class);
 
-    public void save(Dare dare){
+    public void save(Dare dare) {
         dareRepository.save(dare);
     }
 

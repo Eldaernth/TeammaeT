@@ -3,10 +3,10 @@
     height: 70vmin;
     margin-top: 1vmin;
     overflow-y: scroll;
-    scrollbar-width:none;
+    scrollbar-width: none;
 }
 
-.dares::-webkit-scrollbar{
+.dares::-webkit-scrollbar {
     width: 0px;
 }
 
