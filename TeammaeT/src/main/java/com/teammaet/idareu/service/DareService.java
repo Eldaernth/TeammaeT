@@ -1,5 +1,6 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.exception.DareNotFoundException;
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
@@ -45,9 +46,9 @@ public class DareService {
 
     }
 
-    public Dare getDareBy(Long id) throws NullPointerException {
+    public Dare getDareBy(Long id) {
         return dareRepository.findById(id).orElseThrow(() -> {
-            NullPointerException e = new NullPointerException("User not found.");
+            DareNotFoundException e = new DareNotFoundException("User not found.");
             log.info(e.getMessage());
             throw e;
         });
