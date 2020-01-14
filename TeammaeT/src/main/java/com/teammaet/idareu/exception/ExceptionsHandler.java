@@ -10,9 +10,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
+public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = NullPointerException.class)
+    @ExceptionHandler(value = UserNotFoundException.class)
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest wr) {
         String bodyOfResponse = "User not found";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, wr);

@@ -4,6 +4,7 @@ import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Dare;
 import com.teammaet.idareu.model.DareInformation;
 import com.teammaet.idareu.repository.DareRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class DareService {
 
     @Autowired
@@ -20,8 +22,6 @@ public class DareService {
 
     @Autowired
     private UserService userService;
-
-    private Logger logger = LoggerFactory.getLogger(DareService.class);
 
     public void save(Dare dare) {
         dareRepository.save(dare);
@@ -48,7 +48,7 @@ public class DareService {
     public Dare getDareBy(Long id) throws NullPointerException {
         return dareRepository.findById(id).orElseThrow(() -> {
             NullPointerException e = new NullPointerException("User not found.");
-            logger.info(e.getMessage());
+            log.info(e.getMessage());
             throw e;
         });
     }

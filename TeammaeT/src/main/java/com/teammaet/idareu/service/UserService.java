@@ -1,8 +1,10 @@
 package com.teammaet.idareu.service;
 
+import com.teammaet.idareu.exception.UserNotFoundException;
 import com.teammaet.idareu.model.AppUser;
 import com.teammaet.idareu.model.Avatar;
 import com.teammaet.idareu.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -26,8 +29,6 @@ public class UserService {
     private FileService fileService;
 
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-    private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public void save(AppUser appUser) {
         userRepository.save(appUser);
@@ -58,16 +59,16 @@ public class UserService {
     //TODO:best way to handle this exception
     public AppUser getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> {
-            NullPointerException e = new NullPointerException("User not found.");
-            logger.info(e.getMessage());
+            UserNotFoundException e = new UserNotFoundException("User not found.");
+            log.info(e.getMessage());
             throw e;
         });
     }
 
     public AppUser getAppUserByName(String name) {
         return userRepository.findAppUserByName(name).orElseThrow(() -> {
-            NullPointerException e = new NullPointerException("User not found.");
-            logger.info(e.getMessage());
+            UserNotFoundException e = new UserNotFoundException("User not found.");
+            log.info(e.getMessage());
             throw e;
         });
     }
