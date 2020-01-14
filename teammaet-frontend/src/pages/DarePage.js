@@ -15,13 +15,7 @@ export default function DarePage() {
 
     return (
         <Col className={DarePageStyling.dare_page}>
-            <Form encType="multipart/form-data">
-                {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
-                <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*"
-                       className={FileInputStyling.file_input}
-                       onChange={(e) => dareMethods.onUpload(e, userId, id)}/>
-            </Form>
-            <Button variant="secondary" onClick={(e) => dareMethods.deleteDare(e, userId, id)}>Delete dare</Button>
+            <Button variant="secondary" className={DarePageStyling.delete_btn} onClick={(e) => dareMethods.deleteDare(e, userId, id)}>Delete</Button>
             <h1>{dare.title}</h1>
             <Row>
                 <Col className={DarePageStyling.details}>
@@ -35,6 +29,12 @@ export default function DarePage() {
             </Row>
             <Row>
                 <Col className={DarePageStyling.videos}>
+                    <Form encType="multipart/form-data">
+                        {<label htmlFor="avatar" className="btn btn-secondary">Add video</label>}
+                        <input type="file" id="avatar" name="avatar" accept="video/mp4,video/x-m4v,video/*"
+                               className={FileInputStyling.file_input}
+                               onChange={(e) => dareMethods.onUpload(e, userId, id)}/>
+                    </Form>
                     <h2>Videos</h2>
                     {url.map((row) =>
                         <div>

@@ -2,12 +2,11 @@
     position: relative;
 }
 
-.dare_page form {
+.dare_page form , .delete_btn{
     position: absolute;
     top: 0px;
     right: 0px;
     width: 100px;
-    min-height: 50px;
 }
 
 .details, .videos {
