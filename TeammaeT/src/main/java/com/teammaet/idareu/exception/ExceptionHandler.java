@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ErrorHandler extends ResponseEntityExceptionHandler {
+public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = NullPointerException.class)
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest wr) {
