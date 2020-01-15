@@ -18,3 +18,32 @@
     margin-bottom: 15px;
     border-bottom: 2px solid black;
 }
+
+.video_wraper{
+    display: flex;
+    flex-direction: column;
+}
+
+.user_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.img_wrap {
+    position: relative;
+    height: 6vmin;
+    width: 6vmin;
+    display: inline-block;
+}
+
+.friend_icon {
+    cursor: pointer;
+    width: 100%;
+    min-height: 6vmin;
+}
+.video_panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

@@ -1,9 +1,10 @@
 import React, {useContext, useEffect} from "react";
 import {DareContext} from "../context/DareContext";
-import {Redirect, useParams} from 'react-router-dom'
+import {Link, Redirect, useParams} from 'react-router-dom'
 import {Button, Col, Form, Row} from "react-bootstrap";
 import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
+import UserStyling from "../styling/User.module.css";
 
 export default function DarePage() {
     const {dareMethods, dare, dareDependency, url, isExist, owner, participants} = useContext(DareContext);
@@ -12,7 +13,7 @@ export default function DarePage() {
         dareMethods.getDare(userId, id);
         dareMethods.getVideos(userId, id)
     }, [dareDependency]);
-
+    console.log(url);
     return (
         <Col className={DarePageStyling.dare_page}>
             <Button variant="secondary" className={DarePageStyling.delete_btn}
@@ -25,7 +26,7 @@ export default function DarePage() {
                     <p>Bet:{dare.bet}</p>
                     <p>Deadline:{dare.deadline}</p>
                     <p>Owner:{owner.name}</p>
-                    <p>Participants:{participants.map(user=>`${user.name} `)}</p>
+                    <p>Participants:{participants.map(user => `${user.name} `)}</p>
                 </Col>
             </Row>
             <Row>
@@ -37,18 +38,31 @@ export default function DarePage() {
                                onChange={(e) => dareMethods.onUpload(e, userId, id)}/>
                     </Form>
                     <h2>Videos</h2>
+                    <div className={DarePageStyling.video_panel}>
                     {url.map((row) =>
-                        <div>
-                            <p>{row.user.name}</p>
+                            <div>
                             <video width="320" height="240" controls>
                                 <source src={`/Videos/${row.videoPath}`} type="video/mp4"/>
                                 Your browser does not support
                             </video>
-                        </div>
+                            <Link to={`/user/${row.userId}`}
+                                  className={`${UserStyling.link} ${DarePageStyling.video_wraper}`}>
+                                <div className={DarePageStyling.user_wrapper}>
+                                    <div className={DarePageStyling.img_wrap}>
+                                        <label htmlFor="avatar" className={UserStyling.avatar}><img id="photo"
+                                                                                                    className={DarePageStyling.friend_icon}
+                                                                                                    src={row.videoBlob}
+                                                                                                    alt=""/></label>
+                                    </div>
+                                    <h5>{row.userName}</h5>
+                                </div>
+                            </Link>
+                            </div>
                     )}
+                    </div>
                 </Col>
             </Row>
-            {isExist || <Redirect to={`/user/${localStorage.getItem("id")}`}/>}>
+            {isExist || <Redirect to={`/user/${localStorage.getItem("id")}`}/>}
         </Col>
     )
 }

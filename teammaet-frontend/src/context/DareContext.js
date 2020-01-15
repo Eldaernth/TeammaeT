@@ -97,7 +97,27 @@ export function DareProvider(props) {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
-            }).then((res) => setUrl(res.data))
+            }).then((ret) => {
+                for (let re of ret.data) {
+                    Axios.get(`http://localhost:8080/user/${re.user.id}/avatar`, {
+                        responseType: "arraybuffer",
+                        headers: {
+                            "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        }
+                    }).then((res) => {
+                        let arrayBufferView = new Uint8Array(res.data);
+                        let blob = new Blob([arrayBufferView], {type: "image/png"});
+                        let urlCreator = window.URL || window.webkitURL;
+                        setUrl((prev) => ([...prev, {
+                            id: re.id,
+                            videoPath: re.videoPath,
+                            videoBlob: urlCreator.createObjectURL(blob),
+                            userId:re.user.id,
+                            userName:re.user.name
+                        }]));
+                    });
+                }
+            })
         },
         onUpload: (e, userId, id) => {
             const fd = new FormData();
