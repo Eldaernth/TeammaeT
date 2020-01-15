@@ -10,13 +10,19 @@ export function DareProvider(props) {
     const [url, setUrl] = useState([]);
     const [dareDependency, setDareDependency] = useState(false);
     const [isExist, setIsExist] = useState(true);
+    const [owner, setOwner] = useState({});
+    const [participants, setParticipants] = useState([]);
     const dareMethods = {
         getDare: (userId, id) => {
             Axios.get(`http://localhost:8080/user/${userId}/dare/${id}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
-            }).then((res) => setDare(res.data))
+            }).then((res) => {
+                setDare(res.data);
+                setOwner(res.data.userFrom);
+                setParticipants(res.data.userTo);
+            })
         },
         getReceivedDares: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/dare/received`, {
@@ -111,7 +117,7 @@ export function DareProvider(props) {
         }
     };
     return (
-        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare, dareDependency, url, isExist}}>
+        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare, dareDependency, url, isExist,owner,participants}}>
             {props.children}
         </DareContext.Provider>
     );

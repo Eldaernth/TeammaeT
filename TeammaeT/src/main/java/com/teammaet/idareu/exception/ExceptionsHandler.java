@@ -23,9 +23,10 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
         String bodyOfResponse = "Invalid username/password supplied";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, wr);
     }
+
     @ExceptionHandler(value = DareNotFoundException.class)
     protected ResponseEntity<Object> handleDareConflict(RuntimeException ex, WebRequest wr) {
-        String bodyOfResponse = "User not found";
+        String bodyOfResponse = "Dare not found";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, wr);
     }
 }

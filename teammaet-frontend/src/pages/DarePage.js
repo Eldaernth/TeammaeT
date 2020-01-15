@@ -6,7 +6,7 @@ import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
 
 export default function DarePage() {
-    const {dareMethods, dare, dareDependency, url, isExist} = useContext(DareContext);
+    const {dareMethods, dare, dareDependency, url, isExist, owner, participants} = useContext(DareContext);
     const {userId, id} = useParams();
     useEffect(() => {
         dareMethods.getDare(userId, id);
@@ -15,7 +15,8 @@ export default function DarePage() {
 
     return (
         <Col className={DarePageStyling.dare_page}>
-            <Button variant="secondary" className={DarePageStyling.delete_btn} onClick={(e) => dareMethods.deleteDare(e, userId, id)}>Delete</Button>
+            <Button variant="secondary" className={DarePageStyling.delete_btn}
+                    onClick={(e) => dareMethods.deleteDare(e, userId, id)}>Delete</Button>
             <h1>{dare.title}</h1>
             <Row>
                 <Col className={DarePageStyling.details}>
@@ -23,8 +24,8 @@ export default function DarePage() {
                     <p>About the challenge:{dare.dare}</p>
                     <p>Bet:{dare.bet}</p>
                     <p>Deadline:{dare.deadline}</p>
-                    <p>Owner:</p>
-                    <p>Participants:</p>
+                    <p>Owner:{owner.name}</p>
+                    <p>Participants:{participants.map(user=>`${user.name} `)}</p>
                 </Col>
             </Row>
             <Row>
