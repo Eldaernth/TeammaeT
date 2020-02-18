@@ -13,8 +13,10 @@ import FriendsPage from "./pages/FriendsPage";
 import {DareProvider} from "./context/DareContext";
 import {FriendsProvider} from "./context/FriendsContext";
 import DarePage from "./pages/DarePage";
+import Axios from "axios"
 
 function App() {
+    Axios.defaults.headers.common["Authorization"]=`Bearer ${localStorage.getItem("token")}`;
     return (
         <Router>
             <Navigation/>

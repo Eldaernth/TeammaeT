@@ -14,22 +14,15 @@ export function DareProvider(props) {
     const [participants, setParticipants] = useState([]);
     const dareMethods = {
         getDare: (userId, id) => {
-            Axios.get(`http://localhost:8080/user/${userId}/dare/${id}`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            }).then((res) => {
+            Axios.get(`http://localhost:8080/user/${userId}/dare/${id}`)
+                .then((res) => {
                 setDare(res.data);
                 setOwner(res.data.userFrom);
                 setParticipants(res.data.userTo);
             })
         },
         getReceivedDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/received`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get(`http://localhost:8080/user/${id}/dare/received`)
                 .then((ret) => {
                     setReceivedDares(ret.data);
                     setIsExist(true);
@@ -39,11 +32,7 @@ export function DareProvider(props) {
                 });
         },
         getSentDares: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/dare/sent`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get(`http://localhost:8080/user/${id}/dare/sent`)
                 .then((ret) => {
                     setSentDares(ret.data);
                     setIsExist(true);
@@ -55,11 +44,7 @@ export function DareProvider(props) {
 
         deleteDare: (evt, userId, id) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${userId}/dare/${id}`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.delete(`http://localhost:8080/user/${userId}/dare/${id}`)
                 .then((ret) => {
                     dareDependency ? setDareDependency(false) : setDareDependency(true);
                     setIsExist(false);
@@ -81,8 +66,7 @@ export function DareProvider(props) {
                 headers: {
                     "Content-type": "application/json",
                     "Access-Control-Allow-Origin": "http://localhost:3000",
-                    'Accept': 'application/json',
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    'Accept': 'application/json'
                 }
             }).then(res => {
                 dareDependency ? setDareDependency(false) : setDareDependency(true);
@@ -93,11 +77,8 @@ export function DareProvider(props) {
                 });
         },
         getVideos: (userId, id) => {
-            Axios.get(`http://localhost:8080/user/${userId}/dare/${id}/videos`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            }).then((ret) => {
+            Axios.get(`http://localhost:8080/user/${userId}/dare/${id}/videos`)
+                .then((ret) => {
                 for (let re of ret.data) {
                     Axios.get(`http://localhost:8080/user/${re.user.id}/avatar`, {
                         responseType: "arraybuffer",
@@ -112,8 +93,12 @@ export function DareProvider(props) {
                             id: re.id,
                             videoPath: re.videoPath,
                             videoBlob: urlCreator.createObjectURL(blob),
-                            userId:re.user.id,
-                            userName:re.user.name
+                            userId: re.user.id,
+                            userName: re.user.name,
+                            voteCount: 0,
+                            vote:"None",
+                            upColor:"grey",
+                            downColor:"grey"
                         }]));
                     });
                 }
@@ -127,8 +112,20 @@ export function DareProvider(props) {
                     headers: {
                         "Content-type": "application/json",
                         "Access-Control-Allow-Origin": "http://localhost:3000",
-                        'Accept': 'application/json',
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        'Accept': 'application/json'
+                    }
+                }).then(res => {
+                dareDependency ? setDareDependency(false) : setDareDependency(true);
+                console.log(res.data)
+            })
+        },
+        postVote: (e, userId, id, vote) => {
+            Axios.post(`http://localhost:8080/user/${userId}/dare/${id}/vote`,
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        "Access-Control-Allow-Origin": "http://localhost:3000",
+                        'Accept': 'application/json'
                     }
                 }).then(res => {
                 dareDependency ? setDareDependency(false) : setDareDependency(true);
@@ -137,7 +134,18 @@ export function DareProvider(props) {
         }
     };
     return (
-        <DareContext.Provider value={{receivedDares, sentDares, dareMethods, dare, dareDependency, url, isExist,owner,participants}}>
+        <DareContext.Provider value={{
+            receivedDares,
+            sentDares,
+            dareMethods,
+            dare,
+            dareDependency,
+            url,
+            setUrl,
+            isExist,
+            owner,
+            participants
+        }}>
             {props.children}
         </DareContext.Provider>
     );

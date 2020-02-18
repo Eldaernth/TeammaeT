@@ -10,12 +10,7 @@ export function UserProvider(props) {
     const [blobDependency, setBlobDependency] = useState(false);
     const userMethods = {
         getUsers: () => {
-            console.log(localStorage.getItem("token"));
-            Axios.get('http://localhost:8080/user', {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get('http://localhost:8080/user')
                 .then((ret) => {
                     setUsers(ret.data);
                 })
@@ -24,11 +19,7 @@ export function UserProvider(props) {
                 });
         },
         getUser: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get(`http://localhost:8080/user/${id}`)
                 .then((ret) => {
                     setUser(ret.data);
                 })
@@ -39,9 +30,6 @@ export function UserProvider(props) {
         getAvatar: (id) => {
             Axios.get(`http://localhost:8080/user/${id}/avatar`, {
                 responseType: "arraybuffer",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
             })
                 .then(response => {
                     let arrayBufferView = new Uint8Array(response.data);
@@ -62,8 +50,7 @@ export function UserProvider(props) {
                     headers: {
                         "Content-type": "application/json",
                         "Access-Control-Allow-Origin": "http://localhost:3000",
-                        'Accept': 'application/json',
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        'Accept': 'application/json'
                     }
                 }).then(res => {
                 blobDependency ? setBlobDependency(false) : setBlobDependency(true);

@@ -15,10 +15,6 @@ export function FriendsProvider(props) {
             e.preventDefault();
             Axios.post(`http://localhost:8080/user/${userId}/friend/accept`, {
                 id: friendId
-            }, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
             })
                 .then((ret) => {
                     friendRequestDependency ? setFriendRequestDependency(false) : setFriendRequestDependency(true);
@@ -35,10 +31,6 @@ export function FriendsProvider(props) {
             e.preventDefault();
             Axios.post(`http://localhost:8080/user/${userId}/friend/decline`, {
                 id: friendId
-            }, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
             })
                 .then((ret) => {
                     friendRequestDependency ? setFriendRequestDependency(false) : setFriendRequestDependency(true);
@@ -51,19 +43,12 @@ export function FriendsProvider(props) {
         },
 
         getFriendRequestList: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/friend/request`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get(`http://localhost:8080/user/${id}/friend/request`)
                 .then((ret) => {
                     for (let re of ret.data) {
                         console.log(ret.data);
                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
-                            responseType: "arraybuffer",
-                            headers: {
-                                "Authorization": `Bearer ${localStorage.getItem("token")}`
-                            }
+                            responseType: "arraybuffer"
                         }).then((res) => {
                             let arrayBufferView = new Uint8Array(res.data);
                             let blob = new Blob([arrayBufferView], {type: "image/png"});
@@ -83,18 +68,11 @@ export function FriendsProvider(props) {
         },
 
         getFriends: (id) => {
-            Axios.get(`http://localhost:8080/user/${id}/friend`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.get(`http://localhost:8080/user/${id}/friend`)
                 .then((ret) => {
                     for (let re of ret.data) {
                         Axios.get(`http://localhost:8080/user/${re.id}/avatar`, {
-                            responseType: "arraybuffer",
-                            headers: {
-                                "Authorization": `Bearer ${localStorage.getItem("token")}`
-                            }
+                            responseType: "arraybuffer"
                         }).then((res) => {
                             let arrayBufferView = new Uint8Array(res.data);
                             let blob = new Blob([arrayBufferView], {type: "image/png"});
@@ -120,8 +98,7 @@ export function FriendsProvider(props) {
                 headers: {
                     "Content-type": "application/json",
                     "Access-Control-Allow-Origin": "http://localhost:3000",
-                    'Accept': 'application/json',
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    'Accept': 'application/json'
                 }
             })
                 .then((ret) => {
@@ -134,11 +111,7 @@ export function FriendsProvider(props) {
         },
         deleteFriend: (evt, userId, friendId) => {
             evt.preventDefault();
-            Axios.delete(`http://localhost:8080/user/${userId}/friend/del/${friendId}`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            })
+            Axios.delete(`http://localhost:8080/user/${userId}/friend/del/${friendId}`)
                 .then((ret) => {
                     friendDependency ? setFriendDependency(false) : setFriendDependency(true);
                     console.log(ret.data);

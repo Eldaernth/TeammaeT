@@ -1,19 +1,67 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {DareContext} from "../context/DareContext";
 import {Link, Redirect, useParams} from 'react-router-dom'
 import {Button, Col, Form, Row} from "react-bootstrap";
 import DarePageStyling from "../styling/DarePage.module.css"
 import FileInputStyling from "../styling/User.module.css"
-import UserStyling from "../styling/User.module.css";
+import UserStyling from "../styling/User.module.css"
+import {faCaretSquareUp, faCaretSquareDown, faChevronDown} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function DarePage() {
-    const {dareMethods, dare, dareDependency, url, isExist, owner, participants} = useContext(DareContext);
+    const {dareMethods, dare, dareDependency, url, setUrl, isExist, owner, participants} = useContext(DareContext);
     const {userId, id} = useParams();
+
     useEffect(() => {
         dareMethods.getDare(userId, id);
         dareMethods.getVideos(userId, id)
     }, [dareDependency]);
-    console.log(url);
+
+
+    const voteUp = (id) => {
+        let temp = [];
+        url.map((element) => {
+            if (element.id === id) {
+                element.vote === "DOWN" ?
+                    temp.push({
+                        ...element,
+                        voteCount: element.voteCount + 2,
+                        upColor: "red",
+                        downColor: "grey",
+                        vote: "UP"
+                    }) :
+                    temp.push({
+                        ...element,
+                        voteCount: element.voteCount + 1,
+                        upColor: "red",
+                        downColor: "grey",
+                        vote: "UP"
+                    });
+                return;
+            }
+            temp.push(element);
+        });
+        setUrl(temp);
+    };
+
+    const voteDown = (id) => {
+        let temp = [];
+        url.map((element) => {
+            if (element.id === id) {
+                temp.push({
+                    ...element,
+                    voteCount: element.voteCount - 1,
+                    upColor: "grey",
+                    downColor: "red",
+                    vote: "DOWN"
+                });
+                return;
+            }
+            temp.push(element);
+        });
+        setUrl(temp);
+    };
+
     return (
         <Col className={DarePageStyling.dare_page}>
             <Button variant="secondary" className={DarePageStyling.delete_btn}
@@ -39,26 +87,40 @@ export default function DarePage() {
                     </Form>
                     <h2>Videos</h2>
                     <div className={DarePageStyling.video_panel}>
-                    {url.map((row) =>
+                        {url.map((row) =>
                             <div>
-                            <video width="320" height="240" controls>
-                                <source src={`/Videos/${row.videoPath}`} type="video/mp4"/>
-                                Your browser does not support
-                            </video>
-                            <Link to={`/user/${row.userId}`}
-                                  className={`${UserStyling.link} ${DarePageStyling.video_wraper}`}>
-                                <div className={DarePageStyling.user_wrapper}>
-                                    <div className={DarePageStyling.img_wrap}>
-                                        <label htmlFor="avatar" className={UserStyling.avatar}><img id="photo"
-                                                                                                    className={DarePageStyling.friend_icon}
-                                                                                                    src={row.videoBlob}
-                                                                                                    alt=""/></label>
+                                <video width="320" height="240" controls>
+                                    <source src={`/Videos/${row.videoPath}`} type="video/mp4"/>
+                                    Your browser does not support
+                                </video>
+                                <div className={DarePageStyling.video_description}>
+                                    <Link to={`/user/${row.userId}`}
+                                          className={`${UserStyling.link} ${DarePageStyling.video_wraper}`}>
+                                        <div className={DarePageStyling.user_wrapper}>
+                                            <div className={DarePageStyling.img_wrap}>
+                                                <label htmlFor="avatar" className={UserStyling.avatar}><img
+                                                    id="photo"
+                                                    className={DarePageStyling.friend_icon}
+                                                    src={row.videoBlob}
+                                                    alt=""/></label>
+                                            </div>
+                                            <h5>{row.userName}</h5>
+                                        </div>
+                                    </Link>
+                                    <div className={DarePageStyling.vote}>
+                                        <span>{row.voteCount}</span>
+                                        <FontAwesomeIcon
+                                            icon={faCaretSquareUp} size="lg" color={row.upColor} onClick={() => {
+                                            if (row.vote != "UP") voteUp(row.id)
+                                        }}/>
+                                        <FontAwesomeIcon
+                                            icon={faCaretSquareDown} size="lg" color={row.downColor} onClick={() => {
+                                            if (row.vote != "DOWN") voteDown(row.id)
+                                        }}/>
                                     </div>
-                                    <h5>{row.userName}</h5>
                                 </div>
-                            </Link>
                             </div>
-                    )}
+                        )}
                     </div>
                 </Col>
             </Row>
